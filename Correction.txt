@@ -1,0 +1,55 @@
+Bonjour Abderahmane, 
+
+Je vous transmets les corrections et les améliorations à effectuer sur votre livrable, préconisées par votre référent. 
+
+Dans le cahier des charges le benchmark n’est pas complet et il n’y a pas el détail avec impression écran des page d’accueil des concurrent.
+
+Il manque la partie SEO
+Il manque la partie Google ANALYTICS
+Il manque la partie mention légal et politique de confidentialité
+Il manque le RGPD
+
+Le site d’un point du vu visuel fait encore trop amateur ou bien donne l’impression d’un ancien site début des années 2000
+Il faut éviter les animation inutiles.
+Le menu doit être amélioré
+
+
+
+Il aurait fallu plus s’inspirer d’une structure comme le site https://www.cieletespace.fr/ 
+
+Attention aux fautes d’orthographe.
+Il vaut mieux privilégier « vidéos » au pluriel dans le menu
+
+Les liens « lire la suite » ne sont pas très visibles.
+
+C’est dommage qu’il n’y est pas un slider pour mettre en avant des articles ou du contenu nouveau ou autres…
+
+En cliquant sur l’étoile jaune ‘favori » on tombe sur une page d’erreur »
+
+
+Les articles ne sont pas assez illustrés. On a de gros pavé de texte alors que l’on traite d’un sujet très beau en terme de visuel.
+
+Le poids des images utilisé est dextrement lourd. Les images ne sont pas optimisées et il y a un temps de chargement trop important !
+
+Le site n’est pas sécurisé – il manque le HTTPS..
+
+Il manque la page politique de confidentialité
+
+La page mention légale n’est pas complète
+Il manque le bandeau acceptation ou refus des cookies.
+
+Il vaut mieux privilégier un fond blanc pour le site cela fera moins amateur.
+Et mettre les vignettes en fond bleu marine.
+
+Retirer l’effet d’ombre portée et les contours.
+
+Les articles doivent être écrit de la main du candidat. Si c’est du copier/coller d’autres sites, le jury n’acceptera pas car cela fait doublon et c’est pénalisé par Google en terme de référencement. Le site peut aller jusqu’à être blacklisté par le moteur de recherche attention
+
+Vous n’avez effectuer  le test d’auto-evaluation ?
+
+Globalement il y a de bonnes choses mais plusieurs point sont à améliorer car en l’état il y a un fort risque de ne pas valider malheureusement.
+
+Il faut que vous reprenniez le RC et que vous vérifiez les compétences une par une pour que tu sois sûr de bien valider.
+
+Bien cordialement,	 
+

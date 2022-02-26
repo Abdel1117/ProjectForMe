@@ -1,0 +1,15 @@
+https://colorlib.com/wp/template/newsbit/
+https://colorlib.com/wp/cat/magazine/                                  
+
+
+
+Régler le responsive de la carte de news a partir de 980px 
+
+Responsive 
+1920x1080
+13669x768
+1536x864
+414x896
+375x640
+375x667
+

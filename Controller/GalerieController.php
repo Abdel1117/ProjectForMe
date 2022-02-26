@@ -1,0 +1,51 @@
+<?php
+
+
+/**
+ * Controller For The Galerie
+ * Read URL to call the needed Methode
+ * @return None
+ */
+class GalerieController extends Controller{
+
+    public function showGallerie(){
+        $data = [
+            "title" => "Galerie Photo",
+            "Photo" => Model::getPdo()->query("SELECT image FROM space_news "),
+            "carousel_photo" => Model::getPdo()->query("SELECT image, id  FROM image_galerie")
+        ];
+        if(!empty($_POST)){
+            $search = trim(htmlspecialchars($_POST['search']));
+            $donne = [
+                "recherche" => $search
+            ];
+            if($search > 4){
+                $result = Model::getPdo()->query("SELECT * FROM image WHERE Name = :recherche ",$donne);
+                
+                if($result > 0 ){
+                    $data = [
+                        "title" => "Galerie Photo",
+                        "Photo" =>  $result
+                    ];
+                
+                    $this->setdata($data);
+                    $this->render("Galerie");
+                }
+                else{
+                    echo "Aucun Element ne correspond a votre recherche <a href=".URL."Forum/indexForum>Réessayer Ici</a>";
+                }
+            }
+            
+        }
+        $this->setdata($data);
+
+        $this->render("Galerie");
+    }
+
+    public function search(){
+        
+    }
+    public function setResolution(){
+        
+    }
+}
