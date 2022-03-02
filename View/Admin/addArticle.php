@@ -1,4 +1,5 @@
-<?php if($err_mode === true){
+<?php 
+if($err_mode === true){
     echo "<div class='warning_login'>
             <h2 class='warning_title_err_mode'>
                 Veuillez remplir tous les champs nessecaire
@@ -6,6 +7,8 @@
         </div>";
 }
 ?>
+ <script type="text/javascript" src="ckeditor/ckeditor.js" defer></script>
+ <script type="text/javascript" src="somedirectory/ckeditor/ckeditor.js" defer></script>
 <main class="video_add_post_container">
     <h1><?= $title ?></h1>
     
