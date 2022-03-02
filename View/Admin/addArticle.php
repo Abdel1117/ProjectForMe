@@ -9,7 +9,6 @@
 <main class="video_add_post_container">
     <h1><?= $title ?></h1>
     
-    <div>Hello</div>
 
     <div class="form_container_Add">
 
