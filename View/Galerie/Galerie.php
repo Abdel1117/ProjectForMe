@@ -1,8 +1,8 @@
 
 <main>
-    <link rel="stylesheet" href="..\node_modules\@splidejs\splide\dist\css\themes\splide-skyblue.min.css"></link>
-    <script src="../node_modules/@splidejs/splide/dist\js/splide.min.js" defer></script>
-    <h1><?= $title ?></h1>
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/js/splide.min.js"></script>  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/css/themes/splide-skyblue.min.css">  
+<h1><?= $title ?></h1>
     <div class="search_bar">
         <div class="search_div">
             <form class="form_search_bar" method="post" action="">
@@ -13,14 +13,7 @@
             </form>
         </div>
         
-        <div class="resolution-box">
-            <div id="1" class="container_resolution">
-                <div>
-                    <a id="resolution_link" href="#">Select a Resolution</a>
-                </div>
-                
-            </div>
-        </div>
+       
         </form>
         
     </div>
@@ -65,6 +58,7 @@
             <div id="caption"></div>
         </div>
     </section>
+    
 
 
 <script>

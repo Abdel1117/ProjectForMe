@@ -9,7 +9,7 @@
             '<img class="image_news" src='. $contenue[0]->image . ' >';
         
         ?>
-            <p class="para-article reveal" ><?= Config::esc($contenue[0]->news) ?></p>
+            <p class="para-article reveal" ><?=  htmlspecialchars_decode($contenue[0]->news) ?></p>
         </div>
         <div class="infos_in_table">
         

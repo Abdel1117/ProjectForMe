@@ -74,40 +74,25 @@ class AdminController extends Controller
         if (isset($_POST) && !empty($_POST)) {
             $title_article = trim(htmlspecialchars($_POST['title_article']));
             $contenue_article = trim(htmlspecialchars($_POST['article_content']));
-            $image_article1 = $_POST['link_image1'];
-            $image_article2 = $_POST['link_image2'];
-            $image_article3 = $_POST['link_image3'];
-            $image_article4 = $_POST['link_image4'];
-            $image_article5= $_POST['link_image5'];
-
+            
                    
             if (
                 strlen($title_article) > 5
                 && strlen($contenue_article) > 200
-                && !empty($_POST['link_image1'])
-                && !empty($_POST['link_image2'])
-                && !empty($_POST['link_image3'])
-                && !empty($_POST['link_image4'])
-                && !empty($_POST['link_image5'])   
+               
             ) { 
                 $donne = [
                     "title" => $title_article,
                     "contenue" => $contenue_article,
-                    "img1" => $image_article1,
-                    "img2" => $image_article2,
-                    "img3" => $image_article3,
-                    "img4" => $image_article4,
-                    "img5" => $image_article5,
+                    
                 ];
 
-                Model::getPdo()->query("INSERT INTO space_news (Titre, news, image, image2, image3, image4, image5) VALUES (:title, :contenue, :img1, :img2, :img3, :img4, :img5)", $donne);
+                Model::getPdo()->query("INSERT INTO space_news (Titre, news) VALUES (:title, :contenue)", $donne);
                 header("location:" . URL . "/admin/index");
-            } 
-            }   
-            else {
+            }else {
                 $data['err_mode'] = true;
             }
-        
+        }   
         $this->setdata($data);
         $this->render('addArticle');
     }

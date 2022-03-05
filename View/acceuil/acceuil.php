@@ -16,7 +16,7 @@
                     ?>
                     </section>
                     <div class="news_container">
-                        <p><?= $value->news ?></p>
+                        <p><?= htmlspecialchars_decode($value->news) ?></p>
                     </div>
                 </article>
 

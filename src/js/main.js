@@ -5,7 +5,7 @@ let img = document.getElementsByClassName('photo_galerie');
 const body = document.getElementsByTagName('body');
 let button_add_link = document.getElementsByClassName('add_link');
 let modal = document.getElementById("myModal");
-
+let editorplug = document.getElementById('editor');
 // Get the image and insert it inside the modal - use its "alt" text as a caption
 let modalImg = document.getElementById("img01");
 let captionText = document.getElementById("caption");
@@ -73,7 +73,8 @@ var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on <span> (x), close the modal
 
-
-span.onclick = function() {
-    modal.style.display = "none";
-} 
+if(span){
+    span.onclick = function() {
+        modal.style.display = "none";
+    } 
+}

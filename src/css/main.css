@@ -1280,13 +1280,15 @@ table.Image_table thead {
     margin: 5px;
 }
 .input_container,label{
-    display: inline-block;;
+    display: inline-block;
 }
 
 .input_container_article{
     display: flex;
     margin-top: 5%;
 }
+
+
 .Mentions_legales_main_container{
     min-height: 90vh;
 }

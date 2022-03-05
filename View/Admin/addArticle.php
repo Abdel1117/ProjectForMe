@@ -7,14 +7,13 @@ if($err_mode === true){
         </div>";
 }
 ?>
- <script type="text/javascript" src="ckeditor/ckeditor.js" defer></script>
- <script type="text/javascript" src="somedirectory/ckeditor/ckeditor.js" defer></script>
-<main class="video_add_post_container">
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+    <main class="video_add_post_container">
     <h1><?= $title ?></h1>
     
 
     <div class="form_container_Add">
-
+        
         <form enctype="multipart/form-data"  id="addArticle" action="" method="post">
             <div class="input_container_article">
                 <div>
@@ -23,18 +22,8 @@ if($err_mode === true){
                 </div>
                 <div>
                     <label for="article_content">Contenu de L'article</label>
-                    <textarea name="article_content" id="" cols="20" rows="10"></textarea>
+                    <textarea name="article_content" id="editor" cols="20" rows="30"></textarea>
                 </div>
-                <div class="input_container">
-                    <label for="link_image1">L'image Liée a l'article</label>
-                    <input type="text" name="link_image1">                
-                    <input type="text" name="link_image2">                
-                    <input type="text" name="link_image3">                
-                    <input type="text" name="link_image4">                
-                    <input type="text" name="link_image5">                
-
-                </div>
-                
             </div>
             <button type="submit">Envoyer</button>
 
@@ -43,3 +32,10 @@ if($err_mode === true){
     </div>
 
 </main>
+<script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
