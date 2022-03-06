@@ -26,7 +26,11 @@
                     <div id="wrapper2">
                         <h3 class="caption">Email</h3>
                         <div class="Div-para">
-                            <p class="Para-info">Contactez moi par email sur cette adresse: <strong>Abderahmane.adjali@live.fr<strong></p>
+                            <p class="Para-info">Contactez moi par email sur cette adresse: <strong>
+                                <a href="mailto:Abderahmane.Adjali@live.fr">
+                                Abderahmane.adjali@live.fr<strong>
+                                </a>
+                                </p>
                         </div>
 
                     </div>
@@ -44,7 +48,7 @@
                 <div id="wrapper2">
                         <h3 class="caption">Linkedin</h3>
                         <div class="Div-para">
-                            <p class="Para-info">Contactez moi sur Linkedin: <a href="https://www.linkedin.com/feed/"><strong>ICI</strong></a></p>
+                            <p class="Para-info">Contactez moi sur Linkedin: <a href="https://www.linkedin.com/in/abderahmane-adjali-bb2972212/"><strong>ICI</strong></a></p>
                         </div>
                     </div>
                 

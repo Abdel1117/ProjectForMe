@@ -15,6 +15,7 @@ class AcceuilController extends Controller
         $data = [
             "title" => "Accueil",
             "Contenue" => Model::getPdo()->query("SELECT * FROM space_news ORDER BY date_news DESC")
+            
         ];
         $this->setdata($data);
         $this->render("acceuil");
@@ -49,7 +50,7 @@ class AcceuilController extends Controller
                         $_SESSION['pseudo'] = $username_send;
                         $_SESSION['email'] =  $request[0]->email;
                         $_SESSION['age'] =    $request[0]->Age;
-                        $_SESSION['id'] =     $request[0]->Id;
+                        $_SESSION['id'] =     $request[0]->Id;  
                         $_SESSION['role'] = $request[0]->role;
 
                         echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=Acceuil/index');</script>";

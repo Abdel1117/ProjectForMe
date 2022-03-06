@@ -20,7 +20,8 @@ class CompteController extends Controller
             $data = [
                 "title" => "Mon Compte",
                 "image" => ModelChild::getPdo()->query("SELECT image, Idprofil FROM image WHERE Idprofil = " . $_SESSION['id']),
-                "infos" => Model::getPdo()->query("SELECT pseudo, email, description, Country, Age FROM user_data WHERE Id=" .  $id)
+                "infos" => Model::getPdo()->query("SELECT pseudo, email, description, Country, Age FROM user_data WHERE Id=" .  $id),
+                "favorite" => Model::getPdo()->query("SELECT * FROM favorite WHERE id_user = $id")
             ];
 
             //Here we check whenevere the Page is charged if they is a Post data loaded
@@ -171,8 +172,17 @@ class CompteController extends Controller
                 ":id_user" => $_SESSION['id'],
                 ":id_image" => $id
             ];
-            Model::getPdo()->query("INSERT INTO favorite (id_user, id_image) VALUES (:id_user, :id_image) ", $data);
-            echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=indexAccount');</script>";
+            $check = Model::getPdo()->query("SELECT * FROM favorite WHERE id_image = $id AND id_user =" .$_SESSION['id']);
+
+            if(empty($check)){
+                Model::getPdo()->query("INSERT INTO favorite (id_user, id_image) VALUES (:id_user, :id_image) ", $data);
+                echo "<script>window.location.replace('http://localhost/Web/Space-Explorer/Acceuil/index');</script>";
+            }
+            else{
+                echo "<script>alert('Vous possédez déja cette article dans vos favoris');
+                </script>" ;
+                echo "<script>window.location.replace('http://localhost/Web/Space-Explorer/Acceuil/index');</script>";
+            }
         } else {
             echo "<h1>An Error as occured please <a href=" . URL . "acceuil/index>Réessayer Ici</a> </h1>";
         }
