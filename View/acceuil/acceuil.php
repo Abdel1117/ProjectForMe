@@ -81,7 +81,7 @@
         fixedHeight: 500,		
         gap       : 10,
 		rewind    : true,
-		pagination: false,
+		pagination: true,
         cover : true,
         isNavigation : true,
         focus      : 'center',

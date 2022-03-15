@@ -74,8 +74,8 @@
         focus      : 'center',
         breakpoints: {
         600: {
-        fixedWidth : 60,
-        fixedHeight: 44,
+        fixedWidth : 200,
+        fixedHeight: 200,
     },
   },
   } ).mount();
