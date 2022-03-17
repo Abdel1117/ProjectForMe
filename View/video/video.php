@@ -1,4 +1,6 @@
 <main class="section_video">
+    <h1 class="title_page"><?= $title ?>s</h1>
+
 <section class="option-nav-video">
         <div class="order-by">
             <label for="order_choice">Triée Par Ordre</label>

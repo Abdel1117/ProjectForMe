@@ -1,40 +1,18 @@
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/js/splide.min.js"></script>  
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/css/themes/splide-skyblue.min.css">  
 
-
 <section class="splide" id="thumbnail-slider">
     <div class="splide__track">
         <ul class="splide__list">
+            <?php foreach ($Slider_accueil as $Slide) : ?>
             <li class="splide__slide">
-            <img class="img_cover_slide_article" src="https://via.placeholder.com/1200" alt="image_planete_article">
+            <img class="img_cover_slide_article" src="<?= $Slide->image ?>" alt="image_planete_article">
             <div class="modal_cover_article">
-                <p>Lorem ipsum dolor sit amet.</p>
+                <h3><?= $Slide->Titre ?></h3>
+                <p> <?= $Slide->resumé ?></p>
             </div>
             </li>
-            <li class="splide__slide">
-            <img class="img_cover_slide_article" src="https://via.placeholder.com/1200" alt="image_planete_article">
-            <div class="modal_cover_article">
-                <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-            </li>
-            <li class="splide__slide">
-            <img class="img_cover_slide_article" src="https://via.placeholder.com/1200" alt="image_planete_article">
-            <div class="modal_cover_article">
-                <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-            </li>
-            <li class="splide__slide">
-            <img class="img_cover_slide_article" src="https://via.placeholder.com/1200" alt="image_planete_article">
-            <div class="modal_cover_article">
-                <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-            </li>
-            <li class="splide__slide">
-            <img class="img_cover_slide_article" src="https://via.placeholder.com/1200" alt="image_planete_article">
-            <div class="modal_cover_article">
-                <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-            </li>
+            <?php endforeach ?>
         </ul>
     </div>
 </section>

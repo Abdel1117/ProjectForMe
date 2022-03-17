@@ -1,5 +1,5 @@
 <main class="main_section_dash_board">
-    <h1>Bienvenue <?= $admin[0]->pseudo ?></h1>
+    <h1 class="title_page">Bienvenue <?= $admin[0]->pseudo ?></h1>
 
     <div class="back_office_div1">
         <button class="btn btn-AddArticle"><a class="link_normal" href="<?=URL. "Admin/addArticle"?>">AddArticle</a></button>

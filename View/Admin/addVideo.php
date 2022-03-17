@@ -1,6 +1,6 @@
 <main class="video_add_post_container">
 
-    <h1><?= $title ?></h1>
+    <h1 class="title_page"><?= $title ?></h1>
 <?php if($err_mode === true){
     echo "<div class='warning_login'>
             <h2 class='warning_title_err_mode'>

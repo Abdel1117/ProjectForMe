@@ -2,7 +2,7 @@
 <main>
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/js/splide.min.js"></script>  
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/css/themes/splide-skyblue.min.css">  
-<h1><?= $title ?></h1>
+<h1 class="title_page"><?= $title ?></h1>
     <div class="search_bar">
         <div class="search_div">
             <form class="form_search_bar" method="post" action="">
@@ -40,7 +40,7 @@
         <?php
         foreach ($Photo as  $value) : ?>
             <div class="photo_container">
-            <?= '<img class="photo_galerie" src="data:image/jpeg;base64,' . base64_encode($value->image) . '"/>' ?>
+             <img class="photo_galerie" src="<?=$value->image ?>"/>
             </div>
 
         <?php endforeach ?>

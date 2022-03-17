@@ -1,12 +1,12 @@
 <?php if(isset($err_mode) && $err_mode === "pseudo_inccorect") {
     
     echo "<div>
-        <h2>Votre Pseudo est inccorect</h2>
+        <h2 class='title_page'>Votre Pseudo est inccorect</h2>
     </div>";
 }
 elseif(isset($err_mode) && $err_mode === "mot_de_passe_inccorect"){
     echo "<div>
-        <h2>Votre Mot de passe est inccorect</h2>
+        <h2 class='title_page'>Votre Mot de passe est inccorect</h2>
     </div>";
 }elseif(isset($err_mode) && $err_mode === "aucun_champs_remplie"){
     echo "<div>

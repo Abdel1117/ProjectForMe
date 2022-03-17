@@ -1,5 +1,7 @@
 <?php session_start() ?>
 <main class="forum_container">
+<h1 class="title_page"><?= $title ?></h1>
+
     <section class="option-nav">
         <div class="order-by">
             <label for="order_choice">Triée Par Ordre</label>

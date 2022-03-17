@@ -14,8 +14,8 @@ class AcceuilController extends Controller
         
         $data = [
             "title" => "Accueil",
-            "Contenue" => Model::getPdo()->query("SELECT * FROM space_news ORDER BY date_news DESC")
-            
+            "Contenue" => Model::getPdo()->query("SELECT * FROM space_news ORDER BY date_news ASC"),
+            "Slider_accueil" => Model::getPdo()->query("SELECT Titre, image, resumé from space_news ORDER BY date_news DESC LIMIT 5")
         ];
         $this->setdata($data);
         $this->render("acceuil");
@@ -90,6 +90,15 @@ class AcceuilController extends Controller
         $this->setdata($data);
         $this->render("Mentions_Legales");
     }
+    public function politiqueDeConfidentialie(){
+        $data = [
+            "title" => "Politique de Confidentialité"
+        ];
+        $this->setdata($data);
+        $this->render("PolitiqueDeConfidentialite");
+    }
+
+
     public function contact()
     {
         $data = [

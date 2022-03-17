@@ -3,10 +3,9 @@
     
 <main id="main_form" class="main_form">
 
-    <h1>Inscription</h1>
         <form action="" method="post">
             <fieldset class="fieldset_form">
-                <h1 class="title_form">Register</h1>
+                <h1 class="title_form">Inscriptions</h1>
                 <label for="">Pseudo</label><input name="user_Name" type="text" required="true" maxlength="32">
 
                 <label for="">Email</label><input name="email" type="email" required="true" maxlength="32"

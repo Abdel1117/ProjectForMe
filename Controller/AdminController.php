@@ -74,7 +74,8 @@ class AdminController extends Controller
         if (isset($_POST) && !empty($_POST)) {
             $title_article = trim(htmlspecialchars($_POST['title_article']));
             $contenue_article = trim(htmlspecialchars($_POST['article_content']));
-            
+            $image_board = trim(htmlspecialchars($_POST['url_image']));
+            $resume_board = trim(htmlspecialchars($_POST['resume_article']));
                    
             if (
                 strlen($title_article) > 5
@@ -82,12 +83,13 @@ class AdminController extends Controller
                
             ) { 
                 $donne = [
-                    "title" => $title_article,
-                    "contenue" => $contenue_article,
-                    
+                    ":title" => $title_article,
+                    ":contenue" => $contenue_article,
+                    ":image_board" => $image_board,
+                    ":resume" => $resume_board,
                 ];
 
-                Model::getPdo()->query("INSERT INTO space_news (Titre, news) VALUES (:title, :contenue)", $donne);
+                Model::getPdo()->query("INSERT INTO space_news (Titre, news, image, resumé) VALUES (:title, :contenue, :image_board, :resume)", $donne);
                 header("location:" . URL . "/admin/index");
             }else {
                 $data['err_mode'] = true;

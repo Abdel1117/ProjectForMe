@@ -73,6 +73,7 @@
             </div>
             <div class="container_3">
                 <a class="link" href="<?= URL ?>Acceuil/mentionsLegales"> Mentions legales</a>
+                <a href="<?= URL ?>Acceuil/politiqueDeConfidentialie">Politique de confidentialité </a>
                 <a class="link" href="<?= URL ?>Acceuil/contact">Contact</a>
             </div>
         </div>
