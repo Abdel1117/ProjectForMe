@@ -6,10 +6,11 @@
         <ul class="splide__list">
             <?php foreach ($Slider_accueil as $Slide) : ?>
             <li class="splide__slide">
+              
             <img class="img_cover_slide_article" src="<?= $Slide->image ?>" alt="image_planete_article">
             <div class="modal_cover_article">
                 <h3><?= $Slide->Titre ?></h3>
-                <p> <?= $Slide->resumé ?></p>
+                <a class="resume_article_slider" href="<?=URL . "acceuil/newsSolo/$Slide->id" ?>"<p> <?= $Slide->resumé ?></p><a/> 
             </div>
             </li>
             <?php endforeach ?>
@@ -34,19 +35,20 @@
                     <div class="news_container">
                         <div class="title_container">
                             <span> 
-                                <h3><?= Config::esc($value->Titre) ?></h3>
+                                <h3 class="title_page"><?= Config::esc($value->Titre) ?></h3>
                             </span>
                         </div>
 
-                        <p><?= htmlspecialchars_decode($value->news) ?></p>
+                        <p><?= htmlspecialchars_decode($value->resumé) ?></p>
                     </div>
-                </article>
-
-                <span class="button_container">
+                    <span class="button_container">
                         <a class="read_suite" href="<?=URL . "acceuil/newsSolo/$value->id" ?>">Lire la suite...</a>
                         <button><i class="fas fa-share-alt"></i></button>
                         <button><a class="add_favorite" href="<?= URL."compte/addFavoriteImage/$value->id"?>"><i class="fas fa-star"></i></a></button>
                 </span>
+                </article>
+
+                
         </div>
     <?php endforeach ?>
 </section>

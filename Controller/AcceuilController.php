@@ -15,7 +15,7 @@ class AcceuilController extends Controller
         $data = [
             "title" => "Accueil",
             "Contenue" => Model::getPdo()->query("SELECT * FROM space_news ORDER BY date_news ASC"),
-            "Slider_accueil" => Model::getPdo()->query("SELECT Titre, image, resumé from space_news ORDER BY date_news DESC LIMIT 5")
+            "Slider_accueil" => Model::getPdo()->query("SELECT Titre, image, resumé,id  from space_news ORDER BY date_news DESC LIMIT 5")
         ];
         $this->setdata($data);
         $this->render("acceuil");

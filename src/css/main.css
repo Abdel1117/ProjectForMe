@@ -104,6 +104,11 @@ body{
     font-size: 18px;
     padding: 5px;
 }
+.resume_article_slider{
+    color: white;
+    text-decoration: underline;
+}
+
 .main_flux{
     margin-top: 5%;
     margin-left:  auto;
@@ -128,11 +133,11 @@ body{
     margin: 20px;
     height: auto;
     min-height: 100% !important;
-    border: 1px solid black;
+    background-color: #f1f1f1fb;
 }
 
 .title_container{
-    text-align: center;
+    text-align: left;
     text-decoration: underline  #1A2238 ;
     font-size: 2rem;
 }
@@ -142,21 +147,27 @@ body{
     width: 100%;
 }
 .image_container{
-    max-width: 200px;
+ 
     float: left;
+    padding: 20px;
 }
 .image_card{
-    max-width: 200px;
+    width: 200px;
     height: auto;
+    object-fit: contain;
 }
 .news_container {
     font-family: 'Times New Roman', Times, serif;
+    font-size: 1.4rem;
+    text-align: left;
     min-height: 140px;
     max-height: 200px;
+    width: 55%;
     padding: 5px;
     color: #000;
     overflow-y: hidden;
     text-overflow: ellipsis;
+  
 }
 
 .button_container{
@@ -169,7 +180,7 @@ body{
     width: 40px;
     margin: 20px;
     border:1px solid black;
-    border-radius: 50px;
+    border-radius: 50%;
     transition: ease-in-out 500ms;
     cursor: pointer;
 }
@@ -307,6 +318,8 @@ body{
 /*Form Style*/
 .main_form{
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     width: auto;
     height: 100vh;
@@ -654,10 +667,10 @@ form h1:after {
 .article_container{ 
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
     text-align: justify;
-
+    min-height: 80vh;
 }
 .container_news{
    
@@ -1082,7 +1095,7 @@ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .forum_send_container{
-    
+    min-height: 8Ovh;
     display: flex;
     justify-content: center;
     margin: 2%;
@@ -1092,6 +1105,10 @@ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 .forum_inside_forum_container{
     display: inline-grid;
 
+}
+
+#Title_Forum{
+    padding: 10px;
 }
 /*Video Section*/
 
@@ -1365,6 +1382,7 @@ table.Image_table thead {
 #cke_editor1{
     width: 850px;
 }
+
 /*Css de la page Contact */
 .Maincontainer{
     margin-top: 5%;
@@ -1410,203 +1428,20 @@ table.Image_table thead {
     display: flex;
     flex-direction: column;
     text-align: center;
+    align-items: center;
+    justify-content: space-evenly;
     background-color: #FFFFFF;
     border: 1px solid #000000;
     border-radius: 30px;
     padding: 5px;
-    min-width: 350px;
-    max-width: 350px;
+    height: auto;
 }
 .promo-Panel a {
     color: black;
 }
-
-@media screen and (max-width:1366px) {
-    *{
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-    }
-
-    .Maincontainer{
-    padding: 0 5% 0 5%;       
-    }
-
-    .promo-Panel{   
-        width: 90%;
-        margin: 20px;
-        height: auto;
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 1.5rem;
-        
-    }
-    
-    .body-container{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        height: 100%;
-    }
-    
-}
-
-@media screen and (max-width:768px){
- 
-
-    .Maincontainer{
-        display: grid;
-        grid-template-columns: 1fr;
-    }
-
-    .body-container{
-       display: block;
-    }
-    .Para-info{
-        font-size: 1.5rem;
-
-    }
-
-}
-/*Responsive Part */
-
-@media screen and (max-width:768px) {
-    .nav_bar{
-        font-size: 1.5rem;
-
-    }
-    .link_container{
-        width: 80%;
-    }
-    .link_container a{
-        font-size: 1.5rem;
-    }
-    .logo_container a {
-        font-size: 1.5rem;
-        
-    }
-    .logo_container{
-        width: 70%;
-    }
-
-    .container_1 a
-    {
-        font-size: 1.5rem;
-    }
-    .container_2 a
-{
-    font-size:1.5rem
-}   
-    /*Title of the card shop*/
-    .title_container{
-        font-size: 1rem;
-    }
-    .image_container img{
-        width: 75px;
-        height: 75px;
-    }
-    /*Galerie Part*/
-    .section_galerie{
-        display: grid;
-        grid-template-columns: 1fr;
-        align-self: center;
-    }
-    /*Responsive Mon Compte Part*/
-    .profil_display_image{
-        display: flex;
-        flex-direction: column;
-    }
-    .side_info_profil{
-        min-height: 200px;
-    }
-    .desc-side{
-        display: block;
-        margin: 0 auto;
-    }
-    
-.container_3{
-    font-size:1.5rem
-
-}
-    .title_site{
-        display: none;
-    }
-    .infos_in_table{
-        width: 50%;
-        height: 50%;
-    }
-    .order-by{
-        display: none;
-    }
-
-    /*Forum Responsive Part*/
-    .hot_today{
-        display: none;
-    }
-
-
-    /* Forum Solo Responsive */
-    .body_forum{
-        font-size: 1.0rem;
-        font-family: 'Times New Roman', Times, serif;
-    }
-    .info_post{
-        display: none;
-    }
-    .title_data_info{
-        font-size: 1.2rem;
-    }
-    /*Video Section*/
-    .video_doc{
-        max-width: 95%;
-        min-width: 90%;
-    }
-}
-
-/*Admin dash boeard responsive for mobile device 420px*/
-@media screen and (max-width:420px) {
-    .card_shop{
-        height: 35vh;
-        width: 100vw;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-    }
-    .title_container{
-        width: 100%;
-        font-size: 1.5rem;
-        text-align: left;
-        margin-left: 0;
-        margin-bottom: 5px;
-    }
-    .image_container{
-        margin-top: 40px;
-    }
-    .image_container img{        
-        width: 150px;
-        height: 150px;
-        }
-    .button_container{
-        width:100%;
-        position: absolute;
-        right: 0;
-    }
-    .button_container .read_suite{
-        width: fit-content;
-    }
-    .promo-Panel{
-        min-width: 90%
-    }
-    .section_galerie{
-        display: grid;
-        grid-template-columns: 1fr;
-    }
-
-}
-
 #editor{
-    border: 1px solid black;
-    height: 500px;
+    border: 5px solid black;
+    height: 150vh;
     width: 950px;
     
 }
@@ -1616,4 +1451,76 @@ table.Image_table thead {
     display: block;
     margin-left: 0 auto;
     margin-right: 0 auto;
+}
+
+
+/*Responsive du site Web*/
+@media screen and (max-width:900px){
+    .nav_bar{
+        height: 15vh;
+        width: 100vw;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .link_container,  .logo_container{
+        position:static;
+    }
+    .link{
+        font-size: 1.5rem   ;
+    }
+    .logo_container{
+        align-items: center;
+        width: fit-content;
+    }
+    .logo_container a{
+        
+        font-size: 1.5rem;
+    }
+    .title_site{
+        display: none;
+    }
+    .footer_nav a {
+        font-size: 1.5rem;
+    }
+
+    .main_flux{
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: auto;
+        justify-items: center;
+        grid-gap: 20px;
+    }
+    .card_shop{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .feed_flux_infos{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .image_card{
+        width: 300px;
+        height: auto;
+    }
+    .section_video iframe{
+        width: 100%;
+        min-width: 90vw;
+        height: auto;
+    }
+    div[class^=back_office_div]{
+        overflow-x: auto;
+    }
+    .back_office_div1{
+        width: 90vw;
+    }
+    .back_office_div1> button {
+        width: 80px;
+    }
+    .back_office_div1> button a {
+        font-size: 12px;
+    }
 }
