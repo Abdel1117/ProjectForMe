@@ -1,0 +1,35 @@
+Bonjour Abderahmane, 
+
+Je vous transmets les corrections et les améliorations à effectuer sur votre livrable, préconisées par votre référent. 
+
+Dans le cahier des charges le benchmark n’est pas complet et il n’y a pas el détail avec impression écran des page d’accueil des concurrent.
+
+Il manque la partie SEO.
+Il manque la partie Google ANALYTICS.
+Il manque la partie mention légal et politique de .confidentialité
+Il manque le RGPD.
+
+
+
+
+Il aurait fallu plus s’inspirer d’une structure comme le site https://www.cieletespace.fr/ 
+
+
+
+
+Le site n’est pas sécurisé – il manque le HTTPS..
+
+
+
+
+
+Les articles doivent être écrit de la main du candidat. Si c’est du copier/coller d’autres sites, le jury n’acceptera pas car cela fait doublon et c’est pénalisé par Google en terme de référencement. Le site peut aller jusqu’à être blacklisté par le moteur de recherche attention
+------------------------------------------------------------
+Vous n’avez effectuer  le test d’auto-evaluation ?
+
+Globalement il y a de bonnes choses mais plusieurs point sont à améliorer car en l’état il y a un fort risque de ne pas valider malheureusement.
+
+Il faut que vous reprenniez le RC et que vous vérifiez les compétences une par une pour que tu sois sûr de bien valider.
+
+Bien cordialement,	 
+
