@@ -73,8 +73,8 @@ class AcceuilController extends Controller
         if ($id != null) {
 
             $data = [
-                "title" => "News" . $id,
-                "contenue" => Model::getPdo()->query("SELECT * FROM space_news WHERE id =" . $id)
+                "contenue" => Model::getPdo()->query("SELECT * FROM space_news WHERE id =" . $id),
+                "title" => $contenue[0]->Titre
             ];
         }
 

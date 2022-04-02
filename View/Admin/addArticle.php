@@ -7,7 +7,7 @@ if($err_mode === true){
         </div>";
 }
 ?>
-<script src="//cdn.ckeditor.com/4.17.2/full/ckeditor.js"></script>
+<script src="//cdn.ckeditor.com/4.17.2/full/ckeditor.js" ></script>
 
     <main class="article_add_post_container">
     <h1 class="title_page"><?= $title ?></h1>
@@ -49,6 +49,8 @@ if($err_mode === true){
 
 </main>
 <script>
-        CKEDITOR.replace( 'editor1' );
+        CKEDITOR.replace( 'editor1',{
+            removePlugins: 'exportpdf'
+        });
 </script>
 

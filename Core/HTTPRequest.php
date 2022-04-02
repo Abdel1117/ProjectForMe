@@ -1,7 +1,10 @@
 <?php
 
+namespace Hp\SpaceExplorer;
+
 /**
  * Class to handle httprequest
+ * 
  */
 class HTTPRequest
 {

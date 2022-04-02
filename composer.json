@@ -1,9 +1,14 @@
 {
-        "autoload": {
-            "psr-4": {
-                "AbdelDev\\": "src"
-            }
+    "name": "hp/space_explorer",
+    "autoload": {
+        "psr-4": {
+            "Hp\\SpaceExplorer\\": "Core/"
         }
+    },
+    "authors": [
+        {
+            "name": "Abderahmane Adjali"
+        }
+    ],
+    "require": {}
 }
-
-

@@ -1,4 +1,7 @@
 <?php
+
+use Hp\SpaceExplorer\HTTPRequest;
+use Hp\SpaceExplorer\HTTPResponse;
 /**
  * Main COntroller of the APP
  * @param none

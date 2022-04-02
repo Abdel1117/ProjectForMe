@@ -665,52 +665,18 @@ form h1:after {
 
 /*Article*/
 .article_container{ 
-    display: flex;
-    flex-direction: column;
+    
     width: 60%;
-    margin: 0 auto;
+    margin: 5% auto ;
     text-align: justify;
-    min-height: 80vh;
-}
-.container_news{
-   
-    position: relative;
-    margin: 0 auto;
-    padding: 10px;
+    min-height: 100vh;
     font-size: 1.8rem;
-}
-.title-article{
-    text-align: center;
-    padding: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 3rem;
-    text-decoration: underline;
+
 }
 
-.para-article{
-    padding: 20px;
-    margin: 0 auto;
-    font-size: 1.7rem;
-    font-family: 'Times New Roman', Times, serif;
+.article_contenu_wrapper:not(:nth-child(1)){
+        margin-top: 5%;
 }
-.date-article{
-text-align: right;
-font-size: 18px;
-font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-.image_news{
-    width:30%;
-    height: 30%;
-}
-.image_news:nth-child(1){
-    width: 100%;
-    height: 40%;
-}
-.infos_in_table{
-    padding: 15px;
-}
-
 /*Galerie Page*/
 
 .search_bar{
@@ -991,11 +957,13 @@ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
 .Answer_forum{
     font-size: 1.7rem;
-    border: 1px solid black;
     display: flex;
-    width: 100%;
+    width: 70%;
     height: 100%;
     padding: 10px;
+    background-color: #FFFFFF;
+    
+
 }
 .section_title{
     display: block;
@@ -1005,25 +973,24 @@ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: black;
     font-weight: bolder;
 }
-.Answer_forum {
-    width: 70%;
-    border: 1px solid black;
-    background-color: #FFFFFF;
-}
+
 
 .section_question{
     border: 1px solid black;
     padding: 15px;
     min-width: 50%;
+    min-height: 80%;
 }
 .info_question p {
     margin-top: 10%;
+}
+.section_question_height{
+    min-height: 70%;
 }
 .response_forum{
     display: flex;
     justify-content: space-between;
     margin-top: 2%;
-    border: 1px solid black;
     padding: 15px;
     height: auto;
     min-height: 200px;
@@ -1046,8 +1013,17 @@ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     height: 100%;
     border-radius: 5px;
 }
+#info_forum_post{
+    display: block;
+    text-align: center;
+    padding: 5px;
+}
+
+
 #auteur_name{
     display: block;
+    text-align: center;
+    padding: 5px;
 }
 .posted_text{
     position: relative;
@@ -1068,13 +1044,13 @@ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     
 }
 #Date_reponse{
-    float: inline-end;
+    float: right;
+    font-size: 18px;
 }
 .post_answer{
     display: block;
     align-items: center;
-    margin-top: 5%;
-    border-top: 1px solid black;
+    margin-top: 10%;
 }
 #label_response{
     display: block;
@@ -1087,13 +1063,18 @@ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
 .button_send{
     display: block;
-    
     height: 30px;
     width: 75px;
     border: 1px solid black;
+    border-radius: 5px;
     cursor: pointer;
+    transition: 400ms;
 }
-
+.button_send:hover{
+    transition: 400ms;
+    background-color: #000;
+    color: blue;
+}
 .forum_send_container{
     min-height: 8Ovh;
     display: flex;
@@ -1452,7 +1433,9 @@ table.Image_table thead {
     margin-left: 0 auto;
     margin-right: 0 auto;
 }
-
+.change_article_wraper{
+    min-height: 100vh;
+}
 
 /*Responsive du site Web*/
 @media screen and (max-width:900px){
@@ -1511,6 +1494,19 @@ table.Image_table thead {
         min-width: 90vw;
         height: auto;
     }
+
+    .article_container{
+        width: 100%;
+        height: auto;   
+        text-align: justify;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .article_container p {
+        font-size: 12px !important;
+    }
     div[class^=back_office_div]{
         overflow-x: auto;
     }
@@ -1522,5 +1518,17 @@ table.Image_table thead {
     }
     .back_office_div1> button a {
         font-size: 12px;
+    }
+}
+
+@media screen and (max-width:460px)  {
+    .link{
+        font-size: 1rem   ;
+    }
+    .logo_container a {
+        font-size: 1rem;
+    }
+    .footer_nav a {
+        font-size: 1rem;
     }
 }

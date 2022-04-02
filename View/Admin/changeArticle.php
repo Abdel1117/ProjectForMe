@@ -1,4 +1,4 @@
-<main>
+<main class="change_article_wraper">
 <script src="//cdn.ckeditor.com/4.17.2/full/ckeditor.js"></script>
 
     <h1><?= $article[0]->Titre ?></h1>

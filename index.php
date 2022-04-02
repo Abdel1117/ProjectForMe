@@ -1,9 +1,9 @@
 <?php
 session_start();
-
+require_once "vendor/autoload.php";
  
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
 error_reporting(E_ALL);
  
 
@@ -14,6 +14,7 @@ $domaine = $_SERVER['SERVER_NAME'];
 $projet = str_replace("index.php", "", $_SERVER['PHP_SELF']);
 
 define("URL", $protocole . "://" . $domaine . $projet);
+
 if (isset($_GET['p'])) {
     require "Core/Controller.php";
     require "Core/Model.php";
@@ -26,7 +27,7 @@ if (isset($_GET['p'])) {
     $methode = strtolower(isset($params[1]) && !empty($params[1]) ? $params[1] : "index");
     $controller_file = "Controller/" . ucfirst($controller) . "Controller.php";
     if (file_exists($controller_file)) {
-
+        
         require $controller_file;
         $controllerName = ucfirst($controller) . "Controller";
 

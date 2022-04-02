@@ -10,7 +10,7 @@
             <img class="img_cover_slide_article" src="<?= $Slide->image ?>" alt="image_planete_article">
             <div class="modal_cover_article">
                 <h3><?= $Slide->Titre ?></h3>
-                <a class="resume_article_slider" href="<?=URL . "acceuil/newsSolo/$Slide->id" ?>"<p> <?= $Slide->resumé ?></p><a/> 
+                <a class="resume_article_slider" href="<?=URL . "acceuil/newsSolo/$Slide->id" ?>"<p> <?=  htmlspecialchars_decode($Slide->resumé) ?></p></a> 
             </div>
             </li>
             <?php endforeach ?>

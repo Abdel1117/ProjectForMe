@@ -76,11 +76,12 @@ class AdminController extends Controller
             $contenue_article = trim(htmlspecialchars($_POST['article_content']));
             $image_board = trim(htmlspecialchars($_POST['url_image']));
             $resume_board = trim(htmlspecialchars($_POST['resume_article']));
-                   
+            
             if (
                 strlen($title_article) > 5
                 && strlen($contenue_article) > 200
-               
+                && !empty($image_board)
+                && strlen($resume_board) > 20
             ) { 
                 $donne = [
                     ":title" => $title_article,
@@ -90,8 +91,10 @@ class AdminController extends Controller
                 ];
 
                 Model::getPdo()->query("INSERT INTO space_news (Titre, news, image, resumé) VALUES (:title, :contenue, :image_board, :resume)", $donne);
-                header("location:" . URL . "/admin/index");
-            }else {
+
+                echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=Admin/index');</script>";
+                }
+                else {
                 $data['err_mode'] = true;
             }
         }   
