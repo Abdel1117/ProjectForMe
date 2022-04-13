@@ -184,7 +184,7 @@ class CompteController extends Controller
                 echo "<script>window.location.replace('http://localhost/Web/Space-Explorer/Acceuil/index');</script>";
             }
         } else {
-            echo "<h1>An Error as occured please <a href=" . URL . "acceuil/index>Réessayer Ici</a> </h1>";
+            echo "<h1>IL vous faut un compte afin de pouvoir ajouter des article en favoris veuillez vous connecter <a href=" . URL . "acceuil/index>Réessayer Ici</a> </h1>";
         }
     }
     public function deconection()

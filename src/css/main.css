@@ -190,6 +190,8 @@ body{
     outline: 1px solid #1D2228   ;
 }
 .add_favorite{
+    display: inline-block;
+    width: 100%;
     color: #FFE919;
     text-decoration: none;
 }
@@ -254,7 +256,10 @@ body{
     border: none;
 }
 
-
+.bouton_cookie a {
+    display: inline-block;
+    width: 100%;
+}
 #bouton_cookie_oui:hover{
     background-color: #008000;
     transition: 600ms;
@@ -507,11 +512,13 @@ body {
     font-family: 'Times New Roman', Times, serif;
   font-size:12px;
 }
-
+.main_section{
+    min-height: 60vh;
+}
 .form-login {
  	background: rgba(0, 0, 0, 0.13);; 
   width:300px;
-  height: 100vh;
+  height: 50vh;
   margin:30px auto;
   border-radius:0.4em;
   border:1px solid #191919;
@@ -648,7 +655,22 @@ form h1:after {
 .form-login label:hover ~ input[type=password] {
  	background:#27292c;
 }
+.bouton_inscription{
+    background-color: #0184ff;
+    color: white;
+    border: none;
+    margin: 0 auto;
+    height: 35px;
+    padding: 10px;
+    cursor: pointer;
+    transition: 500ms;
+}
 
+.bouton_inscription:hover{
+    color: #0184ff;
+    background-color: white;
+    font-weight: bolder;
+}
 .warning_login{
     border: 1px solid black;
     width:20%;
@@ -674,8 +696,9 @@ form h1:after {
 
 }
 
+
 .article_contenu_wrapper:not(:nth-child(1)){
-        margin-top: 5%;
+        margin-top: 15%;
 }
 /*Galerie Page*/
 
@@ -841,6 +864,7 @@ form h1:after {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap-reverse;
     padding: 20px;
 }
 .order-by{
@@ -888,11 +912,10 @@ form h1:after {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    background-color: #e9d700;
+    background-color: #808080;
     font-size: 1.7rem;
     color: #000;
     padding: 5px;
-    border-radius: 5px;
 }
 .forum_index div {
     text-align: center;
@@ -905,15 +928,26 @@ form h1:after {
     padding: 10px;
 }
     
-.display_data{
+.display_data:nth-child(odd){
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background-color: white;
+    float: right;  
+    width: 100%;
+    height: 30px;
+    font-size: 1.2rem;
+    overflow: hidden;
+
+}
+.display_data:nth-child(even){
     display: flex;
     align-items: center;
     text-align: center;
     float: right;  
     width: 100%;
     height: 30px;
-    background-color: #03d4db;
-    border-radius: 5px;
+    background-color: #bbb;
     font-size: 1.2rem;
     overflow: hidden;
 
@@ -1111,8 +1145,9 @@ form h1:after {
     height: 25%;
 }
 .video_doc{
-    min-width: 90%;
-}
+    width:75%;
+    height:100%;
+    }
 .video_container{
     
     padding: 15px;
@@ -1133,6 +1168,7 @@ form h1:after {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-height: 100vh;
 }
 
 .back_office_div1{
@@ -1506,6 +1542,29 @@ table.Image_table thead {
     }
     .article_container p {
         font-size: 12px !important;
+        padding: 10px;
+    }
+    .discussion_section{
+        width: 100%;
+        height: auto;
+    }
+    .hot_today{
+        display: none;
+    }
+    .main{
+        width: 100%;
+    }
+    .profil_display_image{
+        display: grid;
+        grid-template-columns: 1fr ;
+        
+        grid-gap: 20px;
+    }
+    .side_info_profil{
+        display: flex;
+        flex-direction: row !important;
+        align-items: baseline;
+        min-height: auto;
     }
     div[class^=back_office_div]{
         overflow-x: auto;

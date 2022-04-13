@@ -34,7 +34,7 @@ class InscriptionController extends Controller
                 $password =  htmlspecialchars(trim(password_hash($_POST["password"], PASSWORD_DEFAULT)));
                 $country =  htmlspecialchars(trim($_POST["country"]));
 
-                $donne = [
+                $donnes = [
                     ":user_Name" => $userName,
                     ":email" => $email,
                     ":age" => $age,
@@ -55,8 +55,8 @@ class InscriptionController extends Controller
                     $request = Model::getPdo()->query("SELECT * FROM user_data WHERE pseudo =:pseudo OR email =:email", $donne);
 
                     if (empty($request)) {
-                        $request2 = Model::getPdo()->query("INSERT INTO user_data (pseudo, email, Age, Country,password) VALUES (:user_Name, :email, :age, :country, :password)", $donne);
-                        echo "Vous allez etre redirigez vers la page de login <a src=" . URL . "acceuil/index" . "> Acceuil</a>";
+                        $request2 = Model::getPdo()->query("INSERT INTO user_data (pseudo, email, Age, Country,password) VALUES (:user_Name, :email, :age, :country, :password)", $donnes);
+
                         header("Location:" . URL . "acceuil/index");
                         exit;
                         

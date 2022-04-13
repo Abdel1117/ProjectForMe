@@ -28,12 +28,7 @@ class Controller {
      * 
      */
     public function render($nomView){
-        /*
-        if(empty($_SESSION['pseudo'])){
-
-            session_start();
-        }
-        */
+       
         $dossier = str_replace("Controller", "" , get_class($this));
 
         $dossier = strtolower($dossier);

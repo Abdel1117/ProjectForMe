@@ -1,4 +1,5 @@
 <?php session_start();
+
 /**
  * Function to manage The message displayed in the forum to know when the message has been sended 
  * 
@@ -83,96 +84,87 @@ function get_time_ago_string($time_stamp, $divisor, $time_unit)
 }
 
 ?>
-<main class="forum_container">
-<h1 class="title_page"><?= $title ?></h1>
-
-    <section class="option-nav">
-        <div class="order-by">
-            <label for="order_choice">Triée Par Ordre</label>
+<main class="container fluid">
+<h1 class="mt-2 mb-2"><?= $title ?></h1>
+    
+    <section class="container">
+        <div class="row row-cols-1 align-items-center row-cols-sm-2 row-cols-md-4">
+            <div class="col-lg">
+                <label for="order_choice">Triée Par Ordre</label>
 
             <form action="" method="post">
-                <select name="order_by" id="order_choice">
+                <select class="custom-select " name="order_by" id="">
                     <option value="DESC">Décroissant</option>
                     <option value="ASC">Croissant</option>
                 </select>
-                <button type="submit">Envoyer</button>  
+                <button class="btn btn-primary" type="submit">Envoyer</button>  
             </form>
 
         </div>
 
-        <div class="addPost">
+        <div class="col-lg">
         
             <form action="<?= URL ?>Forum/addPost" method="POST">
                 <?php if(empty($_SESSION['pseudo'])):?>
                     <span>Il faut cree un compte pour pouvoir poster</span> 
                 <?php else: ?>
-                    <button class="subject_button">ADD subject</button>
+                    <button class="btn btn-primary">ADD subject</button>
                 <?php endif ?>
             </form>
         </div>
 
-        <div class="search">
+        <div class="col-lg">
             <form method="POST" action="<?= URL ?>Forum/search">
                 <placeholder>Rechercher </placeholder>
                 <input name="recherche" type="text">
-                <button id="search_button" class="search_button" type="submit">Recherche</button>
+                <button id="search_button" class="btn btn-primary" type="submit">Recherche</button>
             </form>
         </div>
-    </section>
-
-    <section class="forum_section">
-        <div class="discussion_section">
-            
-            <span><h3 class="forum_title"><strong><?= $title ?></strong></h3></span>
-            <section class="forum_index">
-                    <div class="title_post">
-                        <span><p>Titre</p></span>
-                    </div>
-                    <div class="posted_by">
-                        <span><p>Auteur</p></span>
-                    </div>
-                    <div class="lastmessage">
-                        <span><p>Derniere message</p></span>
-                    </div>
-                    <div class="datepost">
-                        <span><p>Date du poste</p></span>
-                    </div>
-                </section>
-
-                
-                <?php foreach ($post as $value) : ?>
-                    <section class="display_data">
-                        <div class="Title_data">
-                            <span><a class="title_data_info" href="<?= URL. "Forum/ForumSolo/" . $value->Id_forum ?>"><?= $value->Titre ?></a></span>
-                        </div>
-                    
-                    <div class="Auteur_data">
-                        <span><p><?= $value->pseudo ?></p></span>
-                    </div>
-                    <div class="last_message_data">
-                        <span><p><?=
-                                get_time_ago(strtotime($value->Date_post))
-                        ?></p></span>
-                    </div>
-                    
-                    <div class="date_data">
-                        <p><?= $value->Date_post ?></p>              
-                    </div>
-                </section>
-
-            <?php endforeach ?>
-
         </div>
         
-        <aside class="hot_today">
-            <?php 
-            foreach ($hot_today as $value) : ?>
-                <div class="hot-today-block">
-                    <span><a href="<?= URL.'Forum/ForumSolo/'.$value->Id_forum ?>"><?= $value->Titre ?></a></span>
-                    <p><?= substr($value->Discussion,0,25) ?></p>
-                </div>
-            <?php endforeach ?>
-        </aside>
     </section>
 
+    <section class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-sm-9">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Titre</th>
+                            <th scope="col">Auteur</th>
+                            <th scope="col">Message</th>
+                            <th scope="col">Dernier Message</th>
+                            <th scope="col">Date du Poste</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($post as $value) : ?>
+                        
+                            <tr>
+                                <td><?= $value->Titre ?></td>
+                                <td><?= $value->pseudo ?></td>
+                                <td><?= $value->Discussion ?></td>
+                                <td><?= get_time_ago(strtotime($value->Date_post))?></td>
+                                <td><?= $value->Date_post ?></td>
+                                <td><a class="nav-link" href="<?= URL . 'Forum/ForumSolo/' .$value->Id_forum ?>">Lire la Suite...</a></td>
+                            </tr>
+                            <?php endforeach ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <aside class="col-lg-3">
+        <?php 
+            foreach ($hot_today as $value) : ?>
+                <div class="row-6 justify-content-center align-item-center">
+                    <span><a href="<?= URL.'Forum/ForumSolo/'.$value->Id_forum ?>"><?= $value->Titre ?></a></span>
+                    <p><?= substr($value->Discussion,0,25) ."...." ?></p>
+                </div>
+            <?php endforeach ?>
+            </aside>
+    
+        </div>
+    
+    </section>
+    
 </main>

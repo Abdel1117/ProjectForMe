@@ -1,7 +1,7 @@
 
 /*Working with the galerie page */
 // Variables
-let img = document.getElementsByClassName('photo_galerie');
+let img = document.getElementsByClassName('img-fluid');
 const body = document.getElementsByTagName('body');
 let button_add_link = document.getElementsByClassName('add_link');
 let modal = document.getElementById("myModal");

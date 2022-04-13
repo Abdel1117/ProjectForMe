@@ -13,13 +13,12 @@ class ForumController extends Controller
     public function indexForum()
     {
         $data = [
-            "title" => "Forum de discussion",
+            "title" => "Forum de discussion de Space Explorer",
             "post" => Model::getPdo()->query("SELECT * FROM forum_discussion INNER JOIN user_data ON user_data.Id = forum_discussion.Id_profil"),
             "hot_today" => Model::getPdo()->query("SELECT * FROM forum_discussion ORDER BY Date_post DESC LIMIT 5")
         ];
         if (!empty($_POST['order_by'])) {
             if ($_POST['order_by']) {
-
                 $data = [
                     "title" => "Forum de discussion",
                     "post" => Model::getPdo()->query("SELECT * FROM forum_discussion INNER JOIN user_data ON user_data.Id = forum_discussion.Id_profil ORDER BY     Date_post " .  $_POST['order_by']),
@@ -74,7 +73,7 @@ class ForumController extends Controller
         $response_2  = Model::getPdo()->query("SELECT * FROM post 
         INNER JOIN user_data
         ON post.id_profil = user_data.Id
-        INNER JOIN image
+        LEFT JOIN image
         ON user_data.Id = image.Idprofil
         WHERE id_forum_discussion = :id", ["id" => $response[0]->Id_forum]);
 
@@ -84,7 +83,9 @@ class ForumController extends Controller
         WHERE image.Idprofil  = post.id_profil');
 
         if (empty($image)) {
-            $image = '<img class ="image_profil_compte" src="../src/image/profil-astronaute-côté-banque-dillustrations_csp0954785.webp" alt="Profil_image" />';
+            $image = '<img class ="image_profil_compte" 
+            src="../src/image/profil-astronaute-côté-banque-dillustrations_csp0954785.webp" 
+            alt="Profil_image" />';
         }
         $data = [
             "title" => $response[0]->Titre,
@@ -108,8 +109,10 @@ class ForumController extends Controller
             ) {
                 if (strlen($post) > 3) {
 
-                    Model::getPdo()->query("INSERT INTO post (id_profil, id_forum_discussion, post) VALUES(:profil, :id_forum, :reponse)", $donne);
-                    echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=Forum/forumSolo/$id');</script>";
+                    Model::getPdo()->query("INSERT INTO post (id_profil, id_forum_discussion, post) 
+                    VALUES(:profil, :id_forum, :reponse)", $donne);
+                    
+                    echo "<script>window.location.replace('http://space-explorer.fr/Forum/ForumSolo/$id');</script>";
                 } else {
                     echo "Veuillez tapez un message suffisament longs pour que l'on puisse vous comprendre";
                 }

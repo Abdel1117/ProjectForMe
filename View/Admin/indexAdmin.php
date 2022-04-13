@@ -1,22 +1,22 @@
-<main class="main_section_dash_board">
+<main class="d-grid gap-5">
     <h1 class="title_page">Bienvenue <?= $admin[0]->pseudo ?></h1>
 
-    <div class="back_office_div1">
-        <button class="btn btn-AddArticle"><a class="link_normal" href="<?=URL. "Admin/addArticle"?>">AddArticle</a></button>
-        <button class="btn btn-AddImage"><a class="link_normal" href="<?= URL.'Admin/addImage'?>">AddImage</a></button>
-        <button class="btn btn-AddVideo"><a class="link_normal" href="<?= URL.'Admin/addVideo'?>">AddVideo</a></button>
-        <button class="btn btn-RemoveVideo"><a class="link_normal" href="<?= URL ?>admin/removeVideo">Gestion videos</a></button>
+    <div class="back_office_div1 mb-3">
+        <a class="btn btn-primary" href="<?=URL. "Admin/addArticle"?>">AddArticle</a>
+        <a class="btn btn-success" href="<?= URL.'Admin/addImage'?>">AddImage</a>
+        <a class="btn btn-info" href="<?= URL.'Admin/addVideo'?>">AddVideo</a>
+        <a class="btn btn-warning" href="<?= URL ?>admin/removeVideo">Gestion videos</a>
     </div>
-    <div class="back_office_div2">
-    <table class="User_table">
+    <div class=" table-hover table-responsive mb-3">
+    <table class="table table-hover">
 <thead>
     <tr>
-        <th>Pseudo</th>
-        <th>Email</th>
-        <th>Age</th>
-        <th>Pays</th>
-        <th>Role</th>
-        <th colspan="3">Action</th>
+        <th scope="col">Pseudo</th>
+        <th scope="col">Email</th>
+        <th scope="col">Age</th>
+        <th scope="col">Pays</th>
+        <th scope="col">Role</th>
+        <th scope="col" colspan="3">Action</th>
     </tr>
 </thead>
     <tbody>
@@ -27,9 +27,9 @@
             <td><?= $user->Age?></td>
             <td><?= $user->Country?></td>
             <td><?= ucfirst($user->role)?></td>
-            <td><button class="btn btn-ban"><a class="link_normal" href="<?= URL."Admin/ban/".$user->Id ?>">Ban</a></button></td>
-            <td><button class="btn btn-AddAdmin"> <a class="link_normal" href="<?= URL."Admin/addAdmin/".$user->Id ?>">AddAdmin</a></button></td>
-            <td><button class="btn btn-removeAdmin"> <a class="link_normal" href="<?= URL."Admin/removeAddmin/".$user->Id ?>">RemoveAdmin</a></button></td>
+            <td><a class="btn btn-danger" href="<?= URL."Admin/ban/".$user->Id ?>">Ban</a></td>
+            <td><a class="btn btn-success" href="<?= URL."Admin/addAdmin/".$user->Id ?>">AddAdmin</a></td>
+            <td><a class="btn btn-warning" href="<?= URL."Admin/removeAddmin/".$user->Id ?>">RemoveAdmin</a></td>
         </tr>
         <?php endforeach ?>
     </tbody>
@@ -37,14 +37,14 @@
 
 
     </div>
-    <div class="back_office_div3">
-        <table class='User_table'>
+    <div class="table-responsive w-75 mb-3">
+        <table class='table table-hover'>
             <thead>
                 <tr>
-                    <th>Article Id</th>
-                    <th>Article Title</th>
-                    <th>Article contenue</th>
-                    <th colspan="2">Action</th>
+                    <th scope="col">Article Id</th>
+                    <th scope="col">Article Title</th>
+                    <th scope="col">Article contenue</th>
+                    <th scope="col" colspan="2">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,15 +53,15 @@
                     <td><?= $article->id ?></td>
                     <td><?= $article->Titre ?></td>
                     <td><?= substr($article->news,0, 50) ?></td>
-                    <td><button class="btn btn-AddArticle"><a class="link_normal" href="<?= URL.'/admin/removeArticle/' . $article->id ?>">Remove</a></button></td>
-                    <td><button class="btn btn-RemoveVideo"><a class="link_normal" href="<?= URL .'admin/ChangeArticle/'.$article->id ?>">Modifer</a></button></td>
+                    <td><a class="btn btn-danger" href="<?= URL.'/admin/removeArticle/' . $article->id ?>">Remove</a></td>
+                    <td><a class="btn btn-warning" href="<?= URL .'admin/ChangeArticle/'.$article->id ?>">Modifer</a></td>
                 </tr>
                 <?php endforeach ?>
             </tbody>
         </table>
     </div>
-    <div class="back_office_div4">
-        <table class='Image_table'>
+    <div class="table table-hover w-50 mb-3">
+        <table class='table table-hover'>
             <thead>
                 <tr>
                     <td>Image_Id</td>
@@ -75,8 +75,8 @@
                         <td id="table_data_id">
                             <?= $image->id ?>
                         </td>
-                        <td id="table_data_image"><img src="<?= $image->image?>" alt=""></td>
-                        <td id="table_data_image"><a class="link_admin_dash_board" href="<?= URL. 'Admin/removeImage/'.$image->id ?>">Suprimer l'image</a></td>
+                        <td id="table_data_image"><img style="width:100px; height:auto"" src="<?= $image->image?>" alt=""></td>
+                        <td id="table_data_image"><a class="btn btn-danger" href="<?= URL. 'Admin/removeImage/'.$image->id ?>">Suprimer l'image</a></td>
                     </tr>
                     <?php endforeach ?>
             </tbody>

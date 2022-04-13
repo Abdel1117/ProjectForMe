@@ -71,10 +71,10 @@ class AcceuilController extends Controller
     {
 
         if ($id != null) {
-
+            $title = Model::getPdo()->query("SELECT Titre FROM space_news WHERE id =" . $id);
             $data = [
                 "contenue" => Model::getPdo()->query("SELECT * FROM space_news WHERE id =" . $id),
-                "title" => $contenue[0]->Titre
+                "title" => $title[0]->Titre
             ];
         }
 

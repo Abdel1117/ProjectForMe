@@ -18,48 +18,38 @@
     </div>
 </section>
 
-<section class="main_flux" id="main_flux">
-        <?php 
-            foreach ($Contenue as $value) : 
-        ?>
-                    
-        <div class="card_shop" id="card_shop">
-            
-                <article class="feed_flux_infos">
-                    <section class="image_container">
-                    <?= 
-                    '<img class="image_card" src='.$value->image . ' >';
-    
-                    ?>
-                    </section>
-                    <div class="news_container">
-                        <div class="title_container">
-                            <span> 
-                                <h3 class="title_page"><?= Config::esc($value->Titre) ?></h3>
-                            </span>
-                        </div>
+<section class="album py-5 bg-light" id="">
+    <h2>Articles de notre Site Web</h2>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <?php foreach ($Contenue as $value) : ?>
+                    <div class="col" id="">
+                        <article class="card shadow-sm">
+                            <img src="<?= $value->image?>" class="img-fluid img-thumbnail" style="max-height:250px" />
+                                    <div class="card-body">
+                                        <p class="card-text"><?= $value->resumé ?></p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="btn-group">
+                                                    <a href="<?= URL ?>acceuil/newsSolo/<?= $value->id ?>" class="btn btn-primary">Lire la suite de l'article</a>
 
-                        <p><?= htmlspecialchars_decode($value->resumé) ?></p>
+                                                    <a href="<?= URL.'Compte/addFavoriteImage/'.$value->id ?>" class="btn btn-warning">Ajouter Favoris</a>
+                                                </div>
+                                            </div>
+                                    </div>
+                </article>    
                     </div>
-                    <span class="button_container">
-                        <a class="read_suite" href="<?=URL . "acceuil/newsSolo/$value->id" ?>">Lire la suite...</a>
-                        <button><i class="fas fa-share-alt"></i></button>
-                        <button><a class="add_favorite" href="<?= URL."compte/addFavoriteImage/$value->id"?>"><i class="fas fa-star"></i></a></button>
-                </span>
-                </article>
-
-                
-        </div>
-    <?php endforeach ?>
+                <?php endforeach ?>
+            </div>
+    </div>
 </section>
 
 
 <script>
  document.addEventListener( 'DOMContentLoaded', function () {
   new Splide( '#thumbnail-slider', {
-		fixedWidth: 800,
+		fixedWidth: 695,
         fixedHeight: 500,		
-        gap       : 10,
+        gap       : 0,
 		rewind    : true,
 		pagination: true,
         cover : true,

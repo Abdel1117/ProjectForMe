@@ -2,24 +2,13 @@
 <main>
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/js/splide.min.js"></script>  
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/css/themes/splide-skyblue.min.css">  
-<h1 class="title_page"><?= $title ?></h1>
-    <div class="search_bar">
-        <div class="search_div">
-            <form class="form_search_bar" method="post" action="">
-                <div>
-                    <label for="search">Recherche</label>
-                    <input name="search" type="text">
-                </div>
-            </form>
-        </div>
-        
-       
-        </form>
-        
+
+    <div class="nav">
+    <h1 class="mx-auto border-bottom"><?= $title ?></h1>
     </div>
     <div class="carrousel_container">
-        <div>
-            <h3 class="title_carrousel">New Images</h3>
+        <div class="d-flex justify-content-center">
+            <h3> Nouvelles Images D'astronomie </h3>
         </div>
         <div id="thumbnail-slider" class="splide">
             <div class="splide__track">
@@ -36,19 +25,22 @@
         
     </div>
 
-    <section class="section_galerie">
+    <section class="row text-center text-lg-start mt-5">
+        <div class="d-flex justify-content-center">
+            <h3>Album photo</h3>
+        </div>
         <?php
         foreach ($Photo as  $value) : ?>
-            <div class="photo_container">
-             <img class="photo_galerie" src="<?=$value->image ?>"/>
+            <div class="col-lg-3 col-md-4 col-6">
+             <img onclick="my_modal(this)" class="img-fluid img-thumbnail" src="<?=$value->image ?>"/>
             </div>
 
         <?php endforeach ?>
         <?php foreach ($carousel_photo as $value) : ?>
-            <div class="photo_container">
-            <img onclick="my_modal(this)" class="photo_galerie" src="<?= $value->image?>" />
+            <div class="col-lg-3 col-md-4 col-6">
+                <img onclick="my_modal(this)" class="img-fluid img-thumbnail"   src="<?= $value->image?>" />
+            </div>
             
-        </div>
         <?php endforeach ?>
         <div id="myModal" class="modal">
             <span class="close">&times;</span>
