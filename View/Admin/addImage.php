@@ -1,13 +1,13 @@
 <main class="h-100">
-    <h1 class="title_page"><?= $title ?></h1>
-    <?php if($err_mod === true){
-    echo "<div class='warning_login'>
-            <h2 class='warning_title_err_mode'>
-                Veuillez remplir tous les champs nessecaire
-            </h2>
-        </div>";
-}
-?>
+<?php 
+if($err_mode != false) : ?>
+    <div class="alert alert-dismissible alert-danger">
+  <button type="button" class="btn-close" data-bs-dismiss="alert">&#10060;</button>
+  <strong>Oh Zut!</strong> <a href="#" class="alert-link"><?= $err_mode ?></a> 
+</div>
+
+
+<?php endif ?>
     <div class="form_container_Add">
 
         <form id="form_image_add" action="" method="post">

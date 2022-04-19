@@ -31,23 +31,23 @@
             <?php if(!empty($Post)){
             
             foreach ($Responses as $key => $Response) : ?>
-                <div class="card mb-3 bg-light mb-3">
+                <div class="card mb-3 mb-3">
                     <div class="row g-0">
-                        <div class="col-md-2">
+                        <div class="col-md-2 border-right">
 
                             <?php if(empty($Response->image) || $Response->image === null ){
-                                echo '<img class="img-fluid" src="https://comps.gograph.com/astronaute-profil-lat%C3%A9ral_gg4410408.jpg" style="width:150px; height: 150px" />';
+                                echo '<img class="img-fluid" src="https://comps.gograph.com/astronaute-profil-lat%C3%A9ral_gg4410408.jpg" style="width:150px; height: 150px" alt="image de l\'utilisateur" />';
                             }
                             else {
 
-                                echo  '<img class ="img-fluid" src="data:image/jpg; charset=utf8;base64,' . base64_encode($Response->image) . '"     style="width:150px; height:150px" alt="Profil Image"/>';
+                                echo  '<img class ="img-fluid" src="data:image/jpg; charset=utf8;base64,' . base64_encode($Response->image) . '"     style="width:150px; height:150px" alt="alt="image de l\'utilisateur""/>';
                             } ?>
                         </div>        
                              
 
                         <div class="col-md-8">
                             <div class="card-body" style="height:100%">
-                                <p id="card-text" style="height:50%"><?= Config::esc($Response->post) ?></p>   
+                                <p id="card-text" style="height:50%"><?= html_entity_decode($Response->post) ?></p>   
                                 <p class="card-text float-end"><small class="text-muted"><?= $Response->Date_poste  ?></small></p>
                             </div>
                         </div>

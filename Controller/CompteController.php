@@ -19,9 +19,10 @@ class CompteController extends Controller
             $id = $_SESSION['id'];
             $data = [
                 "title" => "Mon Compte",
+                "err_mode" => "0",
                 "image" => ModelChild::getPdo()->query("SELECT image, Idprofil FROM image WHERE Idprofil = " . $_SESSION['id']),
                 "infos" => Model::getPdo()->query("SELECT pseudo, email, description, Country, Age FROM user_data WHERE Id=" .  $id),
-                "favorite" => Model::getPdo()->query("SELECT * FROM favorite WHERE id_user = $id")
+                "favorite" => Model::getPdo()->query("SELECT id_user id_image FROM favorite INNER JOIN space_news ON favorite.id_image = space_news.id WHERE id_user = $id")
             ];
 
             //Here we check whenevere the Page is charged if they is a Post data loaded
@@ -31,7 +32,7 @@ class CompteController extends Controller
                 if (isset($_POST['description'])) {
                     $id = $_SESSION['id'];
                     $desc = htmlspecialchars($_POST['description']);
-                    $data = [
+                    $donne = [
                         "description" => $desc
                     ];
                     if (
@@ -42,14 +43,16 @@ class CompteController extends Controller
                         $a = Model::getPdo()->query("SELECT description FROM user_data WHERE id = " . $id);
 
                         if ($a = !NULL) {
-                            Model::getPdo()->query("UPDATE user_data set description = :description WHERE Id = $id ", $data);
+                            Model::getPdo()->query("UPDATE user_data set description = :description WHERE Id = $id ", $donne);
                             echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=compte/indexAccount');</script>";
                         } else {
-                            Model::getPdo()->query("INSERT INTO user_data (description) :description WHERE Id = $id ", $data);
+                            Model::getPdo()->query("INSERT INTO user_data (description) :description WHERE Id = $id ", $donne);
                             echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=compte/indexAccount');</script>";
                         }
                     } else {
-                        echo "<h1>Vous devez vous décrire avec au moint 15 characteres et au maximum avec 4000 characteres <a href=" . URL . "compte/indexAccount>Reésayer</a></h1>";
+                        $data["err_mode"] = "Veuillez remplir le champs nécessaire";
+                        $this->setdata($data);
+                        $this->render("mon_Compte");
                     }
                 } else {
 
@@ -100,12 +103,11 @@ class CompteController extends Controller
                                     echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=compte/indexAccount');</script>";
                                 }
                             } else {
-                                echo "<h1>An Error as occured please <a href=" . URL . "Compte/indexAccount>Réessayer Ici</a> </h1>";
-                                die();
+                                $data["err_mode"] = "Une erreur inconnue est survenue veuillez réesayer plus tard";
                             }
                         } else {
-                            echo "Vous avez la mauvaise extention <a href=" . URL . "Compte/indexAccount>Réessayer Ici</a>";
-                            die();
+                            $data["err_mode"] = "Le site n'accepte que les images de type JPG, PDF, JPEG ou PNG";
+
                         }
                     }
                 }
@@ -115,7 +117,7 @@ class CompteController extends Controller
 
             $this->render("mon_Compte");
         } else {
-            echo "Il faut posseder un Compte afin d'acceder a cette page";
+            $data["err_mode"] =  "Il faut posseder un Compte afin d'acceder a cette page";
         }
     }
     /**
@@ -130,12 +132,15 @@ class CompteController extends Controller
     public function addDesc()
     {
         session_start();
-
+        $data = [
+            "err_mode" => "0"
+        ];
         if (!empty($this->donnee)) {
             $id = $_SESSION['id'];
             $desc = htmlspecialchars($_POST['description']);
-            $data = [
-                "description" => $desc
+            $donne = [
+                "description" => $desc,
+                
             ];
             if (
                 strlen(trim($desc)) > 15
@@ -145,15 +150,16 @@ class CompteController extends Controller
                 $a = Model::getPdo()->query("SELECT description FROM user_data WHERE id = " . $id);
 
                 if ($a = !NULL) {
-                    Model::getPdo()->query("UPDATE user_data set description = :description WHERE Id = $id ", $data);
+                    Model::getPdo()->query("UPDATE user_data set description = :description WHERE Id = $id ", $donne);
                     header("Location:" . URL . "Compte/indexAccount");
                 } else {
-                    Model::getPdo()->query("INSERT INTO user_data (description) :description WHERE Id = $id ", $data);
+                    Model::getPdo()->query("INSERT INTO user_data (description) :description WHERE Id = $id ", $donne);
                     echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=indexAccount');</script>";
                 }
             } else {
-                echo "<h1>Vous devez vous décrire avec au moint 15 characteres et au maximum avec 4000 characteres <a href=" . URL . "compte/indexAccount>Reésayer</a></h1>";
-                die();
+                $data["err_mode"] = "Veuillez remplir tous les champs nécessaire";
+                $this->setdata($data);
+                $this->render("mon_Compte");
             }
         }
     }
@@ -176,15 +182,17 @@ class CompteController extends Controller
 
             if(empty($check)){
                 Model::getPdo()->query("INSERT INTO favorite (id_user, id_image) VALUES (:id_user, :id_image) ", $data);
-                echo "<script>window.location.replace('http://localhost/Web/Space-Explorer/Acceuil/index');</script>";
+                echo "<script>window.location.replace('http://space-explorer.fr/');</script>";
             }
             else{
                 echo "<script>alert('Vous possédez déja cette article dans vos favoris');
                 </script>" ;
-                echo "<script>window.location.replace('http://localhost/Web/Space-Explorer/Acceuil/index');</script>";
+                echo "<script>window.location.replace('http://space-explorer.fr/');</script>";
             }
         } else {
-            echo "<h1>IL vous faut un compte afin de pouvoir ajouter des article en favoris veuillez vous connecter <a href=" . URL . "acceuil/index>Réessayer Ici</a> </h1>";
+            echo "<script>alert('Vous possédez déja cette article dans vos favoris');
+                </script>" ;
+                echo "<script>window.location.replace('http://space-explorer.fr/');</script>";
         }
     }
     public function deconection()

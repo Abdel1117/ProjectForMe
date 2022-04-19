@@ -16,10 +16,10 @@
         </section>
 </div>          
 <section class="container">
-    <div class="row">
+    <div class="col">
         <?php foreach ($video as $videos) :?>
-            <div class="col m-5">
-                <iframe class="video_doc"  src="<?= $videos->Video_link ?>" title="<?= $video->Titre_video ?>" frameborder="2" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
+            <div class="embed-responsive embed-responsive-16by9 mb-4">
+                                <iframe class="video_doc"  src="<?= $videos->Video_link ?>" title="<?= $video->Titre_video ?>" frameborder="2" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
             </div>
             <?php endforeach ?>
         </main>

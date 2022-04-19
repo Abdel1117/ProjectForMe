@@ -1,4 +1,13 @@
 <main class="container mt-5">
+<?php 
+if($err_mode != false) : ?>
+    <div class="alert alert-dismissible alert-danger">
+  <button type="button" class="btn-close" data-bs-dismiss="alert">&#10060;</button>
+  <strong>Oh Zut!</strong> <a href="#" class="alert-link"><?= $err_mode ?></a> 
+</div>
+
+
+<?php endif ?>  
     <div class="row">
 
         <div class="col-lg-4 ">
@@ -9,7 +18,7 @@
                         echo
                         '<img class ="img-fluid" src="data:image/jpg; charset=utf8;base64,' .     base64_encode   ($image[0]->image) . '"     width = "150px" height = "150px"    alt="Profil Image"/>';
                         }else{
-                            echo '<img class ="image_profil_compte" src="https://comps.gograph.com/ astronaute-profil-lat%C3%A9ral_gg4410408.jpg" />';
+                            echo '<img class ="image_profil_compte" src="https://comps.gograph.com/ astronaute-profil-lat%C3%A9ral_gg4410408.jpg" alt="Image profile" />';
                         }
                         ?>
                         <form class="form_image" enctype="multipart/form-data"  action="" method="post">
@@ -45,7 +54,7 @@
                
         </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <?php if($favorite): ?>
             <div class="favorite_side">
                 <?php foreach ($favorite as $value) : ?>
@@ -55,6 +64,6 @@
                     <?php endforeach ?>
                 </div>
                 <?php endif ?>
-    </div>
+    </div> -->
 </main>
 

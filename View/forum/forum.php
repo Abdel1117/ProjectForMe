@@ -90,10 +90,9 @@ function get_time_ago_string($time_stamp, $divisor, $time_unit)
     <section class="container">
         <div class="row row-cols-1 align-items-center row-cols-sm-2 row-cols-md-4">
             <div class="col-lg">
-                <label for="order_choice">Triée Par Ordre</label>
 
             <form action="" method="post">
-                <select class="custom-select " name="order_by" id="">
+                <select class="custom-select w-50" name="order_by" id="">
                     <option value="DESC">Décroissant</option>
                     <option value="ASC">Croissant</option>
                 </select>
@@ -115,8 +114,7 @@ function get_time_ago_string($time_stamp, $divisor, $time_unit)
 
         <div class="col-lg">
             <form method="POST" action="<?= URL ?>Forum/search">
-                <placeholder>Rechercher </placeholder>
-                <input name="recherche" type="text">
+                <input placeholder="Rechercher" name="recherche" type="text">
                 <button id="search_button" class="btn btn-primary" type="submit">Recherche</button>
             </form>
         </div>
@@ -127,7 +125,7 @@ function get_time_ago_string($time_stamp, $divisor, $time_unit)
     <section class="container-fluid">
         <div class="row align-items-center">
             <div class="col-sm-9">
-                <table class="table table-hover">
+                <table class="table table-hover table-responsive">
                     <thead>
                         <tr>
                             <th scope="col">Titre</th>
@@ -141,11 +139,11 @@ function get_time_ago_string($time_stamp, $divisor, $time_unit)
                         <?php foreach ($post as $value) : ?>
                         
                             <tr>
-                                <td><?= $value->Titre ?></td>
-                                <td><?= $value->pseudo ?></td>
-                                <td><?= $value->Discussion ?></td>
-                                <td><?= get_time_ago(strtotime($value->Date_post))?></td>
-                                <td><?= $value->Date_post ?></td>
+                                <td><p><?= $value->Titre ?></p></td>
+                                <td><p><?= $value->pseudo ?></p></td>
+                                <td><p><?= $value->Discussion ?></p></td>
+                                <td><p><?= get_time_ago(strtotime($value->Date_post))?></p></td>
+                                <td><p><?= $value->Date_post ?></p></td>
                                 <td><a class="nav-link" href="<?= URL . 'Forum/ForumSolo/' .$value->Id_forum ?>">Lire la Suite...</a></td>
                             </tr>
                             <?php endforeach ?>
@@ -153,7 +151,7 @@ function get_time_ago_string($time_stamp, $divisor, $time_unit)
                 </table>
             </div>
 
-            <aside class="col-lg-3">
+        <!--     <aside class="col-lg-3">
         <?php 
             foreach ($hot_today as $value) : ?>
                 <div class="row-6 justify-content-center align-item-center">
@@ -162,7 +160,7 @@ function get_time_ago_string($time_stamp, $divisor, $time_unit)
                 </div>
             <?php endforeach ?>
             </aside>
-    
+     -->
         </div>
     
     </section>

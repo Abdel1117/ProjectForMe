@@ -10,25 +10,40 @@
  */
 class AdminController extends Controller
 {
-
+    public $meta = "Section admin du site Space Explorer ou nous pourrons gérer le contenu du site en ajoutons des Articles";
     public function index()
     {
         session_start();
         if (!empty($_SESSION['pseudo'])) {
-            if ($_SESSION['role'] === "admin") {
+            if ($_SESSION['role'] === "admin" || $_SESSION['role'] === "superAdmin") {
                 $data = [
                     "title" => "Bureau Administrative",
+                    "meta" => "Page admin permétant de gérer le contenu du site Web et de gérer également les utilisateurs du site.",
+                    "err_mode" => 0,
                     "admin" => Model::getPdo()->query("SELECT pseudo, email, age, Country FROM user_data"),
                     "users" => Model::getPdo()->query("SELECT Id, pseudo, email,Country, Age, role FROM user_data"),
                     "articles" => Model::getPdo()->query('SELECT id,Titre, news FROM space_news'),
                     "images" => Model::getPdo()->query('SELECT id, image FROM image_galerie'),
                     "videos" => Model::getPdo()->query('SELECT * FROM video_posted')
+                    
 
                 ];
-
+               
                 $this->setdata($data);
                 $this->render("indexAdmin");
-            } else {
+            } /* elseif($_SESSION['role']=== "superAdmin"){
+                $data = [
+                    "title" => "Bureau Administrative",
+                    "meta" => "Page admin permétant de gérer le contenu du site Web et de gérer également les utilisateurs du site.",
+                    "admin" => Model::getPdo()->query("SELECT pseudo, email, age, Country FROM user_data"),
+                    "users" => Model::getPdo()->query("SELECT Id, pseudo, email,Country, Age, role FROM user_data"),
+                    "articles" => Model::getPdo()->query('SELECT id,Titre, news FROM space_news'),
+                    "images" => Model::getPdo()->query('SELECT id, image FROM image_galerie'),
+                    "videos" => Model::getPdo()->query('SELECT * FROM video_posted')
+                ];
+                $this->setdata($data);
+                $this->render("indexAdmin");
+            } */ else {
                 echo "Vous n'êtes pas Admin ";
                 die();
             }
@@ -38,9 +53,36 @@ class AdminController extends Controller
         }
     }
     public function ban($id = null)
-    {
-        Model::getPdo()->query("DELETE FROM user_data WHERE id = :id", [":id" => $id]);
-        header("location:" . URL . "Admin/index");
+    {   
+        $data = [
+                    "title" => "Bureau Administrative",
+                    "meta" => "Page admin permétant de gérer le contenu du site Web et de gérer également les utilisateurs du site.",
+                    "err_mode" => false,
+                    "users" => Model::getPdo()->query("SELECT Id, pseudo, email,Country, Age, role FROM user_data"),
+                    "articles" => Model::getPdo()->query('SELECT id,Titre, news FROM space_news'),
+                    "images" => Model::getPdo()->query('SELECT id, image FROM image_galerie'),
+                    "videos" => Model::getPdo()->query('SELECT * FROM video_posted')
+                ];
+
+        $check = Model::getPdo()->query("SELECT * FROM user_data WHERE id = :id", [":id" => $id]);
+
+        $id_user_to_ban = $check[0]->Id ;
+
+        if($id_user_to_ban === $_SESSION["id"]){
+            $data["err_mode"] = "banself";
+            
+        }
+        elseif($check[0]->role === "admin" || $check[0]->role === "superAdmin"){
+            $data["err_mode"] = "banotherAdmin";
+            
+        }
+        else{   
+             
+            Model::getPdo()->query("DELETE FROM user_data WHERE id = :id", [":id" => $id]);
+            header("location:" . URL . "Admin/index");
+        }
+        $this->setdata($data);
+        $this->render("indexAdmin");
     }
 
     public function addAdmin($id = null)
@@ -95,7 +137,7 @@ class AdminController extends Controller
                 echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=Admin/index');</script>";
                 }
                 else {
-                $data['err_mode'] = true;
+                $data['err_mode'] = "Veuillez remplir tous les champs nécessaire, le titre dois contenir au moins 5 charactères, le resumé dois en contenir au moins 20, l'article dois contenir au moins 200 charactère et sans oublier que l'article dois contenir une image";
             }
         }   
         $this->setdata($data);
@@ -110,7 +152,7 @@ class AdminController extends Controller
 
             $data = [
                 "title" => "Ajoutez des image dans la galerie",
-                "err_mod" => "0"
+                "err_mode" => "0"
             ];
             if (isset($_POST) && !empty($_POST)) {
                 if (isset($_POST['link_image_1']) && !empty($_POST["link_image_1"])) {
@@ -126,7 +168,7 @@ class AdminController extends Controller
                     header("Location:" . URL . "Galerie/showGallerie");
                     exit;
                 } else {
-                    $data["err_mod"] = true;
+                    $data["err_mode"] = "Veuillez remplir tous les champs nécessaire";
                 }
             }
             $this->setdata($data);
@@ -144,7 +186,7 @@ class AdminController extends Controller
         if (!empty($_SESSION['pseudo'])) {
 
             $data = [
-                "title" => "Ajoutez la video",
+                "title" => "Ajoutez des vidéos",
                 "err_mode" =>"0"
             ];
             if(isset($_POST) && !empty($_POST)){
@@ -167,7 +209,7 @@ class AdminController extends Controller
                 }
                 header("Location:" . URL . "Video/indexVideo");
             }else{
-                $data["err_mode"] = true;
+                $data["err_mode"] = "Veuillez remplir tous les champs nécessaire";
             }
             }
             $this->setdata($data);
@@ -208,6 +250,7 @@ class AdminController extends Controller
     {
         $data = [
             "title" => "Video du site",
+            "meta" => $this->meta,
             "videos" => Model::getPdo()->query("SELECT * FROM video_posted")
         ];
 

@@ -2,8 +2,16 @@
 <main id="container " class="container mt-5">
 
 <h1 class="mb-5 text-center" >Page D'inscription</h1>
+  <?php if($err_mode != false ) : ?>
+    <div class="alert alert-dismissible alert-danger">
+  <button type="button" class="btn-close" data-bs-dismiss="alert">&#10060 </button>
+  <strong> Pas si vite !</strong><a href="#" class="alert-link"><?= $err_mode ?></a>
+</div>
 
-<form method="POST" action="" >
+
+
+  <?php endif ?>
+<form method="POST" action="">
   <div class="form-group row mb-3 justify-content-center">
     <label for="input_Username" class="col-sm-1 col-form-label">Pseudo</label>
     <div class="col-lg-3 my-1">

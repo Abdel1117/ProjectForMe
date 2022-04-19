@@ -9,11 +9,12 @@
  */
 class ForumController extends Controller
 {
-
+    public $meta = ["Forum de Space explorer ou vous pouvez parler d'astronomie et d'éspace, afin de partager nos connaisances sur ce sujet qui nous passione."];
     public function indexForum()
     {
         $data = [
             "title" => "Forum de discussion de Space Explorer",
+            "meta" =>  $this->meta,
             "post" => Model::getPdo()->query("SELECT * FROM forum_discussion INNER JOIN user_data ON user_data.Id = forum_discussion.Id_profil"),
             "hot_today" => Model::getPdo()->query("SELECT * FROM forum_discussion ORDER BY Date_post DESC LIMIT 5")
         ];
@@ -21,12 +22,14 @@ class ForumController extends Controller
             if ($_POST['order_by']) {
                 $data = [
                     "title" => "Forum de discussion",
+                    "meta" => $this->meta,
                     "post" => Model::getPdo()->query("SELECT * FROM forum_discussion INNER JOIN user_data ON user_data.Id = forum_discussion.Id_profil ORDER BY     Date_post " .  $_POST['order_by']),
                     "hot_today" => Model::getPdo()->query("SELECT * FROM forum_discussion ORDER BY Date_post DESC LIMIT 5")
                 ];
             } else {
                 $data = [
                     "title" => "Forum de discussion",
+                    "meta" => $this->meta,
                     "post" => Model::getPdo()->query("SELECT * FROM forum_discussion INNER JOIN user_data ON  user_data.Id = forum_discussion.Id_profil"),
 
 
@@ -46,12 +49,14 @@ class ForumController extends Controller
             if ($_POST['order_by']) {
                 $data = [
                     "title" => "Forum de discussion",
+                    "meta" => $this->meta,
                     "post" => Model::getPdo()->query("SELECT * FROM forum_discussion INNER JOIN user_data ON user_data.Id = forum_discussion.Id_profil ORDER BY Date_post " .  $_POST['order_by']),
                     "hot_today" => Model::getPdo()->query("SELECT * FROM forum_discussion ORDER BY Date_post DESC LIMIT 5")
                 ];
             } else {
                 $data = [
                     "title" => "Forum de discussion",
+                    "meta" => $this->meta,
                     "post" => Model::getPdo()->query("SELECT * FROM forum_discussion INNER JOIN user_data ON  user_data.Id = forum_discussion.Id_profil"),
 
 
@@ -89,6 +94,7 @@ class ForumController extends Controller
         }
         $data = [
             "title" => $response[0]->Titre,
+            "meta" => $this->meta,
             "Post" =>  $response,
             "Responses" => $response_2,
             "image"  => $image
@@ -131,7 +137,8 @@ class ForumController extends Controller
             && isset($_SESSION['pseudo'])
         ) {
             $data = [
-                "title" => "Ajoutez Votre propre Sujet"
+                "title" => "Ajoutez Votre propre Sujet",
+                "meta" => $this->meta,
             ];
 
 
@@ -219,6 +226,7 @@ class ForumController extends Controller
                 if ($result >  0) {
                     $data = [
                         "title" => "Forum_discussion",
+                        "meta" => $this->meta,
                         "post" => $result,
                         "hot_today" => Model::getPdo()->query("SELECT * FROM forum_discussion ORDER BY Date_post DESC LIMIT 5")
                     ];

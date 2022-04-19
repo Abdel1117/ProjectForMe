@@ -2,7 +2,11 @@
 session_start();
 require_once "vendor/autoload.php";
 
-
+/* 
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+error_reporting(E_ALL);
+ */
 
 $protocole = $_SERVER['REQUEST_SCHEME'];
 

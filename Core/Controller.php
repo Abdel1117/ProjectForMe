@@ -9,8 +9,10 @@ use Hp\SpaceExplorer\HTTPResponse;
  */
 class Controller {
     public $vars = [];
+    protected $httpRequest;
     public function __construct()
     {
+        $this->httpRequest = new HTTPRequest;
         if(isset($_POST)){
             $this->donnee = $_POST;
             return $this->donnee;

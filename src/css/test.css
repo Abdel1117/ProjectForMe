@@ -1,15 +1,42 @@
-
+.main_flux{
+  min-height: 80vh;
+}
+.title{
+display: flex;
+justify-content: center;
+}
 .logo_img_mars{
     width: 70px;
     height: auto;
 }
-
+.image_profil_compte{
+  height: 150px;
+  width: 150px;
+}
 .img-fluid{
     cursor: pointer;
     min-height: auto;
     transition: 0.3s;
 }
+.img-article-accueil{
+  min-height: 200px;
+}
 
+.splider-image-article{
+  position: relative;
+}
+.modal_cover_article{
+  position: absolute;
+  bottom: 15px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modal_cover_article h3{
+  color: white;
+}
+.modal_cover_article a{
+  color: white;
+  text-decoration: none;
+}
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -52,9 +79,28 @@
     from {transform:scale(0)}
     to {transform:scale(1)}
   }
-  
+  .footer ul {
+    list-style: none;
+  }
+
+  .footer p {
+    color: #fff;
+  }
+  .footer .nav-link{
+    color: rgba(255, 255, 255, 0.75);
+    transition: ease-in-out .2s;
+    
+  }
+
+  .container .nav-link:hover{
+   color: #fff;
+    transition: ease-in-out .2s;
+  }
+  .footer{
+    background-image: linear-gradient(#6d94bf, #446e9b 50%, #3e648d); ;
+  }
   /* The Close Button */
-  .close {
+  .closes {
     position: absolute;
     top: 15px;
     right: 35px;
@@ -63,9 +109,72 @@
     font-weight: bold;
     transition: 0.3s;
   }
-  
-  .close:hover,
-  .close:focus {
+
+
+  .cookie_bandeau_accept{
+    width: 320px;
+    height: 25%;
+    background-image: linear-gradient(#6d94bf, #446e9b 50%, #3e648d);
+    border: .5px solid black;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    text-align: justify;
+    padding: 5px;
+}
+.section_cookie{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.section_cookie h4 {
+    margin: 0 auto;
+    color: white;
+    font-size: 14px;
+}
+
+.section_cookie p {
+    margin-top: 2%;
+    font-size: 12px;
+}
+.bouton_container_cookie{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.bouton_cookie{
+    width: 100px;
+    transition: 600ms;
+    border: none;
+}
+
+.bouton_cookie a {
+    display: inline-block;
+    width: 100%;
+}
+#bouton_cookie_oui:hover{
+    background-color: green;
+    transition: 600ms;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+#bouton_cookie_non:hover{
+    background-color: #e20719;
+    transition: 600ms;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+ 
+  .closes:hover,
+  .closes:focus {
     color: #bbb;
     text-decoration: none;
     cursor: pointer;

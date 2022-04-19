@@ -1,6 +1,11 @@
-<main class="d-grid gap-5">
-    <h1 class="title_page">Bienvenue <?= $admin[0]->pseudo ?></h1>
 
+<main class="d-grid gap-5">
+    <h1 class="title_page">Bienvenue <?= $_SESSION['pseudo'] ?></h1>
+    <?php if(isset($err_mode) && $err_mode === "banself") : ?>
+        <p>Vous essayer de vous bannir vous même </p>
+    <?php elseif (isset($err_mode) && $err_mode === "banotherAdmin") : ?>
+        <p>Vous essayer de Bannir un autres admin </p>
+    <?php endif ?>
     <div class="back_office_div1 mb-3">
         <a class="btn btn-primary" href="<?=URL. "Admin/addArticle"?>">AddArticle</a>
         <a class="btn btn-success" href="<?= URL.'Admin/addImage'?>">AddImage</a>
@@ -9,7 +14,8 @@
     </div>
     <div class=" table-hover table-responsive mb-3">
     <table class="table table-hover">
-<thead>
+<?php if($_SESSION['role'] === "superAdmin") : ?>
+    <thead>
     <tr>
         <th scope="col">Pseudo</th>
         <th scope="col">Email</th>
@@ -34,7 +40,7 @@
         <?php endforeach ?>
     </tbody>
 </table>
-
+<?php endif ?>
 
     </div>
     <div class="table-responsive w-75 mb-3">
@@ -53,7 +59,11 @@
                     <td><?= $article->id ?></td>
                     <td><?= $article->Titre ?></td>
                     <td><?= substr($article->news,0, 50) ?></td>
-                    <td><a class="btn btn-danger" href="<?= URL.'/admin/removeArticle/' . $article->id ?>">Remove</a></td>
+                    <?php if($_SESSION["role"] === "superAdmin") : ?>
+
+                        <td><a class="btn btn-danger" href="<?= URL.'/admin/removeArticle/' . $article->id ?>">Remove</a></td>
+
+                    <?php endif ?>
                     <td><a class="btn btn-warning" href="<?= URL .'admin/ChangeArticle/'.$article->id ?>">Modifer</a></td>
                 </tr>
                 <?php endforeach ?>
@@ -75,8 +85,10 @@
                         <td id="table_data_id">
                             <?= $image->id ?>
                         </td>
-                        <td id="table_data_image"><img style="width:100px; height:auto"" src="<?= $image->image?>" alt=""></td>
-                        <td id="table_data_image"><a class="btn btn-danger" href="<?= URL. 'Admin/removeImage/'.$image->id ?>">Suprimer l'image</a></td>
+                        <td id="table_data_image"><img style="width:100px; height:auto"" src="<?= $image->image?>" alt="image Space explorer"></td>
+                        <?php if($_SESSION["role"] === "superAdmin") : ?>
+                            <td id="table_data_image"><a class="btn btn-danger" href="<?= URL. 'Admin/removeImage/'.$image->id ?>">Suprimer l'image</a></td>
+                        <?php endif ?>
                     </tr>
                     <?php endforeach ?>
             </tbody>

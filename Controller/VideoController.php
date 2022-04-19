@@ -8,6 +8,8 @@
  */
 class VideoController extends Controller{
 
+    public $meta = "Space Explorer séction vidéo ou nous pouvons voir des vidéos sur l'space et l'astronomie";
+
     public function indexVideo(){
         session_start();
         
@@ -15,6 +17,7 @@ class VideoController extends Controller{
             if($_POST['order_by']){
                 $data = [
                     "title" => "Video Space Explorer",
+                    "meta" => $this->meta,
                     "video" => Model::getPdo()->query("SELECT * FROM video_posted ORDER BY Date_post " . $_POST['order_by'])
 
                 ];
@@ -25,6 +28,7 @@ class VideoController extends Controller{
 
             $data = [
                 "title" => "Video Space Explorer",
+                "meta" => $this->meta,
                 "video" => Model::getPdo()->query('SELECT * FROM video_posted')
             ];
             $this->setdata($data);

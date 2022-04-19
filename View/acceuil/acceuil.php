@@ -1,11 +1,11 @@
-<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/js/splide.min.js"></script>  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/css/themes/splide-skyblue.min.css">  
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.1/dist/js/splide.min.js"></script>  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.1/dist/css/themes/splide-default.min.css"> 
 
 <section class="splide" id="thumbnail-slider">
     <div class="splide__track">
         <ul class="splide__list">
             <?php foreach ($Slider_accueil as $Slide) : ?>
-            <li class="splide__slide">
+            <li class="splider-image-article splide__slide">
               
             <img class="img_cover_slide_article" src="<?= $Slide->image ?>" alt="image_planete_article">
             <div class="modal_cover_article">
@@ -18,22 +18,21 @@
     </div>
 </section>
 
-<section class="album py-5 bg-light" id="">
-    <h2>Articles de notre Site Web</h2>
+<section class="album py-5" id="">
+    <h2 class="title">Articles</h2>
         <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5">
                 <?php foreach ($Contenue as $value) : ?>
-                    <div class="col" id="">
-                        <article class="card shadow-sm">
-                            <img src="<?= $value->image?>" class="img-fluid img-thumbnail" style="max-height:250px" />
+                    <div class="col-lg-4 mb-5" id="">
+                        <article class="card shadow-sm h-100">
+                            <img src="<?= $value->image?>" class="img-article-accueil img-fluid img-thumbnail" style="max-height:200px" alt="image astronomie espace" />
                                     <div class="card-body">
-                                        <p class="card-text"><?= $value->resumé ?></p>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="btn-group">
-                                                    <a href="<?= URL ?>acceuil/newsSolo/<?= $value->id ?>" class="btn btn-primary">Lire la suite de l'article</a>
+                                        <p class="card-text h-50"><?= html_entity_decode($value->resumé) ?></p>
+                                            
+                                                <div class="row btn-group mt-2">
+                                                    <a href="<?= URL ?>acceuil/newsSolo/<?= $value->id ?>" class="h-50 btn btn-primary">Lire la suite de l'article</a>
 
                                                     <a href="<?= URL.'Compte/addFavoriteImage/'.$value->id ?>" class="btn btn-warning">Ajouter Favoris</a>
-                                                </div>
                                             </div>
                                     </div>
                 </article>    

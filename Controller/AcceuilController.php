@@ -1,5 +1,6 @@
 <?php
 
+use HP\SpaceExplorer\HTTPRequest;
 
 /**
  * Controller for the Acceuil
@@ -8,14 +9,15 @@
  */
 class AcceuilController extends Controller
 {
-
+    public $meta = "Space-explorer est un site de type blog qui va parler d'astronomie, d'espace et de planète.Vous pourrez voir des video de type documentaire sur l'astronomie.";
     public function index()
     {
-        
         $data = [
             "title" => "Accueil",
+            "meta" => $this->meta,
             "Contenue" => Model::getPdo()->query("SELECT * FROM space_news ORDER BY date_news ASC"),
-            "Slider_accueil" => Model::getPdo()->query("SELECT Titre, image, resumé,id  from space_news ORDER BY date_news DESC LIMIT 5")
+            "Slider_accueil" => Model::getPdo()->query("SELECT Titre, image, resumé,id  from space_news ORDER BY date_news DESC LIMIT 5"),
+            /* "meta" => "",  */
         ];
         $this->setdata($data);
         $this->render("acceuil");
@@ -27,6 +29,7 @@ class AcceuilController extends Controller
     {
         $data = [
             "title" => "Login",
+            "meta" => $this->meta,
             "err_mode" => false
         ];
         if (!empty($this->donnee)) {
@@ -40,7 +43,7 @@ class AcceuilController extends Controller
                 $request = Model::getPdo()->query("SELECT * FROM user_data WHERE pseudo = :pseudo", $donne);
 
                 if (empty($request)) {
-                    $data["err_mode"] = "pseudo_inccorect";
+                    $data["err_mode"] = "Votre Pseudo est incorrect";
                     
                 } else {
                     $password_from_database = $request[0]->password;
@@ -55,12 +58,12 @@ class AcceuilController extends Controller
 
                         echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=Acceuil/index');</script>";
                     } else {
-                        $data["err_mode"] = "mot_de_passe_inccorect";
+                        $data["err_mode"] = "Votre Mot de passe est incorrect";
 
                     }
                 }
             }else {
-                $data["err_mode"] = "aucun_champs_remplie";
+                $data["err_mode"] = "Veuillez remplir touts les champs nécessaire";
             }
         } 
         $this->setdata($data);
@@ -74,6 +77,7 @@ class AcceuilController extends Controller
             $title = Model::getPdo()->query("SELECT Titre FROM space_news WHERE id =" . $id);
             $data = [
                 "contenue" => Model::getPdo()->query("SELECT * FROM space_news WHERE id =" . $id),
+                "meta" => $this->meta,
                 "title" => $title[0]->Titre
             ];
         }
@@ -85,14 +89,16 @@ class AcceuilController extends Controller
     public function mentionsLegales()
     {
         $data = [
-            "title" => "Mentions Legales"
+            "title" => "Mentions Legales",
+            "meta" => $this->meta
         ];
         $this->setdata($data);
         $this->render("Mentions_Legales");
     }
     public function politiqueDeConfidentialie(){
         $data = [
-            "title" => "Politique de Confidentialité"
+            "title" => "Politique de Confidentialité",
+            "meta" => $this->meta
         ];
         $this->setdata($data);
         $this->render("PolitiqueDeConfidentialite");
@@ -102,7 +108,8 @@ class AcceuilController extends Controller
     public function contact()
     {
         $data = [
-            "title" => "Contactez Nous"
+            "title" => "Contactez Nous",
+            "meta" => $this->meta
         ];
         $this->setdata($data);
         $this->render("Contact");

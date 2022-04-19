@@ -1,12 +1,12 @@
 <?php 
-if($err_mode === true){
-    echo "<div class='warning_login'>
-            <h2 class='warning_title_err_mode'>
-                Veuillez remplir tous les champs nessecaire
-            </h2>
-        </div>";
-}
-?>
+if($err_mode != false) : ?>
+    <div class="alert alert-dismissible alert-danger">
+  <button type="button" class="btn-close" data-bs-dismiss="alert">&#10060;</button>
+  <strong>Oh Zut!</strong> <a href="#" class="alert-link"><?= $err_mode ?></a> 
+</div>
+
+
+<?php endif ?>
 <script src="//cdn.ckeditor.com/4.17.2/full/ckeditor.js" ></script>
 
     <main class="article_add_post_container">

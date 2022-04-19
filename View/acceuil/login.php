@@ -1,19 +1,13 @@
-<?php if(isset($err_mode) && $err_mode === "pseudo_inccorect") {
-    
-    echo "<div>
-        <h2 class='title_page'>Votre Pseudo est inccorect</h2>
-    </div>";
-}
-elseif(isset($err_mode) && $err_mode === "mot_de_passe_inccorect"){
-    echo "<div>
-        <h2 class='title_page'>Votre Mot de passe est inccorect</h2>
-    </div>";
-}elseif(isset($err_mode) && $err_mode === "aucun_champs_remplie"){
-    echo "<div>
-    <h2>Veuillez remplir tous les champs indiquer</h2>
-</div>";
-}
-?>
+<?php if($err_mode != false ) : ?>
+    <div class="alert alert-dismissible alert-danger">
+  <button type="button" class="btn-close" data-bs-dismiss="alert">&#10060 </button>
+  <strong> Pas si vite !</strong><a href="#" class="alert-link"><?= $err_mode ?></a>
+</div>
+
+
+
+  <?php endif ?>
+
 <div id="login">
         <div class="container">
             <div id="login-row" class="row justify-content-center align-items-center">
