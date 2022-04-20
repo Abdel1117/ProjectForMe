@@ -134,7 +134,7 @@ class AdminController extends Controller
 
                 Model::getPdo()->query("INSERT INTO space_news (Titre, news, image, resumé) VALUES (:title, :contenue, :image_board, :resume)", $donne);
 
-                echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=Admin/index');</script>";
+                echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=Admin/index');</script>";
                 }
                 else {
                 $data['err_mode'] = "Veuillez remplir tous les champs nécessaire, le titre dois contenir au moins 5 charactères, le resumé dois en contenir au moins 20, l'article dois contenir au moins 200 charactère et sans oublier que l'article dois contenir une image";
@@ -236,7 +236,7 @@ class AdminController extends Controller
             if(strlen($_POST['Updated_article']) > 350){
 
             Model::getPdo()->query('UPDATE space_news SET news = :news WHERE id = :id ', $donne);
-            echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=Acceuil/newsSolo/$id');</script>";
+            echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=Acceuil/newsSolo/$id');</script>";
         }
                 
         else{
@@ -256,7 +256,7 @@ class AdminController extends Controller
 
         if ($id != null) {
             Model::getPdo()->query('DELETE FROM video_posted WHERE Id_video = :id ', [":id" => $id]);
-            echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=Video/indexVideo');</script>";
+            echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=Video/indexVideo');</script>";
         }
         $this->setdata($data);
         $this->render("removeVideo");

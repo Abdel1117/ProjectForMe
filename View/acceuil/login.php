@@ -23,11 +23,12 @@
                                 <label for="password" class="text-black">Mot de passe:</label><br>
                                 <input type="password" name="password" id="password" class="form-control">
                             </div>
-                            <div class="form-group">
+                            <div class="d-flex align-items-center form-group">
                             <a href="<?= URL ?>Inscription/inscription" class="text-black">Si vous n'avez pas de compte Inscrivez vous Ici</a>
-
-                                <input type="submit" name="submit" class="m-5 btn btn-info btn-md" value="Conexion">
+                            <input type="submit" name="submit" class="m-3 btn btn-info btn-md" value="Conexion">
+                                
                             </div>
+                          
                             <div id="register-link" class="text-right">
                             </div>
                         </form>

@@ -8,14 +8,15 @@
 
 <div class="card mb-3" style="max-width: 100%;">
   <div class="row g-0">
-    <div class="col-md-2">
+    <div class="col-md-2 border-right">
     <?php if(!empty($Post[0]->image)){
-            echo'<img class ="img-fluid " src="data:image/jpg; charset=utf8;base64,' . base64_encode($Post[0]->image) . '"     width = "150px" height = "150px" alt="Profil Image"/>';
+            echo'<img class="img-fluid mx-2" src="data:image/jpg; charset=utf8;base64,' . base64_encode($Post[0]->image) . '" alt="Profil Image"/>';
         } 
         else{
-            echo '<img class ="img-fluid " src="../src/image/profil-astronaute-côté-banque-dillustrations_csp0954785.webp" alt="Profil_image" />';
+            echo '<img class ="img-fluid mx-2" src="../src/image/profil-astronaute-côté-banque-dillustrations_csp0954785.webp" alt="Profil_image" />';
         }
-        ?>         
+        ?>        
+        <p class="text-center mt-4"><?= $Post[0]->pseudo ?></p> 
     </div>
     <div class="col-md-8">
       <div class="card-body" style="height:100%">
@@ -36,19 +37,20 @@
                         <div class="col-md-2 border-right">
 
                             <?php if(empty($Response->image) || $Response->image === null ){
-                                echo '<img class="img-fluid" src="https://comps.gograph.com/astronaute-profil-lat%C3%A9ral_gg4410408.jpg" style="width:150px; height: 150px" alt="image de l\'utilisateur" />';
+                                echo '<img class="img-fluid mx-2" src="https://comps.gograph.com/astronaute-profil-lat%C3%A9ral_gg4410408.jpg" style="width:170px; height: 170px" alt="image de l\'utilisateur" />';
                             }
                             else {
 
-                                echo  '<img class ="img-fluid" src="data:image/jpg; charset=utf8;base64,' . base64_encode($Response->image) . '"     style="width:150px; height:150px" alt="alt="image de l\'utilisateur""/>';
+                                echo  '<img class="img-fluid mx-2" src="data:image/jpg; charset=utf8;base64,' . base64_encode($Response->image) . '"     style="width:150px; height:150px" alt="alt="image de l\'utilisateur""/>';
                             } ?>
+                            <p class="text-center mt-4"><?= $Response->pseudo ?></p>
                         </div>        
                              
 
                         <div class="col-md-8">
                             <div class="card-body" style="height:100%">
                                 <p id="card-text" style="height:50%"><?= html_entity_decode($Response->post) ?></p>   
-                                <p class="card-text float-end"><small class="text-muted"><?= $Response->Date_poste  ?></small></p>
+                                <p class="card-text float-right"><small class="text-muted"><?= $Response->Date_poste ?></small></p>
                             </div>
                         </div>
                 </div>

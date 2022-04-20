@@ -15,7 +15,7 @@
             </div>
         </section>
 </div>          
-<section class="container">
+<section class="container mt-3">
     <div class="col">
         <?php foreach ($video as $videos) :?>
             <div class="embed-responsive embed-responsive-16by9 mb-4">

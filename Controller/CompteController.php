@@ -44,10 +44,10 @@ class CompteController extends Controller
 
                         if ($a = !NULL) {
                             Model::getPdo()->query("UPDATE user_data set description = :description WHERE Id = $id ", $donne);
-                            echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=compte/indexAccount');</script>";
+                            echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=compte/indexAccount');</script>";
                         } else {
                             Model::getPdo()->query("INSERT INTO user_data (description) :description WHERE Id = $id ", $donne);
-                            echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=compte/indexAccount');</script>";
+                            echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=compte/indexAccount');</script>";
                         }
                     } else {
                         $data["err_mode"] = "Veuillez remplir le champs nécessaire";
@@ -93,14 +93,14 @@ class CompteController extends Controller
                                     $request->bindParam(':Idprofil', $_SESSION["id"]);
                                     $request->execute();
                                     $request->closeCursor();
-                                    echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=compte/indexAccount');</script>";
+                                    echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=compte/indexAccount');</script>";
                                 } else {
                                     $request = $bdd->prepare("UPDATE image SET image = :imagetosend, Name = :Name WHERE Idprofil = " . $_SESSION['id']);
                                     $request->bindParam(":imagetosend", $imagetosend);
                                     $request->bindParam(":Name", $_FILES['image_profil']['name']);
                                     $request->execute();
                                     $request->closeCursor();
-                                    echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=compte/indexAccount');</script>";
+                                    echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=compte/indexAccount');</script>";
                                 }
                             } else {
                                 $data["err_mode"] = "Une erreur inconnue est survenue veuillez réesayer plus tard";
@@ -154,7 +154,7 @@ class CompteController extends Controller
                     header("Location:" . URL . "Compte/indexAccount");
                 } else {
                     Model::getPdo()->query("INSERT INTO user_data (description) :description WHERE Id = $id ", $donne);
-                    echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=indexAccount');</script>";
+                    echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=indexAccount');</script>";
                 }
             } else {
                 $data["err_mode"] = "Veuillez remplir tous les champs nécessaire";
@@ -182,23 +182,23 @@ class CompteController extends Controller
 
             if(empty($check)){
                 Model::getPdo()->query("INSERT INTO favorite (id_user, id_image) VALUES (:id_user, :id_image) ", $data);
-                echo "<script>window.location.replace('http://space-explorer.fr/');</script>";
+                echo "<script>window.location.replace('https://space-explorer.fr/');</script>";
             }
             else{
                 echo "<script>alert('Vous possédez déja cette article dans vos favoris');
                 </script>" ;
-                echo "<script>window.location.replace('http://space-explorer.fr/');</script>";
+                echo "<script>window.location.replace('https://space-explorer.fr/');</script>";
             }
         } else {
             echo "<script>alert('Vous possédez déja cette article dans vos favoris');
                 </script>" ;
-                echo "<script>window.location.replace('http://space-explorer.fr/');</script>";
+                echo "<script>window.location.replace('https://space-explorer.fr/');</script>";
         }
     }
     public function deconection()
     {
         session_start();
         session_unset();
-        echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=Acceuil/index');</script>";
+        echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=Acceuil/index');</script>";
     }
 }

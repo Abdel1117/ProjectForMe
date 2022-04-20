@@ -30,7 +30,7 @@ function get_time_ago($time_stamp)
          * 60 seconds/minute * 60 minutes/hour * 24 hours/day * 7 days/week
          * This means that the time difference is 1 week or more
          */
-        return get_time_ago_string($time_stamp, 60 * 60 * 24 * 7, 'semaines');
+        return get_time_ago_string($time_stamp, 60 * 60 * 24 * 7, 'semaine');
     }
     elseif ($time_difference >= 60 * 60 * 24)
     {
@@ -88,7 +88,7 @@ function get_time_ago_string($time_stamp, $divisor, $time_unit)
 <h1 class="mt-2 mb-2"><?= $title ?></h1>
     
     <section class="container">
-        <div class="row row-cols-1 align-items-center row-cols-sm-2 row-cols-md-4">
+        <div class="mt-4 row row-cols-1 align-items-center row-cols-sm-2 row-cols-md-4">
             <div class="col-lg">
 
             <form action="" method="post">
@@ -124,7 +124,7 @@ function get_time_ago_string($time_stamp, $divisor, $time_unit)
 
     <section class="container-fluid">
         <div class="row align-items-center">
-            <div class="col-sm-9">
+            <div class="col-sm mt-2">
                 <table class="table table-hover table-responsive">
                     <thead>
                         <tr>
@@ -139,28 +139,18 @@ function get_time_ago_string($time_stamp, $divisor, $time_unit)
                         <?php foreach ($post as $value) : ?>
                         
                             <tr>
-                                <td><p><?= $value->Titre ?></p></td>
+                                <td style="max-width:250px;"><p class="text-truncate w-50"><?= $value->Titre ?></p></td>
                                 <td><p><?= $value->pseudo ?></p></td>
-                                <td><p><?= $value->Discussion ?></p></td>
+                                <td style="max-width:150px"><p class=" text-truncate"><?= $value->Discussion ?></p></td>
                                 <td><p><?= get_time_ago(strtotime($value->Date_post))?></p></td>
                                 <td><p><?= $value->Date_post ?></p></td>
-                                <td><a class="nav-link" href="<?= URL . 'Forum/ForumSolo/' .$value->Id_forum ?>">Lire la Suite...</a></td>
+                                <td><a class=" d-inline-block text-truncate nav-link" href="<?= URL . 'Forum/ForumSolo/' .$value->Id_forum ?>">Lire la Suite...</a></td>
                             </tr>
                             <?php endforeach ?>
                     </tbody>
                 </table>
             </div>
 
-        <!--     <aside class="col-lg-3">
-        <?php 
-            foreach ($hot_today as $value) : ?>
-                <div class="row-6 justify-content-center align-item-center">
-                    <span><a href="<?= URL.'Forum/ForumSolo/'.$value->Id_forum ?>"><?= $value->Titre ?></a></span>
-                    <p><?= substr($value->Discussion,0,25) ."...." ?></p>
-                </div>
-            <?php endforeach ?>
-            </aside>
-     -->
         </div>
     
     </section>

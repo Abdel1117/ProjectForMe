@@ -118,7 +118,7 @@ class ForumController extends Controller
                     Model::getPdo()->query("INSERT INTO post (id_profil, id_forum_discussion, post) 
                     VALUES(:profil, :id_forum, :reponse)", $donne);
                     
-                    echo "<script>window.location.replace('http://space-explorer.fr/Forum/ForumSolo/$id');</script>";
+                    echo "<script>window.location.replace('https://space-explorer.fr/Forum/ForumSolo/$id');</script>";
                 } else {
                     echo "Veuillez tapez un message suffisament longs pour que l'on puisse vous comprendre";
                 }

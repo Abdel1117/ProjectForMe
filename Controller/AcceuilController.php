@@ -56,7 +56,7 @@ class AcceuilController extends Controller
                         $_SESSION['id'] =     $request[0]->Id;  
                         $_SESSION['role'] = $request[0]->role;
 
-                        echo "<script>window.location.replace('http://space-explorer.fr/index.php?p=Acceuil/index');</script>";
+                        echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=Acceuil/index');</script>";
                     } else {
                         $data["err_mode"] = "Votre Mot de passe est incorrect";
 
