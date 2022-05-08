@@ -19,6 +19,18 @@
 </section>
 
 <section class="album py-5" id="">
+    <form action="" method= POST">
+        <select class="form-select form-select-lg mb-3" name="tags_display_article" id="tags">
+            <option selected value="">--Trier par thème aborder--</option>
+            <option value="Système Solaire">Système Solaire</option>
+            <option value="Objet Stellaire">Objet Stellaire</option>
+            <option value="Astéroïde">Astéroïde</option>
+            <option value="Les Galaxies">Les Galaxies</option>
+            <option value="Nébuleuse">Nébuleuse</option>
+            <option value="Trou noir">Trou noir</option>
+        </select>
+        <button class="btn btn-primary">Chercher</button>
+    </form>
     <h2 class="title">Articles</h2>
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5">
@@ -48,7 +60,7 @@
   new Splide( '#thumbnail-slider', {
 		fixedWidth: 695,
         fixedHeight: 500,		
-        gap       : 0,
+        gap       : 1,
 		rewind    : true,
 		pagination: true,
         cover : true,

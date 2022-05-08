@@ -7,6 +7,7 @@ if($err_mode != false) : ?>
 
 
 <?php endif ?>
+
 <script src="//cdn.ckeditor.com/4.17.2/full/ckeditor.js" ></script>
 
     <main class="article_add_post_container">
@@ -24,16 +25,28 @@ if($err_mode != false) : ?>
                         
                         <input placeholder="Le lien de l'image qui apparaitra dans l'accueil" class="form-control" type="url" name="url_image" id="url_input" require="true"">
                     </div>
+                    
             </div>
             <div class="row m-3 "> 
-
+            <div class="col-sm-4">
+                        <select name="tags_article" id="pet-select">
+                            <option value="">--Trier par thème aborder--</  option>
+                            <option value="Système Solaire">Système     Solaire</option>
+                            <option value="Objet Stellaire">Objet   Stellaire</option>
+                            <option value="Astéroïde">Astéroïde</option>
+                            <option value="Les Galaxies">Les Galaxies</ option>
+                            <option value="Nébuleuse">Nébuleuse</option>
+                            <option value="Trou noir">Trou noir</option>
+                        </select>
+                    </div>
                   
             </div>
             <div class="row m-3">
-                    <div class="">
+                    <div class="col-sm-4">
                         
                         <textarea placeholder="Resumé de l'article qui apparaitra dans l'accueil"  name="resume_article" id="resume_article" cols="30" rows="10"></textarea>                    
                     </div>
+                    
                     </div>
                 </div>  
         <div class="row">

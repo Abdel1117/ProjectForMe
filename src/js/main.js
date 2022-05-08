@@ -67,7 +67,6 @@ for (let i = 0; i < img.length; i++) {
 }
 
 
-
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("closes")[0];
 
@@ -81,3 +80,27 @@ span.onclick = function() {
     console.log(error)   
 }
 
+function confirmAlert(msg, url, id){
+    if(msg === undefined){
+        msg = "Voullez vous supprimez ce contenu";
+    }
+    let result = window.confirm(msg);
+        if(result === true){
+            window.location.href= url + id;
+        }
+}
+
+function loadDoc() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+            document.body.innerHTML = this.responseText;
+        }
+    };
+    xhttp.open("POST", "http://127.0.0.1/Web/Space_explorer/Acceuil/index");
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xhttp.send();
+  }
+const input = document.getElementById("tags");
+input.addEventListener("change", loadDoc)

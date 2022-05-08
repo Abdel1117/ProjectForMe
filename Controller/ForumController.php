@@ -53,7 +53,34 @@ class ForumController extends Controller
                     "post" => Model::getPdo()->query("SELECT * FROM forum_discussion INNER JOIN user_data ON user_data.Id = forum_discussion.Id_profil ORDER BY Date_post " .  $_POST['order_by']),
                     "hot_today" => Model::getPdo()->query("SELECT * FROM forum_discussion ORDER BY Date_post DESC LIMIT 5")
                 ];
+            }else if (!empty($_POST['recherche'])) {
+                $search =  trim(htmlspecialchars(ucfirst($_POST['recherche'])));
+                $donne = [
+                    ":recherche" => $search
+                ];
+                if (strlen($search) > 4) {
+                    $result = Model::getPdo()->query("SELECT * FROM forum_discussion INNER JOIN user_data ON user_data.Id = forum_discussion.Id_profil WHERE Titre LIKE %$search% ", $donne);
+    
+                    if ($result >  0) {
+                        $data = [
+                            "title" => "Forum_discussion",
+                            "meta" => $this->meta,
+                            "post" => $result,
+                            "hot_today" => Model::getPdo()->query("SELECT * FROM forum_discussion ORDER BY Date_post DESC LIMIT 5")
+                        ];
+                        $this->setdata($data);
+                        $this->render('forum');
+                    } else {
+                        echo "Aucun fil de discussion qui correspond désolè <a href=" . URL . "Forum/indexForum>Réessayer Ici</a>";
+                    }
+                } else {
+                    echo "Pas assez d'info dans la recherche <a href=" . URL . "Forum/indexForum>Réessayer Ici</a> ";
+                }
             } else {
+                echo "Pas assez d'info dans la recherche <a href=" . URL . "Forum/indexForum>Réessayer Ici</a>";
+            }
+        }
+             else {
                 $data = [
                     "title" => "Forum de discussion",
                     "meta" => $this->meta,
@@ -65,7 +92,7 @@ class ForumController extends Controller
             $this->setdata($data);
             $this->render("forum");
         }
-    }
+    
 
     public function ForumSolo($id = null)
     {
@@ -215,31 +242,6 @@ class ForumController extends Controller
     public function search()
     {
 
-        if (!empty($_POST)) {
-            $search =  trim(htmlspecialchars(ucfirst($_POST['recherche'])));
-            $donne = [
-                "recherche" => $search
-            ];
-            if (strlen($search) > 4) {
-                $result = Model::getPdo()->query("SELECT * FROM forum_discussion INNER JOIN user_data ON user_data.Id = forum_discussion.Id_profil WHERE Titre = :recherche", $donne);
-
-                if ($result >  0) {
-                    $data = [
-                        "title" => "Forum_discussion",
-                        "meta" => $this->meta,
-                        "post" => $result,
-                        "hot_today" => Model::getPdo()->query("SELECT * FROM forum_discussion ORDER BY Date_post DESC LIMIT 5")
-                    ];
-                    $this->setdata($data);
-                    $this->render('forum');
-                } else {
-                    echo "Aucun fil de discussion qui correspond désolè <a href=" . URL . "Forum/indexForum>Réessayer Ici</a>";
-                }
-            } else {
-                echo "Pas assez d'info dans la recherche <a href=" . URL . "Forum/indexForum>Réessayer Ici</a> ";
-            }
-        } else {
-            echo "Pas assez d'info dans la recherche <a href=" . URL . "Forum/indexForum>Réessayer Ici</a>";
-        }
+        
     }
 }

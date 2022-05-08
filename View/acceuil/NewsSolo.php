@@ -5,4 +5,4 @@
         
 </article>
 
-<a  class="btn btn-primary" href="<?= URL . 'Acceuil/index' ?>"> Reveni à l'accueil</a>
+<a  class="btn btn-primary" href="<?= URL . 'Acceuil/index' ?>"> Revenir à l'accueil</a>

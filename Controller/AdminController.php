@@ -31,19 +31,7 @@ class AdminController extends Controller
                
                 $this->setdata($data);
                 $this->render("indexAdmin");
-            } /* elseif($_SESSION['role']=== "superAdmin"){
-                $data = [
-                    "title" => "Bureau Administrative",
-                    "meta" => "Page admin permétant de gérer le contenu du site Web et de gérer également les utilisateurs du site.",
-                    "admin" => Model::getPdo()->query("SELECT pseudo, email, age, Country FROM user_data"),
-                    "users" => Model::getPdo()->query("SELECT Id, pseudo, email,Country, Age, role FROM user_data"),
-                    "articles" => Model::getPdo()->query('SELECT id,Titre, news FROM space_news'),
-                    "images" => Model::getPdo()->query('SELECT id, image FROM image_galerie'),
-                    "videos" => Model::getPdo()->query('SELECT * FROM video_posted')
-                ];
-                $this->setdata($data);
-                $this->render("indexAdmin");
-            } */ else {
+            } else {
                 echo "Vous n'êtes pas Admin ";
                 die();
             }
@@ -54,6 +42,8 @@ class AdminController extends Controller
     }
     public function ban($id = null)
     {   
+        
+            if ( !empty($_SESSION['pseudo']) &&  $_SESSION['role'] === "superAdmin") {
         $data = [
                     "title" => "Bureau Administrative",
                     "meta" => "Page admin permétant de gérer le contenu du site Web et de gérer également les utilisateurs du site.",
@@ -83,32 +73,63 @@ class AdminController extends Controller
         }
         $this->setdata($data);
         $this->render("indexAdmin");
+        
+    }
+        else{
+            echo "Vous nêtes pas Super Admin";
+            die();
+        }
     }
 
     public function addAdmin($id = null)
-    {
-        Model::getPdo()->query("UPDATE user_data SET role = 'admin' WHERE id = :id", [":id" => $id]);
-        header("location:" . URL . "Admin/index");
+    {   
+        if ( !empty($_SESSION['pseudo']) &&  $_SESSION['role'] === "superAdmin") {
+             Model::getPdo()->query("UPDATE user_data SET role = 'admin'     WHERE id = :id", [":id" => $id]);
+             header("location:" . URL . "Admin/index");
+        }
+        else{
+            echo "Vous n'êtes pas Super Admin";
+            die();
+        }
     }
-    public function removeAddmin($id = null)
+    public function removeAdmin($id = null)
     {
-        Model::getPdo()->query("UPDATE user_data SET role = 'user' WHERE id = :id", [":id" => $id]);
-        header("location:" . URL . "Admin/index");
+        if ( !empty($_SESSION['pseudo']) && $_SESSION['role'] === "superAdmin") {
+            Model::getPdo()->query("UPDATE user_data SET role = 'user'  WHERE id = :id", [":id" => $id]);
+            header("location:" . URL . "Admin/index");
+        }
+        else{
+            echo "Vous n'êtes pas Super Admin";
+            die();
+        }
     }
     public function removeArticle($id = null)
     {
+        if ( !empty($_SESSION['pseudo']) && $_SESSION['role'] === "admin" || $_SESSION['role'] === "superAdmin") {
         Model::getPdo()->query('DELETE FROM space_news WHERE id = :id ', [":id" => $id]);
         header("location:" . URL . "Admin/index");
+        }
+        else{
+            echo "Vous n'êtes pas admin";
+            die();
+        }
     }
 
     public function removeImage($id = null)
     {
+        if ( !empty($_SESSION['pseudo']) && $_SESSION['role'] === "admin" || $_SESSION['role'] === "superAdmin") {
         Model::getPdo()->query('DELETE FROM image_galerie WHERE id = :id ', [":id" => $id]);
         header("location:" . URL . "Admin/index");
+        }
+        else{
+            echo "Vous n'êtes pas admin";
+            die();
+        }
     }
     public function addArticle()
     {
         session_start();
+        if ($_SESSION['role'] === "admin" || $_SESSION['role'] === "superAdmin") {
         $data = [
             "title" => "Ajoutez un article",
             "err_mode" => "0"
@@ -118,37 +139,44 @@ class AdminController extends Controller
             $contenue_article = trim(htmlspecialchars($_POST['article_content']));
             $image_board = trim(htmlspecialchars($_POST['url_image']));
             $resume_board = trim(htmlspecialchars($_POST['resume_article']));
+            $tags_article = trim(htmlspecialchars($_POST['tags_article']));
             
             if (
+                !empty($tags_article) && 
                 strlen($title_article) > 5
                 && strlen($contenue_article) > 200
                 && !empty($image_board)
                 && strlen($resume_board) > 20
             ) { 
                 $donne = [
+                    ":tags" => $tags_article,
                     ":title" => $title_article,
                     ":contenue" => $contenue_article,
                     ":image_board" => $image_board,
                     ":resume" => $resume_board,
                 ];
 
-                Model::getPdo()->query("INSERT INTO space_news (Titre, news, image, resumé) VALUES (:title, :contenue, :image_board, :resume)", $donne);
+                Model::getPdo()->query("INSERT INTO space_news (Tags, Titre, news, image, resumé) VALUES (:tags, :title, :contenue, :image_board, :resume)", $donne);
 
                 echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=Admin/index');</script>";
                 }
                 else {
-                $data['err_mode'] = "Veuillez remplir tous les champs nécessaire, le titre dois contenir au moins 5 charactères, le resumé dois en contenir au moins 20, l'article dois contenir au moins 200 charactère et sans oublier que l'article dois contenir une image";
+                $data['err_mode'] = "Veuillez remplir tous les champs nécessaire, l'article dois avoir un tag? le titre dois contenir au moins 5 charactères, le resumé dois en contenir au moins 20, l'article dois contenir au moins 200 charactère et sans oublier que l'article dois contenir une image";
             }
         }   
         $this->setdata($data);
         $this->render('addArticle');
+        }else{
+            echo "Vous n'êtes pas Admin";
+            die();
+        }
     }
 
     public function addImage()
     {
 
         session_start();
-        if (!empty($_SESSION['pseudo'])) {
+        if (!empty($_SESSION['pseudo']) && $_SESSION["role"] != "user") {
 
             $data = [
                 "title" => "Ajoutez des image dans la galerie",
@@ -173,6 +201,8 @@ class AdminController extends Controller
             }
             $this->setdata($data);
             $this->render("addImage");
+        }else{
+            echo "Vous n'êtes pas admin" ;
         }
     }
     /**
@@ -183,7 +213,7 @@ class AdminController extends Controller
     {
 
         session_start();
-        if (!empty($_SESSION['pseudo'])) {
+        if (!empty($_SESSION['pseudo']  && $_SESSION["role"] != "user")) {
 
             $data = [
                 "title" => "Ajoutez des vidéos",
@@ -222,7 +252,8 @@ class AdminController extends Controller
 
     public function changeArticle($id = null)
     {
-        $data = [
+        if (!empty($_SESSION['pseudo']  && $_SESSION["role"] != "user")) {       
+             $data = [
             "title" => "Modifier L'article N°" . $id,
             "article" => Model::getPdo()->query("SELECT * FROM space_news WHERE id = :id", [":id" => $id]),
             "err_mode" => 0
@@ -245,9 +276,15 @@ class AdminController extends Controller
         }
         $this->setdata($data);
         $this->render('changeArticle');
+        }
+        else{
+            echo "Vous n'êtes pas Admin";
+            die();
+        }
     }
     public function removeVideo($id = null)
     {
+        if ( !empty($_SESSION['pseudo']) && $_SESSION['role'] === "admin" || $_SESSION['role'] === "superAdmin") {
         $data = [
             "title" => "Video du site",
             "meta" => $this->meta,
@@ -260,5 +297,9 @@ class AdminController extends Controller
         }
         $this->setdata($data);
         $this->render("removeVideo");
+    }else{
+        echo "Vous n'êtes pas admin";
+        die();
+    }
     }
 }

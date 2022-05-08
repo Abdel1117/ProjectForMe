@@ -28,14 +28,20 @@
     <tbody>
         <?php foreach ($users as  $user): ?>
         <tr>
-            <td><?= $user->pseudo?></td>
+            <td><?= $user->pseudo ?></td>
             <td><?= $user->email?></td>
             <td><?= $user->Age?></td>
             <td><?= $user->Country?></td>
             <td><?= ucfirst($user->role)?></td>
-            <td><a class="btn btn-danger" href="<?= URL."Admin/ban/".$user->Id ?>">Ban</a></td>
-            <td><a class="btn btn-success" href="<?= URL."Admin/addAdmin/".$user->Id ?>">AddAdmin</a></td>
-            <td><a class="btn btn-warning" href="<?= URL."Admin/removeAddmin/".$user->Id ?>">RemoveAdmin</a></td>
+            <td>
+            <a class="btn btn-danger h6" onClick="confirmAlert('Voulez vous vraiment bannir <?= $user->pseudo ?>','<?= URL  . 'admin/ban/' ?>','<?= $user->Id ?>')">Bannir </a></td>
+
+            <td>
+            <a class="btn btn-success" onClick="confirmAlert('Voulez vous vraiment rajouter les droits d\'admin à <?= $user->pseudo ?>','<?= URL . 'admin/addAdmin/' ?>','<?= $user->Id ?>')">Ajoutez Admin</a></td>
+
+            <td>
+            <a class="btn btn-warning " onClick="confirmAlert('Voulez vous vraiment retiré les droit d\'admin à <?= $user->pseudo ?>','<?= URL . 'admin/removeAdmin/' ?>','<?= $user->Id ?>')" >Supprimer Admin</a>
+            </td>
         </tr>
         <?php endforeach ?>
     </tbody>
@@ -61,7 +67,7 @@
                     <td><?= substr($article->news,0, 50) ?></td>
                     <?php if($_SESSION["role"] === "superAdmin") : ?>
 
-                        <td><a class="btn btn-danger" href="<?= URL.'/admin/removeArticle/' . $article->id ?>">Remove</a></td>
+                        <td><a class="btn btn-danger" onClick="confirmAlert('Voulez vous vraiment supprimé l\'article sur <?= $article->Titre ?>','<?= URL . 'admin/removeArticle/'?>' , '<?= $article->id ?>')" >Supprimez l'article</a></td>
 
                     <?php endif ?>
                     <td><a class="btn btn-warning" href="<?= URL .'admin/ChangeArticle/'.$article->id ?>">Modifer</a></td>
@@ -87,7 +93,7 @@
                         </td>
                         <td id="table_data_image"><img style="width:100px; height:auto"" src="<?= $image->image?>" alt="image Space explorer"></td>
                         <?php if($_SESSION["role"] === "superAdmin") : ?>
-                            <td id="table_data_image"><a class="btn btn-danger" href="<?= URL. 'Admin/removeImage/'.$image->id ?>">Suprimer l'image</a></td>
+                            <td id="table_data_image"><a class="btn btn-danger" onClick="confirmAlert('Voulez vous vraiment supprimer l\'image ?','<?= URL. 'Admin/removeImage/'?>' , '<?= $image->id ?>')">Suprimer l'image</a></td>
                         <?php endif ?>
                     </tr>
                     <?php endforeach ?>

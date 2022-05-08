@@ -107,17 +107,12 @@ function get_time_ago_string($time_stamp, $divisor, $time_unit)
                 <?php if(empty($_SESSION['pseudo'])):?>
                     <span>Il faut cree un compte pour pouvoir poster</span> 
                 <?php else: ?>
-                    <button class="btn btn-primary">ADD subject</button>
+                    <button class="btn btn-primary">Ajoutez un sujet de discussion </button>
                 <?php endif ?>
             </form>
         </div>
 
-        <div class="col-lg">
-            <form method="POST" action="<?= URL ?>Forum/search">
-                <input placeholder="Rechercher" name="recherche" type="text">
-                <button id="search_button" class="btn btn-primary" type="submit">Recherche</button>
-            </form>
-        </div>
+        
         </div>
         
     </section>

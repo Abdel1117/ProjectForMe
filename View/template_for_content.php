@@ -16,10 +16,10 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4 sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="<?= URL . 'Acceuil/index' ?>">
-      <img style="height:75px" src="<?= URL . "src\image\Artboard_1_copy_5mdpi.png" ?>" alt="Logo-image-space-explorer">
+      <img style="height:100px" src="<?= URL . "src\image\Artboard_1_copy_5mdpi.png" ?>" alt="Logo-image-space-explorer">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
