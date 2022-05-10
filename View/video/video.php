@@ -1,5 +1,6 @@
 <main class="container">
-    <h1 class="title_page"><?= $title ?>s</h1>
+    <h1 class="title_page"><?= $title ?></h1>
+    <?php use Hp\SpaceExplorer\UImessage; UImessage::message_To_Send() ?>
 <div class="row">
         <section class="option-nav-video">
             <div class="order-by">

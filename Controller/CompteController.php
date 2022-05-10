@@ -1,5 +1,6 @@
 <?php
 
+use Hp\SpaceExplorer\UImessage; 
 /**
  * Controller For Managing the Account of the user
  * 
@@ -20,6 +21,7 @@ class CompteController extends Controller
             $data = [
                 "title" => "Mon Compte",
                 "err_mode" => "0",
+                "succes" => "0",
                 "image" => ModelChild::getPdo()->query("SELECT image, Idprofil FROM image WHERE Idprofil = " . $_SESSION['id']),
                 "infos" => Model::getPdo()->query("SELECT pseudo, email, description, Country, Age FROM user_data WHERE Id=" .  $id),
                 "favorite" => Model::getPdo()->query("SELECT id_user id_image FROM favorite INNER JOIN space_news ON favorite.id_image = space_news.id WHERE id_user = $id")
@@ -44,13 +46,18 @@ class CompteController extends Controller
 
                         if ($a = !NULL) {
                             Model::getPdo()->query("UPDATE user_data set description = :description WHERE Id = $id ", $donne);
-                            echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=compte/indexAccount');</script>";
+                            $_SESSION['succes'] = "Description ajouté";
+                            header("Location:" . URL . "Compte/indexAccount");
+                            exit;
                         } else {
                             Model::getPdo()->query("INSERT INTO user_data (description) :description WHERE Id = $id ", $donne);
-                            echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=compte/indexAccount');</script>";
+                            $_SESSION['succes'] = "Description ajouté";
+                            
+                            header("Location:" . URL . "Compte/indexAccount");
+                            exit;
                         }
                     } else {
-                        $data["err_mode"] = "Veuillez remplir le champs nécessaire";
+                        $_SESSION["err_mode"] = "Veuillez remplir le champs nécessaire";
                         $this->setdata($data);
                         $this->render("mon_Compte");
                     }
@@ -66,7 +73,7 @@ class CompteController extends Controller
                         $file_ext =  explode(".", $file_name);
                         $extention_Of_File = strtolower(end($file_ext));
 
-                        $extention_allowed = array("jpg", "pdf", "jpeg", "png");
+                        $extention_allowed = array("jpg",  "jpeg", "png");
 
                         if (in_array(
                             $extention_Of_File,
@@ -79,7 +86,7 @@ class CompteController extends Controller
                                     $new_file_name  = uniqid("", true) . "." . $extention_Of_File;
 
                                 $imagetosend = file_get_contents($file_tmp);
-                                $bdd = new PDO('mysql:host=flex.o2switch.net;dbname=uqiv5705_Space-explorer;charset=utf8', 'uqiv5705', '5ye8gtfdHDUw');
+                                $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
                                 $id = $_SESSION['id'];
                                 $requete = $bdd->prepare("SELECT COUNT(*) FROM image WHERE Idprofil = $id");
                                 $requete->execute();
@@ -93,20 +100,33 @@ class CompteController extends Controller
                                     $request->bindParam(':Idprofil', $_SESSION["id"]);
                                     $request->execute();
                                     $request->closeCursor();
-                                    echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=compte/indexAccount');</script>";
+                                    $_SESSION["succes"] = "L'image à belle est bien était insérer";
+                                    header("Location:" . URL ."Compte/indexAcount");
+                                    exit;
+                                    
                                 } else {
                                     $request = $bdd->prepare("UPDATE image SET image = :imagetosend, Name = :Name WHERE Idprofil = " . $_SESSION['id']);
                                     $request->bindParam(":imagetosend", $imagetosend);
                                     $request->bindParam(":Name", $_FILES['image_profil']['name']);
                                     $request->execute();
                                     $request->closeCursor();
-                                    echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=compte/indexAccount');</script>";
+
+                                    $_SESSION["succes"] = "L'image à belle est bien était modifier";
+                                    
+                                   
+                                    header("Location:" . URL ."Compte/indexAccount");
+                                    exit;
                                 }
                             } else {
-                                $data["err_mode"] = "Une erreur inconnue est survenue veuillez réesayer plus tard";
+                                $_SESSION["err_mode"] = "Une erreur inconnue est survenue veuillez réesayer plus tard";
+                                header("Location:" . URL . "Compte/indexAccount");
+
+                                exit;
                             }
                         } else {
-                            $data["err_mode"] = "Le site n'accepte que les images de type JPG, PDF, JPEG ou PNG";
+                            $_SESSION["err_mode"] = "Le site n'accepte que les images de type JPG, JPEG ou PNG";
+                            header("Location:" . URL ."Compte/indexAccount");
+                            exit;
 
                         }
                     }
@@ -117,7 +137,9 @@ class CompteController extends Controller
 
             $this->render("mon_Compte");
         } else {
-            $data["err_mode"] =  "Il faut posseder un Compte afin d'acceder a cette page";
+            $_SESSION["err_mode"] = "Il faut posseder un Compte afin d'acceder a cette page";
+            header("Location:" . URL . "Acceuil/index");
+            exit;
         }
     }
     /**
@@ -151,6 +173,7 @@ class CompteController extends Controller
 
                 if ($a = !NULL) {
                     Model::getPdo()->query("UPDATE user_data set description = :description WHERE Id = $id ", $donne);
+                    
                     header("Location:" . URL . "Compte/indexAccount");
                 } else {
                     Model::getPdo()->query("INSERT INTO user_data (description) :description WHERE Id = $id ", $donne);
@@ -199,6 +222,8 @@ class CompteController extends Controller
     {
         session_start();
         session_unset();
-        echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=Acceuil/index');</script>";
+        $_SESSION["deco"] = "deco";
+
+        echo "<script>window.location.replace('https://localhost/Web/Space_explorer/Acceuil/index');</script>";
     }
 }

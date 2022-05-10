@@ -48,6 +48,7 @@ class AdminController extends Controller
                     "title" => "Bureau Administrative",
                     "meta" => "Page admin permétant de gérer le contenu du site Web et de gérer également les utilisateurs du site.",
                     "err_mode" => false,
+                    "succes"  => false,
                     "users" => Model::getPdo()->query("SELECT Id, pseudo, email,Country, Age, role FROM user_data"),
                     "articles" => Model::getPdo()->query('SELECT id,Titre, news FROM space_news'),
                     "images" => Model::getPdo()->query('SELECT id, image FROM image_galerie'),
@@ -59,18 +60,22 @@ class AdminController extends Controller
         $id_user_to_ban = $check[0]->Id ;
 
         if($id_user_to_ban === $_SESSION["id"]){
-            $data["err_mode"] = "banself";
-            
-        }
+            $_SESSION["err_mode"] = "Vous essayer de vous bannir vous même";
+/*             echo "<script>window.location.replace('https://localhost/Web/Space_explorer/Admin/index');</script>";
+ */        }
         elseif($check[0]->role === "admin" || $check[0]->role === "superAdmin"){
-            $data["err_mode"] = "banotherAdmin";
-            
-        }
+            $_SESSION["err_mode"] = "Vous ne pouvez bannir d'autre admin";
+/*             echo "<script>window.location.replace('https://localhost/Web/Space_explorer/Admin/index');</script>";
+ */        }
         else{   
              
             Model::getPdo()->query("DELETE FROM user_data WHERE id = :id", [":id" => $id]);
-            header("location:" . URL . "Admin/index");
-        }
+            $_SESSION["succes"] = "L'Utilisateur " .  $check[0]->pseudo . " à était Bannie";
+/*             echo "<script>window.location.replace('https://localhost/Web/Space_explorer/Admin/index');</script>";
+ */
+/*             echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=Admin/index');</script>";
+ */        
+}
         $this->setdata($data);
         $this->render("indexAdmin");
         
@@ -84,30 +89,58 @@ class AdminController extends Controller
     public function addAdmin($id = null)
     {   
         if ( !empty($_SESSION['pseudo']) &&  $_SESSION['role'] === "superAdmin") {
-             Model::getPdo()->query("UPDATE user_data SET role = 'admin'     WHERE id = :id", [":id" => $id]);
-             header("location:" . URL . "Admin/index");
+            $user_to_Update = Model::getPdo()->query("SELECT pseudo, role FROM user_data WHERE id = :id" , ["id" => $id]);
+              
+            if($user_to_Update[0]->role != "admin" &&  $user_to_Update[0]->role != "superAdmin"){
+
+                Model::getPdo()->query("UPDATE user_data SET role = 'admin' WHERE id = :id", [":id" => $id]);   
+                
+                $_SESSION["succes"] = "L'utilisateur " . $user_to_Update[0]->pseudo. " est devenu admin";
+                echo "<script>window.location.replace('https://localhost/Web/Space_explorer/Admin/index');</script>";        
+            }else{
+                $_SESSION["err_mode"] = "L'utilisateur " . $user_to_Update[0]->pseudo . " est déja admin";
+                echo "<script>window.location.replace('https://localhost/Web/Space_explorer/Admin/index');</script>";        
+            }
         }
         else{
             echo "Vous n'êtes pas Super Admin";
             die();
         }
     }
+
     public function removeAdmin($id = null)
     {
         if ( !empty($_SESSION['pseudo']) && $_SESSION['role'] === "superAdmin") {
-            Model::getPdo()->query("UPDATE user_data SET role = 'user'  WHERE id = :id", [":id" => $id]);
-            header("location:" . URL . "Admin/index");
+            
+            $userToBan = Model::getPdo()->query("SELECT pseudo, role FROM user_data WHERE id = :id", [":id" => $id]);
+            
+            if($userToBan[0]->role != "superAdmin"){
+                
+                Model::getPdo()->query("UPDATE user_data SET role = 'user'  WHERE id = :id", [":id" => $id]);
+                $_SESSION["succes"] = "Droit d'admin enlevé à " . $userToBan[0]->pseudo;
+                echo "<script>window.location.replace('https://localhost/Web/Space_explorer/Admin/index');</script>";        
+            }
+        else{
+                $_SESSION['err_mode'] = "Vous ne pouvez pas bannir le super Admin";
+                echo "<script>window.location.replace('https://localhost/Web/Space_explorer/Admin/index');</script>";
+            }
         }
         else{
             echo "Vous n'êtes pas Super Admin";
             die();
         }
     }
+    
     public function removeArticle($id = null)
     {
+        
         if ( !empty($_SESSION['pseudo']) && $_SESSION['role'] === "admin" || $_SESSION['role'] === "superAdmin") {
-        Model::getPdo()->query('DELETE FROM space_news WHERE id = :id ', [":id" => $id]);
-        header("location:" . URL . "Admin/index");
+        $article = Model::getPdo()->query("SELECT Titre FROM space_news WHERE id = :id", [":id"=> $id]);
+        
+        Model::getPdo()->query("DELETE FROM space_news WHERE id = :id", [":id" => $id]);
+        $_SESSION["succes"] = "L'article sur " . $article[0]->Titre .  " à était  Supprimé ";
+        echo "<script>window.location.replace('https://localhost/Web/Space_explorer/Admin/index');</script>";        
+
         }
         else{
             echo "Vous n'êtes pas admin";
@@ -117,10 +150,11 @@ class AdminController extends Controller
 
     public function removeImage($id = null)
     {
-        if ( !empty($_SESSION['pseudo']) && $_SESSION['role'] === "admin" || $_SESSION['role'] === "superAdmin") {
+        if( !empty($_SESSION['pseudo']) && $_SESSION['role'] === "admin" || $_SESSION['role'] === "superAdmin") {
         Model::getPdo()->query('DELETE FROM image_galerie WHERE id = :id ', [":id" => $id]);
-        header("location:" . URL . "Admin/index");
-        }
+        $_SESSION["succes"] = "Image Supprimé ";
+        echo "<script>window.location.replace('https://localhost/Web/Space_explorer/Admin/index');</script>";        
+    }
         else{
             echo "Vous n'êtes pas admin";
             die();
@@ -132,6 +166,7 @@ class AdminController extends Controller
         if ($_SESSION['role'] === "admin" || $_SESSION['role'] === "superAdmin") {
         $data = [
             "title" => "Ajoutez un article",
+            "succes" => "0",
             "err_mode" => "0"
         ];
         if (isset($_POST) && !empty($_POST)) {
@@ -148,6 +183,7 @@ class AdminController extends Controller
                 && !empty($image_board)
                 && strlen($resume_board) > 20
             ) { 
+                $title_article_to_display = $title_article;
                 $donne = [
                     ":tags" => $tags_article,
                     ":title" => $title_article,
@@ -157,11 +193,12 @@ class AdminController extends Controller
                 ];
 
                 Model::getPdo()->query("INSERT INTO space_news (Tags, Titre, news, image, resumé) VALUES (:tags, :title, :contenue, :image_board, :resume)", $donne);
+                $_SESSION['succes'] = "Article sur " . $title_article_to_display ." ajouté";
 
-                echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=Admin/index');</script>";
-                }
+                echo "<script>window.location.replace('https://localhost/Web/Space_explorer/Acceuil/index');</script>";               
+             }
                 else {
-                $data['err_mode'] = "Veuillez remplir tous les champs nécessaire, l'article dois avoir un tag? le titre dois contenir au moins 5 charactères, le resumé dois en contenir au moins 20, l'article dois contenir au moins 200 charactère et sans oublier que l'article dois contenir une image";
+                $_SESSION['err_mode'] = "Veuillez remplir tous les champs nécessaire, l'article dois avoir un tag, le titre dois contenir au moins 5 charactères, le resumé dois en contenir au moins 20, l'article dois contenir au moins 200 charactère et sans oublier que l'article dois contenir une image";
             }
         }   
         $this->setdata($data);
@@ -187,12 +224,13 @@ class AdminController extends Controller
                     $len = count($_POST);
                     for ($i = 1; $i <= $len; $i++) {
                         $nm = $_POST['link_image_' . $i];
-                        $db = new PDO('mysql:host=flex.o2switch.net;dbname=uqiv5705_Space-explorer;charset=utf8', 'uqiv5705', '5ye8gtfdHDUw');
+                        $db = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
 
                         $stm = $db->prepare("INSERT INTO image_galerie (image) VALUES ('$nm') ");
                         $stm->execute();
                         $stm->closeCursor();
                     }
+                    $_SESSION['succes'] = "Les images ont était ajouté avec succès";
                     header("Location:" . URL . "Galerie/showGallerie");
                     exit;
                 } else {
@@ -203,6 +241,7 @@ class AdminController extends Controller
             $this->render("addImage");
         }else{
             echo "Vous n'êtes pas admin" ;
+            die();
         }
     }
     /**
@@ -230,13 +269,14 @@ class AdminController extends Controller
                 for ($i = 1; $i <= $len; $i++) {
                     $tm = htmlspecialchars(addslashes($_POST['title_video_' . $i]));
                     $nm = htmlspecialchars(addslashes($_POST['link_video_' . $i]));
-
+                    
                     $db = new PDO('mysql:host=flex.o2switch.net;dbname=uqiv5705_Space-explorer;charset=utf8', 'uqiv5705', '5ye8gtfdHDUw');
                     $stm = $db->prepare("INSERT INTO video_posted (Titre_video, Video_link)VALUES ('$tm','$nm')");
 
                     $stm->execute();
                     $stm->closeCursor();
                 }
+                $_SESSION["succes"] = "Les videos on était ajouté ";
                 header("Location:" . URL . "Video/indexVideo");
             }else{
                 $data["err_mode"] = "Veuillez remplir tous les champs nécessaire";

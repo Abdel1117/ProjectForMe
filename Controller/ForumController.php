@@ -121,6 +121,8 @@ class ForumController extends Controller
         }
         $data = [
             "title" => $response[0]->Titre,
+            "err_mode" => "0",
+            "succes" => "0",
             "meta" => $this->meta,
             "Post" =>  $response,
             "Responses" => $response_2,
@@ -140,20 +142,57 @@ class ForumController extends Controller
                 isset($_SESSION['id'])
                 && isset($_SESSION['pseudo'])
             ) {
-                if (strlen($post) > 3) {
+                if ($post != null && strlen($post) > 3 ) {
 
                     Model::getPdo()->query("INSERT INTO post (id_profil, id_forum_discussion, post) 
                     VALUES(:profil, :id_forum, :reponse)", $donne);
-                    
-                    echo "<script>window.location.replace('https://space-explorer.fr/Forum/ForumSolo/$id');</script>";
+
+                    $_SESSION['succes'] = "Votre réponse à bien était enregistré";
+                    header("Location:" . URL . "Forum/ForumSolo/" . $id );            
+                    exit;
+
+                   
                 } else {
-                    echo "Veuillez tapez un message suffisament longs pour que l'on puisse vous comprendre";
+                    
+                   $_SESSION["err_mode"] = "Veuillez tapez assez de charactère afin que l'on puisse vous comprendre"; 
+                    header("Location:" . URL . "Forum/ForumSolo/" . $id ); 
+                    exit;         
                 }
             }
         }
 
         $this->setdata($data);
         $this->render("ForumSolo");
+    }
+
+    
+
+    public function addAnswer($id = null)
+    {
+        session_start();
+        $post = trim(htmlspecialchars($_POST['answear']));
+
+        $data = [
+            "profil" => $_SESSION['id'],
+            "id_forum" => $id,
+            "reponse" => htmlspecialchars($post)
+        ];
+        if (
+            isset($_SESSION['id'])
+            && isset($_SESSION['pseudo'])
+        ) {
+            if (strlen($post) > 3) {
+
+                Model::getPdo()->query("INSERT INTO post (id_profil, id_forum_discussion, post) VALUES(:profil, :id_forum, :reponse)", $data);
+                $_SESSION['succes'] = "Votre message à bien était ajouter au fil de discussion"; 
+              
+                header("location:" . URL . "Forum/ForumSolo/" . $id);
+            } else {
+                $data["err_mode"] =  "Veuillez tapez un message suffisament longs pour que l'on puisse vous comprendre";
+            }
+        } else {
+            $data["err_mode"] = "Il faut que vous possédiez un compte afin de pouvoir poster une réponse Connecter vous  ICI <a href=" . URL . "Acceuil/login>Réessayer Ici</a>  ou inscrivez vous <a href=" . URL . "inscription/inscription>Inscription</a>  ";
+        }
     }
 
     public function addPost()
@@ -192,13 +231,15 @@ class ForumController extends Controller
                             VALUES (:Titre,:Discussion ,:Id_profil)",
                             $data
                         );
-                        header("Location:" . URL . "Forum/indexForum");
+                        $_SESSION["succes"] = "Votre sujet à était poster";
+                        header("Location:" . URL . "Forum/indexForum"); 
                     } else {
 
-                        echo "Veuillez tapez un tittre avec plus de 5 characteres et un texte avec au moins 15 characteres <a href=" . URL . "Forum/indexForum>Réessayer Ici</a>";
+                        $data["err_mode"] = "Veuillez tapez au moins 5 charactères pour le titre et au moins 10 charactère dans le champs de text";
                     }
                 } else {
-                    echo "Il faut possedez un compte sur notre plateforme afin de pouvoir poster quelque chose <a href=" . URL . "Forum/indexForum>Réessayer Ici</a>";
+                    
+                    $data["err_mode"] = "Il faut possedez un compte sur notre plateforme afin de pouvoir poster quelque chose <a href=" . URL . "Forum/indexForum>Réessayer Ici</a>";
                 }
             }
 
@@ -210,38 +251,5 @@ class ForumController extends Controller
         }
     }
 
-    public function addAnswer($id = null)
-    {
-        session_start();
-        $post = trim(htmlspecialchars($_POST['answear']));
-
-        $data = [
-            "profil" => $_SESSION['id'],
-            "id_forum" => $id,
-            "reponse" => htmlspecialchars($post)
-        ];
-        if (
-            isset($_SESSION['id'])
-            && isset($_SESSION['pseudo'])
-        ) {
-            if (strlen($post) > 3) {
-
-                Model::getPdo()->query("INSERT INTO post (id_profil, id_forum_discussion, post) VALUES(:profil, :id_forum, :reponse)", $data);
-                header("location:" . URL . "Forum/ForumSolo/" . $id);
-            } else {
-                echo "Veuillez tapez un message suffisament longs pour que l'on puisse vous comprendre";
-            }
-        } else {
-            echo "An Error as occured <a href=" . URL . "Forum/indexForum>Réessayer Ici</a>";
-        }
-    }
-    public function sendPost()
-    {
-        session_start();
-    }
-    public function search()
-    {
-
-        
-    }
+   
 }

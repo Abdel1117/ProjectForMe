@@ -19,7 +19,7 @@ class AcceuilController extends Controller
                 "meta" => $this->meta,
                 "Contenue" => Model::getPdo()->query("SELECT * FROM space_news ORDER BY date_news ASC"),
                 "Slider_accueil" => Model::getPdo()->query("SELECT Titre, image, resumé,id from space_news ORDER BY date_news DESC LIMIT 5"),
-                
+                "err_mode" => "0"
             ];
             $this->setdata($data);
             $this->render("acceuil");
@@ -73,9 +73,10 @@ class AcceuilController extends Controller
                         $_SESSION['age'] =    $request[0]->Age;
                         $_SESSION['id'] =     $request[0]->Id;  
                         $_SESSION['role'] = $request[0]->role;
-
-                        echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=Acceuil/index');</script>";
-                    } else {
+                        $_SESSION['first_connect'] = true;
+                        echo "<script>window.location.replace('https://localhost/Web/Space_explorer/Acceuil/index');</script>";
+                    } 
+                    else {
                         $data["err_mode"] = "Votre Mot de passe est incorrect";
 
                     }

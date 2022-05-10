@@ -2,6 +2,7 @@
 
 use Hp\SpaceExplorer\HTTPRequest;
 use Hp\SpaceExplorer\HTTPResponse;
+
 /**
  * Main COntroller of the APP
  * @param none
@@ -11,7 +12,7 @@ class Controller {
     public $vars = [];
     protected $httpRequest;
     public function __construct()
-    {
+    {   
         $this->httpRequest = new HTTPRequest;
         if(isset($_POST)){
             $this->donnee = $_POST;

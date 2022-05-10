@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once "vendor/autoload.php";
- 
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -19,7 +19,7 @@ if (isset($_GET['p'])) {
     require "Core/Model.php";
     require "Core/Config.php";
     require "Core/Model2.php";
-    
+    require "Core/UImessage.php";
     $params = explode("/", trim($_GET['p'], "/"));
 
     $controller = strtolower(isset($params[0]) && !empty($params[0]) ? $params[0] : "acceuil");

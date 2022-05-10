@@ -85,6 +85,15 @@ function get_time_ago_string($time_stamp, $divisor, $time_unit)
 
 ?>
 <main class="container fluid">
+<?php if(isset($_SESSION['succes']) && !empty($_SESSION["succes"])) : ?>
+    <div class="alert alert-success d-flex align-items-center" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert">&#10060 </button>
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+    <?= $_SESSION['succes'] ?>
+
+</div>
+<?php unset($_SESSION['succes']); endif ?>
+
 <h1 class="mt-2 mb-2"><?= $title ?></h1>
     
     <section class="container">

@@ -89,7 +89,7 @@ function confirmAlert(msg, url, id){
             window.location.href= url + id;
         }
 }
-
+/* 
 function loadDoc() {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -103,4 +103,10 @@ function loadDoc() {
     xhttp.send();
   }
 const input = document.getElementById("tags");
-input.addEventListener("change", loadDoc)
+input.addEventListener("change", loadDoc) */
+
+
+
+function alertLogged(){
+    
+}

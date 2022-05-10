@@ -1,11 +1,11 @@
+<?php use Hp\SpaceExplorer\UImessage ?>
 <?php session_start()?>
-
 <main class="container">
 <div class="d-flex justify-content-center">
                 <h3 class="text-align-center"><span><?= $Post[0]->Titre ?></span></h3>
 </div>
 
-
+<?php UImessage::message_To_Send(); ?>
 <div class="card mb-3" style="max-width: 100%;">
   <div class="row g-0">
     <div class="col-md-2 border-right">

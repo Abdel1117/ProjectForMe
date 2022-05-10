@@ -1,6 +1,47 @@
+<?php use Hp\SpaceExplorer\UImessage;  ?>
+
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.1/dist/js/splide.min.js"></script>  
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.1/dist/css/themes/splide-default.min.css"> 
 
+
+<?php if(isset($_SESSION['first_connect']) === true ) :?>
+    <div class="alert alert-success d-flex align-items-center" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert">&#10060 </button>
+
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+  <div>
+        Vous vous êtes Connecté avec succès !!!! 
+  </div>
+</div>
+
+<?php 
+unset($_SESSION['first_connect']);
+elseif(isset($_SESSION["succes_inscription"])) : ?>
+
+    <div class="alert alert-success d-flex align-items-center" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert">&#10060 </button>
+
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+  <div>
+        Vous êtes inscrit !!!! 
+  </div>
+</div>
+
+<?php unset($_SESSION['succes_inscription']); endif ?>
+
+<?php if(isset($_SESSION['deco']) === true ) :?>
+    
+    <div class="alert alert-warning d-flex align-items-center" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert">&#10060 </button>
+
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+  <div>
+        Vous vous êtes deconnecté avec succès !!!! 
+  </div>
+</div>
+
+<?php unset($_SESSION["deco"]); endif ?>
+<?php UImessage::message_To_Send() ?>
 <section class="splide" id="thumbnail-slider">
     <div class="splide__track">
         <ul class="splide__list">

@@ -5,6 +5,9 @@
     <div class="nav">
     <h1 class="mx-auto border-bottom"><?= $title ?></h1>
     </div>
+    <?php  use Hp\SpaceExplorer\UImessage;
+            UImessage::message_To_Send() 
+        ?>
     <div class="carrousel_container">
         <div class="d-flex justify-content-center">
             <h2> Nouvelles Images D'astronomie </h2>
@@ -50,7 +53,7 @@
         </div>
     </section>
     
-
+        
 
 <script>
  document.addEventListener( 'DOMContentLoaded', function () {

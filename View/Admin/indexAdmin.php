@@ -1,11 +1,19 @@
+<?php use Hp\SpaceExplorer\UImessage; ?>
 
 <main class="d-grid gap-5">
     <h1 class="title_page">Bienvenue <?= $_SESSION['pseudo'] ?></h1>
-    <?php if(isset($err_mode) && $err_mode === "banself") : ?>
-        <p>Vous essayer de vous bannir vous même </p>
-    <?php elseif (isset($err_mode) && $err_mode === "banotherAdmin") : ?>
-        <p>Vous essayer de Bannir un autres admin </p>
+    <?php if(isset($err_mode) && $err_mode != false) : ?>
+        <div class="alert alert-danger" role="alert">
+            <p><?= $err_mode ?></p>
+        </div>
+        
+    <?php elseif (isset($succes) && $succes != false) : ?>
+        <div class="alert alert-succes" role="alert">
+            <p><?= $succes ?> </p>
+        </div>
     <?php endif ?>
+
+<?php UImessage::message_To_Send() ?>
     <div class="back_office_div1 mb-3">
         <a class="btn btn-primary" href="<?=URL. "Admin/addArticle"?>">AddArticle</a>
         <a class="btn btn-success" href="<?= URL.'Admin/addImage'?>">AddImage</a>
