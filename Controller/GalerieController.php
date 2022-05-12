@@ -8,6 +8,9 @@
  */
 class GalerieController extends Controller{
     public $meta = "Space Explorer section Galerie, image n'astronomie, de planète, méteorite ou de station spatial";
+
+
+    
     public function showGallerie(){
         $data = [
             "title" => "Galerie Photo",

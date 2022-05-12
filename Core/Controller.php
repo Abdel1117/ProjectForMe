@@ -2,6 +2,7 @@
 
 use Hp\SpaceExplorer\HTTPRequest;
 use Hp\SpaceExplorer\HTTPResponse;
+use Hp\SpaceExplorer\UImessage;
 
 /**
  * Main COntroller of the APP
@@ -13,6 +14,7 @@ class Controller {
     protected $httpRequest;
     public function __construct()
     {   
+        
         $this->httpRequest = new HTTPRequest;
         if(isset($_POST)){
             $this->donnee = $_POST;

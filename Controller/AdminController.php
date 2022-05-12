@@ -121,7 +121,7 @@ class AdminController extends Controller
                 echo "<script>window.location.replace('https://localhost/Web/Space_explorer/Admin/index');</script>";        
             }
         else{
-                $_SESSION['err_mode'] = "Vous ne pouvez pas bannir le super Admin";
+                $_SESSION['err_mode'] = "Vous ne pouvez pas retiré les droits du super Admin";
                 echo "<script>window.location.replace('https://localhost/Web/Space_explorer/Admin/index');</script>";
             }
         }

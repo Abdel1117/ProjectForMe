@@ -93,7 +93,7 @@ class CompteController extends Controller
                                 $stm = $requete->fetchAll();
 
                                 if ($stm[0][0] < 1) {
-
+                                    
                                     $request = $bdd->prepare("INSERT INTO image (image, Name, Idprofil) VALUES (:image, :Name, :Idprofil)");
                                     $request->bindParam(":image", $imagetosend);
                                     $request->bindParam(':Name', $_FILES['image_profil']['name']);
