@@ -16,7 +16,8 @@ class GalerieController extends Controller{
             "title" => "Galerie Photo",
             "meta" => $this->meta,
             "Photo" => Model::getPdo()->query("SELECT image FROM space_news "),
-            "carousel_photo" => Model::getPdo()->query("SELECT image, id  FROM image_galerie")
+            "carousel_photo" => Model::getPdo()->query("SELECT image, id FROM image_galerie"),
+            "photo_galerie" => Model::getPdo()->query("SELECT titre_image, image, description FROM image_galerie")
         ];
         if(!empty($_POST)){
             $search = trim(htmlspecialchars($_POST['search']));

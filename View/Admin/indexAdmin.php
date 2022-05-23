@@ -99,7 +99,7 @@
                         <td id="table_data_id">
                             <?= $image->id ?>
                         </td>
-                        <td id="table_data_image"><img style="width:100px; height:auto"" src="<?= $image->image?>" alt="image Space explorer"></td>
+                        <td id="table_data_image"><img style="width:100px; height:auto"" src="../<?= $image->image?>" alt="image Space explorer"></td>
                         <?php if($_SESSION["role"] === "superAdmin") : ?>
                             <td id="table_data_image"><a class="btn btn-danger" onClick="confirmAlert('Voulez vous vraiment supprimer l\'image ?','<?= URL. 'Admin/removeImage/'?>' , '<?= $image->id ?>')">Suprimer l'image</a></td>
                         <?php endif ?>

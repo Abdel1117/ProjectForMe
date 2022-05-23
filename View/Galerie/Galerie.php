@@ -17,7 +17,7 @@
             		<ul class="splide__list">
                         <?php foreach($carousel_photo as $photo) : ?>
             			    <li class="splide__slide">
-                                <img src="<?= $photo->image ?>" alt="Photo d'astronomie">    
+                                <img src="../<?= $photo->image ?>" alt="Photo d'astronomie">    
                             </li>
                         <?php endforeach ?>
             			
@@ -38,9 +38,9 @@
             </div>
 
         <?php endforeach ?>
-        <?php foreach ($carousel_photo as $value) : ?>
+        <?php foreach ($photo_galerie as $value) : ?>
             <div class="col-lg-3 col-md-4 col-6">
-                <img onclick="my_modal(this)" class="img-fluid img-thumbnail h-100"   src="<?= $value->image?>" alt="image planete astronomie galaxie" />
+                <img onclick="my_modal(this)" class="img-fluid img-thumbnail h-100"   src="../<?= $value->image?>" alt="image planete astronomie galaxie" />
             </div>
             
         <?php endforeach ?>
@@ -49,7 +49,7 @@
 
             <img class="modal-content" id="img01">
 
-            <div id="caption"></div>
+            <div id="caption"> <?= $value->titre_image ?></div>
         </div>
     </section>
     

@@ -74,10 +74,12 @@ elseif(isset($_SESSION["succes_inscription"])) : ?>
     </form>
     <h2 class="title">Articles</h2>
         <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5">
+            <div class="row row-cols-1 g-5">
                 <?php foreach ($Contenue as $value) : ?>
+
                     <div class="col-lg-4 mb-5" id="">
                         <article class="card shadow-sm h-100">
+                            <h2 class="text-center"><?= $value->Titre ?></h2>
                             <img src="<?= $value->image?>" class="img-article-accueil img-fluid img-thumbnail" style="max-height:200px" alt="image astronomie espace" />
                                     <div class="card-body">
                                         <p class="card-text h-50"><?= html_entity_decode($value->resumé) ?></p>
@@ -88,7 +90,7 @@ elseif(isset($_SESSION["succes_inscription"])) : ?>
                                                     <a href="<?= URL.'Compte/addFavoriteImage/'.$value->id ?>" class="btn btn-warning">Ajouter Favoris</a>
                                             </div>
                                     </div>
-                </article>    
+                        </article>    
                     </div>
                 <?php endforeach ?>
             </div>

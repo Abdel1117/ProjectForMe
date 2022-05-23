@@ -1,24 +1,29 @@
-<main class="h-100">
+<main class="container-fluid ">
 <?php 
-if($err_mode != false) : ?>
-    <div class="alert alert-dismissible alert-danger">
-  <button type="button" class="btn-close" data-bs-dismiss="alert">&#10060;</button>
-  <strong>Oh Zut!</strong> <a href="#" class="alert-link"><?= $err_mode ?></a> 
-</div>
+use Hp\SpaceExplorer\UIMessage;
+UImessage::message_To_Send(); ?>
 
+<div class="form_container_Add">
 
-<?php endif ?>
-    <div class="form_container_Add">
-
-        <form id="form_image_add" action="" method="post">
-            <div class="input_container">
-                <label for="link_image_1">Lien de la galerie</label><input class="m-3" type="text" name="link_image_1">
+        <form id="form_image_add" class="input_container" action="" method="post" enctype="multipart/form-data" >
+            <div class="form-row align-items-center" id="container_id">
+                <div class="col-lg-3">
+                    <input class="form-control" type="file" name="image_upload" placeholder="Lien de la galerie">
+                </div>
+                <div class="col-lg-2">    
+                     <input class="form-control" type="text" name="title_image" id="" placeholder="Titre de L'image">
+                </div>
+                <div class="col-lg-2">
+                    <input class="form-control" type="text" name="desc_image" id="" placeholder="Description de l'image">
+                </div>
             </div>
-            <button class="btn btn-primary" type="submit">Ajouter</button>
-            <button class="btn btn-success add_link">Ajouter des photos suplemmentaire</button>
+            <div id="btn-group-add-image" class="row mt-5">
+                <button class="btn btn-primary mr-2" type="submit" name="envoyer" value="1">Ajouter</button>
+                <button class="btn btn-success add_link">Ajouter des photos suplemmentaire</button>
+            </div>
 
         </form>
 
     </div>
-
+    
 </main>

@@ -9,6 +9,7 @@ use HP\SpaceExplorer\HTTPRequest;
  */
 class AcceuilController extends Controller
 {
+
     public $meta = "Space-explorer est un site de type blog qui va parler d'astronomie, d'espace et de planète.Vous pourrez voir des video de type documentaire sur l'astronomie.";
     public function index()
     {

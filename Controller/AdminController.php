@@ -151,8 +151,13 @@ class AdminController extends Controller
     public function removeImage($id = null)
     {
         if( !empty($_SESSION['pseudo']) && $_SESSION['role'] === "admin" || $_SESSION['role'] === "superAdmin") {
+        
+        $img_to_delete = Model::getPdo()->query("SELECT image FROM image_galerie WHERE id = :id", [":id"=>$id]);
+        
+        unlink($img_to_delete[0]->image);
         Model::getPdo()->query('DELETE FROM image_galerie WHERE id = :id ', [":id" => $id]);
         $_SESSION["succes"] = "Image Supprimé ";
+
         echo "<script>window.location.replace('https://localhost/Web/Space_explorer/Admin/index');</script>";        
     }
         else{
@@ -219,27 +224,75 @@ class AdminController extends Controller
                 "title" => "Ajoutez des image dans la galerie",
                 "err_mode" => "0"
             ];
-            if (isset($_POST) && !empty($_POST)) {
-                if (isset($_POST['link_image_1']) && !empty($_POST["link_image_1"])) {
-                    $len = count($_POST);
-                    for ($i = 1; $i <= $len; $i++) {
-                        $nm = $_POST['link_image_' . $i];
-                        $db = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
+            if(isset($_POST) && !empty($_POST)){
 
-                        $stm = $db->prepare("INSERT INTO image_galerie (image) VALUES ('$nm') ");
-                        $stm->execute();
-                        $stm->closeCursor();
+                if(isset($_FILES['image_upload']) && !empty($_FILES['image_upload'])
+                && isset($_POST['title_image']) && !empty($_POST['title_image'])
+                && isset($_POST['desc_image']) && !empty($_POST['desc_image'])) {
+
+                 
+                    
+                    $name = trim(htmlspecialchars(($_POST["title_image"])));
+                    $desc =  trim(htmlspecialchars($_POST["desc_image"]));
+                    
+                    
+                    if(strlen($name) > 5 && strlen($desc) > 10){
+                    $img = $_FILES["image_upload"]["name"];
+                    
+                    $array_of_allowed_ext = array("jpg",  "jpeg", "png");
+                    $image_Tmp =  $_FILES["image_upload"]["tmp_name"];
+                    $size_of_image = $_FILES["image_upload"]["size"];
+                    $ext_of_image = $_FILES['image_upload']['type'];
+                    $file_response = $_FILES["image_upload"]['error'];
+                
+                    $name_of_image =  explode("." ,$_FILES["image_upload"]["name"]);
+                    $ext = end($name_of_image);
+                    
+                        if(in_array(strtolower($ext), $array_of_allowed_ext)){
+                            if($file_response === 0){                        
+                        
+                                $_SESSION["err_mode"] = "Une erreur inconnue c'est produite";
+                                if($size_of_image < 5000000){
+                                    
+                                
+                                $path = "src\\image\\uploads\\$img";    
+                                move_uploaded_file($image_Tmp , "$path");
+                                
+                                $data_to_send = [
+                                    ":title" => $name,
+                                    ":img_path" => $path,
+                                    ":description"=> $desc,
+                                ];
+                                
+                                    Model::getPdo()->query("INSERT INTO image_galerie (titre_image, image, description) VALUES (:title , :img_path, :description)", $data_to_send);
+                                
+                                    $_SESSION["succes"] = "Image ajouté avec succes";                         
+                                }
+                                else{
+                                $_SESSION['err_mode'] = "Le fichier est trop volumineux il dois faire moins de 5MO";
+                                }
+                            }else{
+                             $_SESSION["err_mode"] = "Une erreur inconnue c'est produite";
+                            }
+                        }
+                    else
+                    {
+                        $_SESSION["err_mode"] = "Le fichier dois etre une image JPEG, JPG ou PNG !";
                     }
-                    $_SESSION['succes'] = "Les images ont était ajouté avec succès";
-                    header("Location:" . URL . "Galerie/showGallerie");
-                    exit;
-                } else {
-                    $data["err_mode"] = "Veuillez remplir tous les champs nécessaire";
-                }
+                    } 
+                    else{
+                        $_SESSION['err_mode'] = "Le titre dois contenir au moins 5 charactères et la description au moins 10 charactères";
+                        }
             }
+            else{
+             $_SESSION["err_mode"] = "Veuillez remplir les champs nécesaire à l'insertion d'image";
+            } 
+        } 
+   
             $this->setdata($data);
             $this->render("addImage");
-        }else{
+        }
+        else{
             echo "Vous n'êtes pas admin" ;
             die();
         }
