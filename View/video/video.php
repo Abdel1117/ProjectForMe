@@ -1,4 +1,4 @@
-<main class="container">
+<main class="container-fluid">
     <h1 class="title_page"><?= $title ?></h1>
     <?php use Hp\SpaceExplorer\UImessage; UImessage::message_To_Send() ?>
 <div class="row">
@@ -11,15 +11,15 @@
                         <option value="DESC">Décroissant</option>
                         <option value="ASC">Croissant</option>
                     </select>
-                    <button type="submit">Envoyer</button>  
+                    <button type="submit">Triée</button>  
                 </form>
             </div>
         </section>
 </div>          
 <section class="container mt-3">
-    <div class="col">
+    <div class="row justify-content-around">
         <?php foreach ($video as $videos) :?>
-            <div class="embed-responsive embed-responsive-16by9 mb-4">
+            <div class="embed-responsive embed-responsive-16by9 m-2 col-sm-5">
                                 <iframe  class="video_doc"  src="<?= $videos->Video_link ?>" title="<?= $video->Titre_video ?>" frameborder="2" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
             </div>
             <?php endforeach ?>

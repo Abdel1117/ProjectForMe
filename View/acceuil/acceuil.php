@@ -78,20 +78,22 @@ elseif(isset($_SESSION["succes_inscription"])) : ?>
                 <?php foreach ($Contenue as $value) : ?>
 
                     <div class="col-lg-4 mb-5" id="">
-                        <article class="card shadow-sm h-100">
-                            <h2 class="text-center"><?= $value->Titre ?></h2>
-                            <img src="<?= $value->image?>" class="img-article-accueil img-fluid img-thumbnail" style="max-height:200px" alt="image astronomie espace" />
+                        <article class="card mb-4 box-shadow h-100">
+                            <img src="<?= $value->image?>" class="card-img-top" style="max-height:300px" alt="image astronomie espace" />
                                     <div class="card-body">
-                                        <p class="card-text h-50"><?= html_entity_decode($value->resumé) ?></p>
-                                            
-                                                <div class="row btn-group mt-2">
-                                                    <a href="<?= URL ?>acceuil/newsSolo/<?= $value->id ?>" class="h-50 btn btn-primary">Lire la suite de l'article</a>
+                                    <h2 class="text-center text-dark text-wrap text-truncate mb-4"><?= $value->Titre ?></h2>
 
-                                                    <a href="<?= URL.'Compte/addFavoriteImage/'.$value->id ?>" class="btn btn-warning">Ajouter Favoris</a>
+                                        <p class="card-text text-dark"><?= html_entity_decode($value->resumé) ?></p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="">
+
+                                                        <a href="<?= URL ?>acceuil/newsSolo/<?= $value->id ?>" class=" btn btn-primary ">Lire la suite de l'article</a>
+                                                    </div>
+                                                </div>
                                             </div>
+                                        </article>    
                                     </div>
-                        </article>    
-                    </div>
+                                                   
                 <?php endforeach ?>
             </div>
     </div>
@@ -101,7 +103,7 @@ elseif(isset($_SESSION["succes_inscription"])) : ?>
 <script>
  document.addEventListener( 'DOMContentLoaded', function () {
   new Splide( '#thumbnail-slider', {
-		fixedWidth: 695,
+		fixedWidth: 100 + "%",
         fixedHeight: 500,		
         gap       : 1,
 		rewind    : true,
@@ -111,7 +113,7 @@ elseif(isset($_SESSION["succes_inscription"])) : ?>
         focus      : 'center',
         breakpoints: {
         600: {
-        fixedWidth : 300,
+        fixedWidth : 100 + "%",
         fixedHeight: 300,
     },
   },

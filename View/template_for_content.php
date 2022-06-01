@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="Description" content="<?= $meta ?>">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/spacelab/bootstrap.min.css" integrity="sha384-F1AY0h4TrtJ8OCUQYOzhcFzUTxSOxuaaJ4BeagvyQL8N9mE4hrXjdDsNx249NpEc" crossorigin="anonymous">    <!--<link rel="stylesheet" href="<?= URL ?>src/css/main.css">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/spacelab/bootstrap.min.css" integrity="sha384-F1AY0h4TrtJ8OCUQYOzhcFzUTxSOxuaaJ4BeagvyQL8N9mE4hrXjdDsNx249NpEc" crossorigin="anonymous">    
+    <!--<link rel="stylesheet" href="<?= URL ?>src/css/main.css">-->
     <script src="<?= URL ?>src/js/main.js" defer></script>
     <link rel="shortcut icon" type="image/png" href="<?= URL ?>favicon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -27,10 +28,28 @@
 
     <div class="collapse navbar-collapse" id="navbarColor03">
       <ul class="navbar-nav me-auto ">
-        <li class="nav-item">
-          <a class="nav-link" href="<?= URL . 'Acceuil/index' ?>">Accueil
+      <li class="nav-item">
+          <a class="nav-link" href="<?= URL . 'Acceuil/home' ?>">Accueil
           </a>
         </li>
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Articles</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="<?= URL . 'acceuil/index/Planetes' ?>">Planètes</a>
+            <a class="dropdown-item" href="<?= URL . 'acceuil/index/ObjetStelaire' ?>">Objet Stelaire</a>
+            <a class="dropdown-item" href="<?= URL . 'acceuil/index/Asteroide' ?>">Astéroïde</a>
+            <a class="dropdown-item" href="<?= URL . 'acceuil/index/lesGalaxie' ?>">Les Galaxie</a>
+            <a class="dropdown-item" href="<?= URL . 'acceuil/index/Nebuleuse' ?>">Nébuleuse</a>
+            <a class="dropdown-item" href="<?= URL . 'acceuil/index/TrouNoir' ?>">Trou Noir</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="<?= URL . 'acceuil/index' ?>">Tous les Articles</a>
+          </div>
+        </li>
+
+       
+
         <li class="nav-item">
           <a class="nav-link" href="<?= URL . 'Galerie/showGallerie' ?>">Galerie</a>
         </li>

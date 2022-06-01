@@ -8,16 +8,16 @@
     <?php   use Hp\SpaceExplorer\UImessage;
             UImessage::message_To_Send() 
         ?>
-    <div class="carrousel_container">
+    <div class=" container-fluid carrousel_container">
         <div class="d-flex justify-content-center">
-            <h2> Nouvelles Images D'astronomie </h2>
+            <h2 class=""> Nouvelles Images D'astronomie </h2>
         </div>
         <div id="thumbnail-slider" class="splide">
             <div class="splide__track">
             		<ul class="splide__list">
                         <?php foreach($carousel_photo as $photo) : ?>
             			    <li class="splide__slide">
-                                <img src="../<?= $photo->image ?>" alt="Photo d'astronomie">    
+                                <img src="..\<?= $photo->image ?>" alt="Photo d'astronomie">    
                             </li>
                         <?php endforeach ?>
             			
@@ -26,21 +26,28 @@
         </div>
         
     </div>
+<section class="container">
 
     <section class="row text-center text-lg-start mt-5">
         <div class="p-3 w-100 mx-auto">
             <h3>Album photo</h3>
         </div>
-        <?php
+       <!--  <?php
         foreach ($Photo as  $value) : ?>
             <div class="col-lg-3 col-md-4 col-6">
              <img onclick="my_modal(this)" class="img-fluid img-thumbnail h-100" src="<?=$value->image ?>" alt="Photo d'astronomie et de planète"/>
             </div>
 
-        <?php endforeach ?>
+        <?php endforeach ?> -->
         <?php foreach ($photo_galerie as $value) : ?>
-            <div class="col-lg-3 col-md-4 col-6">
-                <img onclick="my_modal(this)" class="img-fluid img-thumbnail h-100"   src="../<?= $value->image?>" alt="image planete astronomie galaxie" />
+            
+            <div class="col-sm-6 col-md-4 mb-3 ">   
+                <figure>
+                    <img onclick="my_modal(this)" class="img-fluid img-thumbnail w-100 h-100"   src="..\<?= $value->image?>" alt="<?= $value->titre_image ?>" />
+                    <figcaption class="">
+                        <strong><?= $value->description ?></strong>
+                </figcaption>
+                </figure>
             </div>
             
         <?php endforeach ?>
@@ -51,6 +58,8 @@
 
             <div id="caption"> <?= $value->titre_image ?></div>
         </div>
+        </section>
+
     </section>
     
         
@@ -58,8 +67,8 @@
 <script>
  document.addEventListener( 'DOMContentLoaded', function () {
   new Splide( '#thumbnail-slider', {
-		fixedWidth: 450,
-        fixedHeight: 350,		
+		fixedWidth: 100 + "%",
+        fixedHeight: 450,		
         gap       : 10,
 		rewind    : true,
 		pagination: false,
@@ -68,7 +77,7 @@
         focus      : 'center',
         breakpoints: {
         600: {
-        fixedWidth : 200,
+        fixedWidth : 100 + "%",
         fixedHeight: 200,
     },
   },

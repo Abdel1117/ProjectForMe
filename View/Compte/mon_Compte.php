@@ -43,7 +43,7 @@
         
             <div class="col-sm-4  ">
                 <div class="col text-wrap bg-light">
-                    <h2>Description</h2>
+                    <h2 class="mb-3">Description</h2>
                     <p><?= $infos[0]->description ?></p>
                 </div>
                 <div class="Description_profil">
@@ -58,16 +58,6 @@
                
         </div>
     </div>
-    <!-- <div class="row">
-        <?php if($favorite): ?>
-            <div class="favorite_side">
-                <?php foreach ($favorite as $value) : ?>
-                    <div class="info_favorite">
-                        <h1><?= $favorite[0]->id_image ?></h1>
-                    </div>
-                    <?php endforeach ?>
-                </div>
-                <?php endif ?>
-    </div> -->
+    
 </main>
 

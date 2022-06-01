@@ -8,20 +8,20 @@
 <?php UImessage::message_To_Send(); ?>
 <div class="card mb-3" style="max-width: 100%;">
   <div class="row g-0">
-    <div class="col-md-2 border-right">
+    <div class="col-md-2 align-items-center ">
     <?php if(!empty($Post[0]->image)){
-            echo'<img class="img-fluid mx-2" src="data:image/jpg; charset=utf8;base64,' . base64_encode($Post[0]->image) . '" alt="Profil Image"/>';
+            echo'<img class="img-fluid img-responsive img-thumbnail "  src="data:image/jpg; charset=utf8;base64,' . base64_encode($Post[0]->image) . '" alt="Profil Image"/>';
         } 
         else{
-            echo '<img class ="img-fluid mx-2" src="../src/image/profil-astronaute-côté-banque-dillustrations_csp0954785.webp" alt="Profil_image" />';
+            echo '<img class ="img-fluid img-responsive img-thumbnail "  src="../src/image/profil-astronaute-côté-banque-dillustrations_csp0954785.webp" alt="Profil_image" />';
         }
         ?>        
-        <p class="text-center mt-4"><?= $Post[0]->pseudo ?></p> 
+            <p class="text-center mt-4 "><?= $Post[0]->pseudo ?></p> 
     </div>
     <div class="col-md-8">
       <div class="card-body" style="height:100%">
-        <p class="card-text" style="height:50%"><?= Config::esc($Post[0]->Discussion) ?></p>
-        <p class="card-text float-end"><small class="text-muted"><?= $Post[0]->Date_post ?></small></p>
+        <p class="card-text " style="height:50%"><?= Config::esc($Post[0]->Discussion) ?></p>
+        <p class="card-text float-right"><small class="text-muted">Poster le <?= $Post[0]->Date_post ?></small></p>
       </div>
     </div>
   </div>
@@ -34,14 +34,14 @@
             foreach ($Responses as $key => $Response) : ?>
                 <div class="card mb-3 mb-3">
                     <div class="row g-0">
-                        <div class="col-md-2 border-right">
+                        <div class="col-md-2 ">
 
                             <?php if(empty($Response->image) || $Response->image === null ){
-                                echo '<img class="img-fluid mx-2" src="https://comps.gograph.com/astronaute-profil-lat%C3%A9ral_gg4410408.jpg" style="width:170px; height: 170px" alt="image de l\'utilisateur" />';
+                                echo '<img class="img-fluid img-responsive img-thumbnail " src="https://comps.gograph.com/astronaute-profil-lat%C3%A9ral_gg4410408.jpg"  alt="image de l\'utilisateur" />';
                             }
                             else {
 
-                                echo  '<img class="img-fluid mx-2" src="data:image/jpg; charset=utf8;base64,' . base64_encode($Response->image) . '"     style="width:150px; height:150px" alt="alt="image de l\'utilisateur""/>';
+                                echo  '<img class="img-fluid img-responsive img-thumbnail " src="data:image/jpg; charset=utf8;base64,' . base64_encode($Response->image) . '"     alt="alt="image de l\'utilisateur""/>';
                             } ?>
                             <p class="text-center mt-4"><?= $Response->pseudo ?></p>
                         </div>        
@@ -63,7 +63,7 @@
                     <div class="col">
                         <form action='' method="POST">
                                 <textarea class="form-control" name="answear" id="answear-form" cols="10" rows="5" placeholder="Votre Reponse Ici" ></textarea>
-                            <button class="btn btn-primary float-end">Envoyer</button>
+                            <button class="btn btn-primary mt-2">Envoyer</button>
                         </form>
                     </div>
                 </div>

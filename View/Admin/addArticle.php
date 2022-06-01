@@ -23,7 +23,7 @@ if($err_mode != false) : ?>
                     </div>
                     <div class="col-sm-4">
                         
-                        <input placeholder="Le lien de l'image qui apparaitra dans l'accueil" class="form-control" type="url" name="url_image" id="url_input" require="true"">
+                        <input placeholder="Le lien de l'image qui apparaitra dans l'accueil" class="form-control" type="file" name="image_place_holder" id="url_input" require="true"">
                     </div>
                     
             </div>

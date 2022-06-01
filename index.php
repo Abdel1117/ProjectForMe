@@ -19,7 +19,8 @@ if (isset($_GET['p'])) {
     require "Core/Model.php";
     require "Core/Config.php";
     require "Core/Model2.php";
-    require "Core/UImessage.php";
+    require "Core/ImageOptimize.php";
+    
     $params = explode("/", trim($_GET['p'], "/"));
 
     $controller = strtolower(isset($params[0]) && !empty($params[0]) ? $params[0] : "acceuil");

@@ -108,7 +108,9 @@ for (let i = 0; i < img.length; i++) {
     galery.onclick = function(e){
         modal.style.display = "block";
         modalImg.src = this.src;
+        modalImg.style.bottom = 20 + "px";
         captionText.innerHTML = this.alt;
+        
     }
 }
 

@@ -25,6 +25,7 @@
                             </div>
                             <div class="d-flex align-items-center form-group">
                             <a href="<?= URL ?>Inscription/inscription" class="text-black">Si vous n'avez pas de compte Inscrivez vous Ici</a>
+                            <a href="<?= URL ?>Compte/mot_de_passe_oublie">Mot de passe oublié ? </a>
                             <input type="submit" name="submit" class="m-3 btn btn-info btn-md" value="Conexion">
                                 
                             </div>

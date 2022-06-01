@@ -1,6 +1,9 @@
 <?php
 
-use Hp\SpaceExplorer\UImessage; 
+
+use Hp\SpaceExplorer\EmailHandler;
+use Hp\SpaceExplorer\UImessage;
+
 /**
  * Controller For Managing the Account of the user
  * 
@@ -24,7 +27,7 @@ class CompteController extends Controller
                 "succes" => "0",
                 "image" => ModelChild::getPdo()->query("SELECT image, Idprofil FROM image WHERE Idprofil = " . $_SESSION['id']),
                 "infos" => Model::getPdo()->query("SELECT pseudo, email, description, Country, Age FROM user_data WHERE Id=" .  $id),
-                "favorite" => Model::getPdo()->query("SELECT id_user id_image FROM favorite INNER JOIN space_news ON favorite.id_image = space_news.id WHERE id_user = $id")
+               
             ];
 
             //Here we check whenevere the Page is charged if they is a Post data loaded
@@ -194,29 +197,7 @@ class CompteController extends Controller
      */
     public function addFavoriteImage($id = null)
     {
-        session_start();
-        if (!empty($_SESSION['pseudo'])) {
-
-            $data = [
-                ":id_user" => $_SESSION['id'],
-                ":id_image" => $id
-            ];
-            $check = Model::getPdo()->query("SELECT * FROM favorite WHERE id_image = $id AND id_user =" .$_SESSION['id']);
-
-            if(empty($check)){
-                Model::getPdo()->query("INSERT INTO favorite (id_user, id_image) VALUES (:id_user, :id_image) ", $data);
-                echo "<script>window.location.replace('https://space-explorer.fr/');</script>";
-            }
-            else{
-                echo "<script>alert('Vous possédez déja cette article dans vos favoris');
-                </script>" ;
-                echo "<script>window.location.replace('https://space-explorer.fr/');</script>";
-            }
-        } else {
-            echo "<script>alert('Vous possédez déja cette article dans vos favoris');
-                </script>" ;
-                echo "<script>window.location.replace('https://space-explorer.fr/');</script>";
-        }
+      
     }
     public function deconection()
     {
@@ -225,5 +206,41 @@ class CompteController extends Controller
         $_SESSION["deco"] = "deco";
 
         echo "<script>window.location.replace('https://localhost/Web/Space_explorer/Acceuil/index');</script>";
+    }
+
+
+    /**
+     * @param 
+     */
+    public function mot_de_passe_oublie(){
+        
+        $data = [
+            "title" => "Mot de passe oublié ",
+            "err_mode" => "0"
+        ];
+        if(isset($_POST) && !empty($_POST)){
+            
+            $email = trim(htmlspecialchars($_POST['email']));
+            
+            $donne = [
+                ":email" => $_POST["email"],
+
+            ];
+
+            $check_if_exist = Model::getPdo()->query("SELECT COUNT(*) FROM user_data WHERE email = :email ", $donne);
+
+            var_dump($check_if_exist);
+
+            if($check_if_exist > 0 ){
+                echo "Email trouvé"; 
+                EmailHandler::sendEmail("abderahmane.adjali@live.fr","Test","Test");
+
+                
+            }
+            die();
+        }
+
+    $this->setdata($data);
+    $this->render("mot_de_passe_oublie");
     }
 }

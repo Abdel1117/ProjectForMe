@@ -5,6 +5,8 @@
 display: flex;
 justify-content: center;
 }
+
+
 .logo_img_mars{
     width: 70px;
     height: auto;
@@ -190,4 +192,10 @@ justify-content: center;
     .modal-content {
       width: 100%;
     }
+  }
+
+  @media screen and (max-width:990px ) {
+      .my-button{
+        margin-top: 10px;
+      }
   }

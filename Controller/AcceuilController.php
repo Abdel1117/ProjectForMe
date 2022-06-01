@@ -11,12 +11,27 @@ class AcceuilController extends Controller
 {
 
     public $meta = "Space-explorer est un site de type blog qui va parler d'astronomie, d'espace et de planète.Vous pourrez voir des video de type documentaire sur l'astronomie.";
+    
+    public function home(){
+        $data = [
+            "meta" => $this->meta,
+            "title" => "Accueil",
+            "article" => Model::getPdo()->query("SELECT * FROM space_news ORDER BY date_news DESC LIMIT 3"),
+            "photo" => Model::getPdo()->query("SELECT * FROM image_galerie ORDER BY date_image DESC LIMIT 3"),
+            "Subject" => Model::getPdo()->query("SELECT Id_forum, Titre FROM forum_discussion LIMIT 5")
+
+        ];
+        $this->setdata($data);
+        $this->render("home");
+    }
+    
     public function index()
     {
+      
         if($this->displayByTag() == NULL){
             
             $data = [
-                "title" => "Accueil",
+                "title" => "Articles",
                 "meta" => $this->meta,
                 "Contenue" => Model::getPdo()->query("SELECT * FROM space_news ORDER BY date_news ASC"),
                 "Slider_accueil" => Model::getPdo()->query("SELECT Titre, image, resumé,id from space_news ORDER BY date_news DESC LIMIT 5"),
@@ -25,10 +40,12 @@ class AcceuilController extends Controller
             $this->setdata($data);
             $this->render("acceuil");
         }else{
+            
             $tag = $this->displayByTag();
             $donne = [
                 ":tag" => $tag
             ];
+            
             $data = [
                 "title" => "Accueil",
                 "meta" => $this->meta,
@@ -107,9 +124,25 @@ class AcceuilController extends Controller
     }
 
     public function displayByTag(){
-        if(isset($_POST["tags_display_article"]) && !empty($_POST["tags_display_article"])){
-            return $_POST['tags_display_article'];
+        if(isset($_GET['p'])){
+           
+        
+
+            $param_articles = explode("/", $_GET['p']);
+           
+            if(!empty($param_articles[2])){
+                
+                return ucfirst($param_articles[2]);
+            }
+            else{
+                return NULL ;
+            }
+
+            
         }
+            
+            
+
     }
 
     public function mentionsLegales()

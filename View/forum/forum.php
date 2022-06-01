@@ -87,7 +87,7 @@ function get_time_ago_string($time_stamp, $divisor, $time_unit)
 <main class="container fluid">
 <?php if(isset($_SESSION['succes']) && !empty($_SESSION["succes"])) : ?>
     <div class="alert alert-success d-flex align-items-center" role="alert">
-    <button type="button" class="btn-close" data-bs-dismiss="alert">&#10060 </button>
+        <button type="button" class="btn-close" style="max-height:75px" data-bs-dismiss="alert">&#10060 </button>
   <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
     <?= $_SESSION['succes'] ?>
 
@@ -97,7 +97,7 @@ function get_time_ago_string($time_stamp, $divisor, $time_unit)
 <h1 class="mt-2 mb-2"><?= $title ?></h1>
     
     <section class="container">
-        <div class="mt-4 row row-cols-1 align-items-center row-cols-sm-2 row-cols-md-4">
+        <div class="mt-4 row align-items-center ">
             <div class="col-lg">
 
             <form action="" method="post">
@@ -116,7 +116,7 @@ function get_time_ago_string($time_stamp, $divisor, $time_unit)
                 <?php if(empty($_SESSION['pseudo'])):?>
                     <span>Il faut cree un compte pour pouvoir poster</span> 
                 <?php else: ?>
-                    <button class="btn btn-primary">Ajoutez un sujet de discussion </button>
+                    <button class="my-button btn btn-primary">Ajoutez un sujet de discussion </button>
                 <?php endif ?>
             </form>
         </div>

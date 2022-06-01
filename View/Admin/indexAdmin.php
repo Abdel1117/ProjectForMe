@@ -14,7 +14,7 @@
     <?php endif ?>
 
 <?php UImessage::message_To_Send() ?>
-    <div class="back_office_div1 mb-3">
+    <div class="d-flex flex-wrap justify-content-around w-50 back_office_div1 mb-3">
         <a class="btn btn-primary" href="<?=URL. "Admin/addArticle"?>">AddArticle</a>
         <a class="btn btn-success" href="<?= URL.'Admin/addImage'?>">AddImage</a>
         <a class="btn btn-info" href="<?= URL.'Admin/addVideo'?>">AddVideo</a>
@@ -42,7 +42,7 @@
             <td><?= $user->Country?></td>
             <td><?= ucfirst($user->role)?></td>
             <td>
-            <a class="btn btn-danger h6" onClick="confirmAlert('Voulez vous vraiment bannir <?= $user->pseudo ?>','<?= URL  . 'admin/ban/' ?>','<?= $user->Id ?>')">Bannir </a></td>
+            <a class="btn btn-danger" onClick="confirmAlert('Voulez vous vraiment bannir <?= $user->pseudo ?>','<?= URL  . 'admin/ban/' ?>','<?= $user->Id ?>')">Bannir </a></td>
 
             <td>
             <a class="btn btn-success" onClick="confirmAlert('Voulez vous vraiment rajouter les droits d\'admin à <?= $user->pseudo ?>','<?= URL . 'admin/addAdmin/' ?>','<?= $user->Id ?>')">Ajoutez Admin</a></td>
@@ -57,7 +57,7 @@
 <?php endif ?>
 
     </div>
-    <div class="table-responsive w-75 mb-3">
+    <div class="table-responsive w-100 my-5">
         <table class='table table-hover'>
             <thead>
                 <tr>
@@ -75,10 +75,10 @@
                     <td><?= substr($article->news,0, 50) ?></td>
                     <?php if($_SESSION["role"] === "superAdmin") : ?>
 
-                        <td><a class="btn btn-danger" onClick="confirmAlert('Voulez vous vraiment supprimé l\'article sur <?= $article->Titre ?>','<?= URL . 'admin/removeArticle/'?>' , '<?= $article->id ?>')" >Supprimez l'article</a></td>
+                        <td><a class="btn btn-danger" style="width:200px" onClick="confirmAlert('Voulez vous vraiment supprimé l\'article sur <?= $article->Titre ?>','<?= URL . 'admin/removeArticle/'?>' , '<?= $article->id ?>')" >Supprimez l'article</a></td>
 
                     <?php endif ?>
-                    <td><a class="btn btn-warning" href="<?= URL .'admin/ChangeArticle/'.$article->id ?>">Modifer</a></td>
+                    <td><a class="btn btn-warning" style="width:200px" href="<?= URL .'admin/ChangeArticle/'.$article->id ?>">Modifer l'article</a></td>
                 </tr>
                 <?php endforeach ?>
             </tbody>
@@ -99,9 +99,9 @@
                         <td id="table_data_id">
                             <?= $image->id ?>
                         </td>
-                        <td id="table_data_image"><img style="width:100px; height:auto"" src="../<?= $image->image?>" alt="image Space explorer"></td>
+                        <td id="table_data_image"><img style="width:100px; height:auto" src="../<?= $image->image?>" alt="image Space explorer"></td>
                         <?php if($_SESSION["role"] === "superAdmin") : ?>
-                            <td id="table_data_image"><a class="btn btn-danger" onClick="confirmAlert('Voulez vous vraiment supprimer l\'image ?','<?= URL. 'Admin/removeImage/'?>' , '<?= $image->id ?>')">Suprimer l'image</a></td>
+                            <td id="table_data_image"><a  class="btn btn-danger" onClick="confirmAlert('Voulez vous vraiment supprimer l\'image ?','<?= URL. 'Admin/removeImage/'?>' , '<?= $image->id ?>')">Suprimer l'image</a></td>
                         <?php endif ?>
                     </tr>
                     <?php endforeach ?>

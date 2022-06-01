@@ -1,5 +1,6 @@
 <?php
 
+use Hp\SpaceExplorer\ImageOptimizer;
 
 /**
  * Admin Controller
@@ -177,7 +178,7 @@ class AdminController extends Controller
         if (isset($_POST) && !empty($_POST)) {
             $title_article = trim(htmlspecialchars($_POST['title_article']));
             $contenue_article = trim(htmlspecialchars($_POST['article_content']));
-            $image_board = trim(htmlspecialchars($_POST['url_image']));
+            $image_board = trim(htmlspecialchars($_FILES['image_place_holder']));
             $resume_board = trim(htmlspecialchars($_POST['resume_article']));
             $tags_article = trim(htmlspecialchars($_POST['tags_article']));
             
@@ -188,6 +189,11 @@ class AdminController extends Controller
                 && !empty($image_board)
                 && strlen($resume_board) > 20
             ) { 
+
+
+                
+
+
                 $title_article_to_display = $title_article;
                 $donne = [
                     ":tags" => $tags_article,
@@ -247,16 +253,22 @@ class AdminController extends Controller
                 
                     $name_of_image =  explode("." ,$_FILES["image_upload"]["name"]);
                     $ext = end($name_of_image);
-                    
+
                         if(in_array(strtolower($ext), $array_of_allowed_ext)){
                             if($file_response === 0){                        
                         
                                 $_SESSION["err_mode"] = "Une erreur inconnue c'est produite";
                                 if($size_of_image < 5000000){
-                                    
+                                
                                 
                                 $path = "src\\image\\uploads\\$img";    
                                 move_uploaded_file($image_Tmp , "$path");
+                                
+                                $compress_file = $img;
+                                $compressed_img = ".\\src\\image\\uploads\\" . $compress_file;
+                                
+                                ImageOptimizer::compressedImage($path,$compressed_img, 50);
+                                
                                 
                                 $data_to_send = [
                                     ":title" => $name,
@@ -390,7 +402,8 @@ class AdminController extends Controller
         }
         $this->setdata($data);
         $this->render("removeVideo");
-    }else{
+    }
+    else{
         echo "Vous n'êtes pas admin";
         die();
     }
