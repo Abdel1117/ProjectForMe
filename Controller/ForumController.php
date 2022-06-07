@@ -51,6 +51,7 @@ class ForumController extends Controller
                     "title" => "Forum de discussion",
                     "meta" => $this->meta,
                     "post" => Model::getPdo()->query("SELECT * FROM forum_discussion INNER JOIN user_data ON user_data.Id = forum_discussion.Id_profil ORDER BY Date_post " .  $_POST['order_by']),
+                    
                     "hot_today" => Model::getPdo()->query("SELECT * FROM forum_discussion ORDER BY Date_post DESC LIMIT 5")
                 ];
             }else if (!empty($_POST['recherche'])) {

@@ -1,7 +1,7 @@
 const animation = () => {
     let window_height = innerHeight * 0.8;
     const space = document.getElementsByClassName("col-lg-6");
-    
+        
     Array.from(space,children => { 
         const distance = children.getBoundingClientRect();
         if(distance.top < window_height + 50 ){

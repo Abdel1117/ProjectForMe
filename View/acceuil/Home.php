@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="<?= URL ?>src/css/home.css">
 <script src="<?= URL ?>src/js/home.js" defer></script>
 <section class="container-fluid mt-5">
@@ -10,14 +11,13 @@
                         
                         <a class="text-white" href="<?= URL ?>acceuil/newsSolo/<?= $article[1]->id ?>">
                             <h5 class="card-title"><?= $article[1]->Titre ?></h5>
-                            <!--<p class="card-text"><?= $article[1]->resumé ?></p> -->
                         </a>
                         </div>
                     </div>
                 </div>
 
 			
-                <div class="sibling-columns-home col-lg-5">
+                <div class="sibling-columns-home col-lg-6">
                     <div class="card mb-3" style="max-width: 600px;">
                         <div class="row g-0">
                           <div class="col-lg-6">
@@ -66,21 +66,21 @@
 
         <div class="row mt-4">
             <div class="col-lg-6 text-center m-auto">
-                <h2>Nos dernieres images </h2>
-                <p>Space explorer vous permet de visioner des photos magnifiques de l'espace</p>
+                <h2> Vous pouvez visiter la Galerie <a href="<?= URL. "galerie/showGallerie" ?>"> Ici </a></h2>
+                <p> </p>
             </div>
             <div class="col-lg-6 mt-5">
-                <img src="<?= URL . $photo[0]->image ?>" alt="" class="img-fluid">
+                <img src="<?= URL . $photo[1]->image ?>" alt="" class="img-fluid">
             </div>    
         </div>
 
         <div class="row mt-4">
             <div class="col-lg-6 mt-5">
-                <img src="<?= URL . $photo[0]->image ?>" alt="" class="img-fluid">
+                <img src="<?= URL . $photo[2]->image ?>" alt="" class="img-fluid">
             </div>
             <div class="col-lg-6 text-center m-auto">
                 <h2>Nos dernieres images </h2>
-                <p>Space explorer vous permet de visioner des photos magnifiques de l'espace</p>
+                <p>Des Images choisis avec soins </p>
             </div>
         </div>
 
@@ -105,7 +105,7 @@
                             <img src="https://dummyimage.com/250x140/000/fff" alt="" class="img-fluid">
                         </div>
                         <div class="col-sm-6">
-                            <h3>Titre video</h3>
+                            <h3 class="title_f6" ><?= $Video[0]->Titre_video ?></h3>
                             <p>Lorem ipsum dolor sit amet.</p>
                         </div>
                     </div>
@@ -116,7 +116,18 @@
                             <img src="https://dummyimage.com/250x140/000/fff" alt="" class="img-fluid">
                         </div>
                         <div class="col-sm-6">
-                            <h3>Titre video</h3>
+                            <h3 class="title_f6" ><?= $Video[1]->Titre_video ?></h3>
+                            <p>Lorem ipsum dolor sit amet.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-25">
+                    <div class="row g-0 align-items-center">
+                        <div class="col-sm-6">
+                            <img src="https://dummyimage.com/250x140/000/fff" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-sm-6">
+                            <h3 class="title_f6" ><?= $Video[2]->Titre_video ?></h3>
                             <p>Lorem ipsum dolor sit amet.</p>
                         </div>
                     </div>
@@ -124,21 +135,10 @@
                 <div class="h-25">
                     <div class="row align-items-center">
                         <div class="col-sm-6">
-                            <img src="https://dummyimage.com/250x140/000/fff" alt="" class="img-fluid">
+                            <iframe lazy src="<?= $Video[2]->Video_link ?>" frameborder="0"></iframe>
                         </div>
                         <div class="col-sm-6">
-                            <h3>Titre video</h3>
-                            <p>Lorem ipsum dolor sit amet.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="h-25">
-                    <div class="row align-items-center">
-                        <div class="col-sm-6">
-                            <img src="https://dummyimage.com/250x140/000/fff" alt="" class="img-fluid">
-                        </div>
-                        <div class="col-sm-6">
-                            <h3>Titre video</h3>
+                            <h3 class="title_f6" ><?= $Video[3]->Titre_video ?></h3>
                             <p>Lorem ipsum dolor sit amet.</p>
                         </div>
                     </div>
@@ -162,7 +162,7 @@
             <div class="col-lg-6">
                 <img class="img-fluid" src="<?= URL  ?>/src/image/Planetes/forum_illustration.jpg" alt="Image Testimonial" alt="" class="img-thumbail">
             </div>
-            <div class="col-lg-5 mt-5">
+            <div class="col-lg-6 mt-5">
                 
                 <ul class="navbar-nav">
                     <li class="nav-item">

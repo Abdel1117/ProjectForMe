@@ -5,7 +5,7 @@
  * @return None 
  */
 class NewsController extends Controller{
-
+    public $meta = "Article de notre site Web avec de magnifique image";
 
     public function newsSolo($id = null){
 
@@ -13,7 +13,8 @@ class NewsController extends Controller{
             
             $data = [
                 "title" => "News" . $id,
-                "contenue" => Model::getPdo()->query("SELECT * FROM space_news WHERE id =" . $id)
+                "contenue" => Model::getPdo()->query("SELECT * FROM space_news WHERE id =" . $id),
+                $this->meta
             ];
         }
         $this->setdata($data);

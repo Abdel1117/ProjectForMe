@@ -75,7 +75,7 @@ class AdminController extends Controller
 /*             echo "<script>window.location.replace('https://localhost/Web/Space_explorer/Admin/index');</script>";
  */
 /*             echo "<script>window.location.replace('https://space-explorer.fr/index.php?p=Admin/index');</script>";
- */        
+ */        header("Location:" . URL . "Admin/index");
 }
         $this->setdata($data);
         $this->render("indexAdmin");
@@ -297,7 +297,7 @@ class AdminController extends Controller
                         }
             }
             else{
-             $_SESSION["err_mode"] = "Veuillez remplir les champs nécesaire à l'insertion d'image";
+             $_SESSION["err_mode"] = "Veuillez remplir les champs nécessaire à l'insertion d'image";
             } 
         } 
    
@@ -323,28 +323,55 @@ class AdminController extends Controller
                 "title" => "Ajoutez des vidéos",
                 "err_mode" =>"0"
             ];
-            if(isset($_POST) && !empty($_POST)){
+            if(isset($_POST) 
+            && !empty($_POST) 
+            && isset($_FILES) 
+            && !empty($_FILES)){
             if (
-                isset($_POST['title_video_1'])
-                && isset($_POST['link_video_1'])
-                && !empty($_POST['title_video_1'])
-                && !empty($_POST['link_video_1'])
-            ) {
-                $len = count($_POST) / 2;
-                for ($i = 1; $i <= $len; $i++) {
-                    $tm = htmlspecialchars(addslashes($_POST['title_video_' . $i]));
-                    $nm = htmlspecialchars(addslashes($_POST['link_video_' . $i]));
-                    
-                    $db = new PDO('mysql:host=flex.o2switch.net;dbname=uqiv5705_Space-explorer;charset=utf8', 'uqiv5705', '5ye8gtfdHDUw');
-                    $stm = $db->prepare("INSERT INTO video_posted (Titre_video, Video_link)VALUES ('$tm','$nm')");
+                isset($_POST['title_video'])
+                && isset($_POST['link_video'])
+                && !empty($_POST['title_video'])
+                && !empty($_POST['link_video'])
+                && !empty($_FILES['image_thumb'])
+                && strlen($_POST['title_video']) > 5
+                && strlen($_POST["link_video"] > 10)
+            ) { 
+                $video_title = trim(htmlspecialchars($_POST['title_video']));
+                $video_link = trim(htmlspecialchars($_POST['link_video']));
+                $video_image = $_FILES['image_thumb']['name'];
 
-                    $stm->execute();
-                    $stm->closeCursor();
+                $img_check = ImageOptimizer::checkImageOfVideo("image_thumb");
+                
+                if($img_check === true ){
+                    $img = $_FILES["image_thumb"]["name"];
+		            $image_Tmp =  $_FILES["image_thumb"]["tmp_name"];
+		            $size_of_image = $_FILES["image_thumb"]["size"];
+		            $ext_of_image = $_FILES["image_thumb"]['type'];
+		            $file_response = $_FILES["image_thumb"]['error'];
+
+                   
+                    $path = "src\\image_Video\\$img";    
+                    move_uploaded_file($image_Tmp , "$path");
+                    
+                    $compress_file = $img;
+                    $compressed_img = ".\\src\\image\\uploads\\" . $compress_file;
+                    
+                    ImageOptimizer::compressedImage($path,$compressed_img, 50);
+                     $donne = [
+                         ":video_title" => $video_title,
+                         ":video_link" => $video_link,
+                         ":video_image" => $path
+                         
+                     ];
+                    Model::getPdo()->query("INSERT INTO video_posted (Titre_video, Video_link, image_video) VALUES (:video_title,:video_link,:video_image)",$donne);
+                     
+                    $_SESSION["succes"] = "Les videos on était ajouté ";
+                    header("Location:" . URL . "Video/indexVideo");
                 }
-                $_SESSION["succes"] = "Les videos on était ajouté ";
-                header("Location:" . URL . "Video/indexVideo");
+
             }else{
-                $data["err_mode"] = "Veuillez remplir tous les champs nécessaire";
+               
+                $_SESSION["err_mode"] = "Veuillez remplir tous les champs nécessaire";
             }
             }
             $this->setdata($data);

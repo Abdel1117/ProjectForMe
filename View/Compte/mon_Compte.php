@@ -17,7 +17,7 @@
                             </div>
                         <?php endif ?>
 
-                        <?php if($image[0]->image != NULL){
+                        <?php if(!empty($image[0]->image) ){
                         echo
                         '<img class ="img-fluid" src="data:image/jpg; charset=utf8;base64,' .     base64_encode   ($image[0]->image) . '"     width = "150px" height = "150px"    alt="Profil Image"/>';
                         }else{

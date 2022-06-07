@@ -3,6 +3,7 @@
 
 use Hp\SpaceExplorer\EmailHandler;
 use Hp\SpaceExplorer\UImessage;
+use Hp\SpaceExplorer\TokenHandler;
 
 /**
  * Controller For Managing the Account of the user
@@ -10,13 +11,15 @@ use Hp\SpaceExplorer\UImessage;
  */
 class CompteController extends Controller
 {
-
+    public $meta = "Gerer votre compte sur cette page, ici vous pourrez choisir l'image qui apparaitra sur le Forum ainsi qu'une description sur vous";
     /**
      * IndexAccount Homepage of user DashBoard
      * Manage Description and ImageProfile
      */
     public function indexAccount()
     {
+
+        
         //From here we just check if the session_user isset to allow the acces of the page
         session_start();
         if (isset($_SESSION['pseudo'])) {
@@ -27,7 +30,7 @@ class CompteController extends Controller
                 "succes" => "0",
                 "image" => ModelChild::getPdo()->query("SELECT image, Idprofil FROM image WHERE Idprofil = " . $_SESSION['id']),
                 "infos" => Model::getPdo()->query("SELECT pseudo, email, description, Country, Age FROM user_data WHERE Id=" .  $id),
-               
+                "meta" => $this->meta,
             ];
 
             //Here we check whenevere the Page is charged if they is a Post data loaded
@@ -158,7 +161,8 @@ class CompteController extends Controller
     {
         session_start();
         $data = [
-            "err_mode" => "0"
+            "err_mode" => "0",
+            "meta" => $this->$meta
         ];
         if (!empty($this->donnee)) {
             $id = $_SESSION['id'];
@@ -209,13 +213,84 @@ class CompteController extends Controller
     }
 
 
-    /**
-     * @param 
-     */
+    public function passwordLost(){
+
+
+        $data = [ 
+            "title" => "Changement de Mot de passe",
+            "meta" => $this->meta,
+            
+        ];
+      
+        if(isset($_GET['selector']) && isset($_GET['validator'])){
+            
+            $selector = $_GET['selector'];
+            $validator = $_GET['validator'];
+
+            $verif = [
+                ":selector" => $_GET["selector"],
+                ":validator" => $_GET['validator']
+            ];
+
+
+            $check_validator = Model::getPdo()->query("SELECT * FROM passwordresset WHERE pwResetSelector = :selector AND pwResetToken = :validator ",$verif);
+           
+
+            $expire = $check_validator[0]->pwResetExpire;
+            $date_now = date("U");
+            $result =  $date_now - $expire ;
+            
+            if($result){
+                if(isset($_POST['passwordChanged']) && isset($_POST['secondPassword'])){
+
+                        $password = trim(htmlspecialchars($_POST['passwordChanged']));
+                        $password_verifie = trim(htmlspecialchars($_POST['secondPassword']));
+
+                        if(strlen($password) >= 8 
+                        && preg_match("^(?=.*[A-Z])(?=.*\d).{8,20}$^",$password)
+                        && strlen($password_verifie)>=8
+                        && preg_match("^(?=.*[A-Z])(?=.*\d).{8,20}$^", $password_verifie)
+                        
+                        ){
+                            if($password === $password_verifie){
+                                
+                                $data_email = [":email" => $check_validator[0]->pwResetEmail];
+                                
+                                $donne = [
+                                    "email" => $check_validator[0]->pwResetEmail,
+                                    ":password_reset" => password_hash($password,PASSWORD_DEFAULT)
+                                ];
+                                Model::getPdo()->query("UPDATE user_data set password = :password_reset WHERE email = :email" , $donne);
+                                Model::getPdo()->query("DELETE FROM passwordresset WHERE :email = pwResetEmail", $data_email);
+                                $_SESSION["succes"] = "Votre mot de passe à bien était changer";
+                                header("Location:" . URL . "Acceuil/index");
+                            }
+                            else{
+                               
+                                $_SESSION["err_mode"] = "Vos deux mot de passe ne sont pas identique ! ";
+                            }
+                        }
+                        else{
+                            $_SESSION["err_mode"] = "Votre Mot de passe dois contenir au moins 8 charactères avec une majuscule et au moins un chiffre";
+                        }
+
+                        
+                }
+                $this->setdata($data);
+                $this->render("mot_de_passe_reset"); 
+            }
+            else{
+                $_SESSION["err_mode"] = "Vous ne pouvez changer de mot passe car une demande à déja effectuer il y à moins de 30 minutes ";
+            }
+        }
+    }
+
+
     public function mot_de_passe_oublie(){
         
         $data = [
             "title" => "Mot de passe oublié ",
+            "meta" => $this->meta,
             "err_mode" => "0"
         ];
         if(isset($_POST) && !empty($_POST)){
@@ -227,17 +302,78 @@ class CompteController extends Controller
 
             ];
 
-            $check_if_exist = Model::getPdo()->query("SELECT COUNT(*) FROM user_data WHERE email = :email ", $donne);
+            $check_if_exist = Model::getPdo()->query("SELECT COUNT(email) as count FROM user_data WHERE email = :email", $donne);
 
-            var_dump($check_if_exist);
+            if($check_if_exist[0]->count > 0 ){
 
-            if($check_if_exist > 0 ){
-                echo "Email trouvé"; 
-                EmailHandler::sendEmail("abderahmane.adjali@live.fr","Test","Test");
+                $if_token_exist = Model::getPdo()->query("SELECT COUNT(*) FROM passwordresset WHERE pwResetEmail = :email", $donne);                                
 
+                $token = bin2hex(random_bytes(8));;
+                $selector = bin2hex(random_bytes(32));
+                $expire = date("U") + 1800;
+
+                $donne = [
+                    ":email" => $_POST["email"],
+                    ":selector" => $selector,
+                    ":token" => $token,
+                    ":expire" => $expire
+                ];
+
+               
+                $url = URL . "compte/passwordLost?selector=".$selector."&validator=".$token;
+
+                $check = Model::getPdo()->query("SELECT * FROM user_data INNER JOIN passwordresset ON user_data.email = passwordresset.pwResetEmail WHERE email = '$email'");
+
+               
+                if(empty($check)){ 
                 
+                Model::getPdo()->query("INSERT INTO passwordresset (pwResetEmail, pwResetSelector, pwResetToken, pwResetExpire) VALUES (:email, :selector, :token, :expire)",$donne);
+
+                $message_mail = "Vous avez demandé une réinitialisation de mot de passe, veuillez cliquer sur ce lien afin de pouvoir le changer " . $url ;
+
+
+                EmailHandler::sendEmail($donne[':email'],"Demande de Nouveau mot de passe", $message_mail);   
+
+
+                $_SESSION['succes'] = "Nous allons vous envoyer un mail avec un lien afin de pouvoir changer votre mot de passe perdu ! ";
+
+
+               }
+               else{
+                    $expire = $check[0]->pwResetExpire;
+                    $date_now = date("U");
+
+                    if($expire <= $date_now){
+
+                        $user_data = [
+                            ":email" => trim(htmlspecialchars($_POST['email']))
+                        ];
+                        Model::getPdo()->query("DELETE FROM passwordresset WHERE :email = pwResetEmail" ,$user_data);
+                        Model::getPdo()->query("INSERT INTO passwordresset (pwResetEmail, pwResetSelector, pwResetToken, pwResetExpire) VALUES (:email, :selector, :token, :expire)",$donne);
+
+                        $message_mail = "Vous avez demandé une réinitialisation de mot de passe, veuillez cliquer sur ce lien afin de pouvoir le changer " . $url ;
+        
+        
+                        EmailHandler::sendEmail($donne[':email'],"Demande de Nouveau mot de passe", $message_mail);   
+        
+        
+                        $_SESSION['succes'] = "Nous allons vous envoyer un mail avec un lien afin de pouvoir changer votre mot de passe perdu ! ";
+        
+        
+                    }else{
+                        $_SESSION["err_mode"] = "Vous ne pouvez pas effectuer plusieurs fois votre demande de mot de passe veuillez attendre 20 min après votre dérnière demande";
+                        
+                    }
+                }
+                
+                    
+                
+            }else{
+                $_SESSION['err_mode'] = "L'adresse email que vous nous avez indiqué n'éxiste pas";
+                header("Location:" . URL . "Compte/mot_de_passe_oublie");
+                die();
             }
-            die();
+            
         }
 
     $this->setdata($data);

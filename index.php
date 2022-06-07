@@ -15,11 +15,11 @@ $projet = str_replace("index.php", "", $_SERVER['PHP_SELF']);
 define("URL", $protocole . "://" . $domaine . $projet);
 
 if (isset($_GET['p'])) {
-    require "Core/Controller.php";
-    require "Core/Model.php";
-    require "Core/Config.php";
-    require "Core/Model2.php";
-    require "Core/ImageOptimize.php";
+    require_once "Core/Controller.php";
+    require_once "Core/Model.php";
+    require_once "Core/Config.php";
+    require_once "Core/Model2.php";
+    require_once "Core/ImageOptimize.php";
     
     $params = explode("/", trim($_GET['p'], "/"));
 

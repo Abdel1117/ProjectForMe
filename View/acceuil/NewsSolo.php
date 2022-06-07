@@ -5,4 +5,4 @@
         
 </article>
 
-<a  class="btn btn-primary" href="<?= URL . 'Acceuil/index' ?>"> Revenir à l'accueil</a>
+<a class="btn btn-primary mt-5" id="previous_page" onclick="history.back()" href=""> Revenir à la page précèdente</a>

@@ -20,7 +20,7 @@
     <div class="row justify-content-around">
         <?php foreach ($video as $videos) :?>
             <div class="embed-responsive embed-responsive-16by9 m-2 col-sm-5">
-                                <iframe  class="video_doc"  src="<?= $videos->Video_link ?>" title="<?= $video->Titre_video ?>" frameborder="2" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
+                                <iframe lazy  class="video_doc"  src="<?= $videos->Video_link ?>" title="<?= $video->Titre_video ?>" frameborder="2" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
             </div>
             <?php endforeach ?>
         </main>

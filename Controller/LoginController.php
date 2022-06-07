@@ -8,7 +8,8 @@
  * @return None
  */
 class LoginController extends Controller
-{
+{   
+    public $meta = "Connecter vous afin de pouvoir poster sur notre forum";
     /**
      * Display the login Page
      */

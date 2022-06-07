@@ -18,8 +18,8 @@ class AcceuilController extends Controller
             "title" => "Accueil",
             "article" => Model::getPdo()->query("SELECT * FROM space_news ORDER BY date_news DESC LIMIT 3"),
             "photo" => Model::getPdo()->query("SELECT * FROM image_galerie ORDER BY date_image DESC LIMIT 3"),
-            "Subject" => Model::getPdo()->query("SELECT Id_forum, Titre FROM forum_discussion LIMIT 5")
-
+            "Subject" => Model::getPdo()->query("SELECT Id_forum, Titre FROM forum_discussion LIMIT 5"),
+            "Video" => Model::getPdo()->query("SELECT Titre_video, Video_link FROM video_posted ORDER BY Date_post DESC LIMIT 5")
         ];
         $this->setdata($data);
         $this->render("home");

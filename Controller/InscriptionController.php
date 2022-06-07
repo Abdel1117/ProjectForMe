@@ -67,6 +67,7 @@ class InscriptionController extends Controller
                         $request2 = Model::getPdo()->query("INSERT INTO user_data 
                         (pseudo, email, Age, Country,password) 
                         VALUES (:user_Name, :email, :age, :country, :password)", $donnes);
+                        
                         $_SESSION['succes_inscription'] = "1";
                         header("Location:" . URL . "acceuil/index");
                         exit;

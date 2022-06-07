@@ -6,7 +6,11 @@ display: flex;
 justify-content: center;
 }
 
-
+.title_f6{
+  padding-top: 1rem;
+  padding-left: .1rem;
+  font-size: 14px;
+}
 .logo_img_mars{
     width: 70px;
     height: auto;
@@ -15,6 +19,12 @@ justify-content: center;
   height: 150px;
   width: 150px;
 }
+.profil_image_forum{
+  width: 75px;
+  height: 75px;
+}
+
+
 .img-fluid{
     cursor: pointer;
     min-height: auto;

@@ -30,7 +30,7 @@ if($err_mode != false) : ?>
             <div class="row m-3 "> 
             <div class="col-sm-4">
                         <select name="tags_article" id="pet-select">
-                            <option value="">--Trier par thème aborder--</  option>
+                            <option value="">--Choisisez le Thème abordé--</  option>
                             <option value="Système Solaire">Système     Solaire</option>
                             <option value="Objet Stellaire">Objet   Stellaire</option>
                             <option value="Astéroïde">Astéroïde</option>

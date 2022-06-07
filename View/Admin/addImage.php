@@ -19,7 +19,6 @@ UImessage::message_To_Send(); ?>
             </div>
             <div id="btn-group-add-image" class="row mt-5">
                 <button class="btn btn-primary mr-2" type="submit" name="envoyer" value="1">Ajouter</button>
-                <button class="btn btn-success add_link">Ajouter des photos suplemmentaire</button>
             </div>
 
         </form>
